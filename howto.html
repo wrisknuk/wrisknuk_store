@@ -3,45 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Инструкция по установке — wrisknuk_store</title>
+    <title>Инструкция — wrisknuk_store</title>
     <style>
-        body { background-color: #000000; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; line-height: 1.6; }
-        h1 { color: #0078d7; font-weight: 300; }
-        h2 { color: #0078d7; font-size: 18px; margin-top: 25px; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        ol, ul { padding-left: 20px; }
-        li { margin-bottom: 10px; }
-        .back-btn { display: inline-block; background-color: #333; color: white; text-decoration: none; padding: 8px 15px; margin-bottom: 20px; font-weight: 600; }
-        .back-btn:active { background-color: #555; }
-        .alert { background-color: #2b1d00; border-left: 4px solid #ffaa00; padding: 10px; margin: 15px 0; font-size: 14px; }
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --win-purple: #5133ab;
+            --border-color: #333333;
+            --alert-bg: #2b1d00;
+        }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --win-purple: #5133ab;
+            --border-color: #e0e0e0;
+            --alert-bg: #fff3cd;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; margin: 15px; line-height: 1.6; transition: background 0.2s, color 0.2s; }
+        h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin-top: 0; }
+        h2 { color: var(--win-purple); font-size: 16px; margin-top: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        ol, ul { padding-left: 20px; margin-bottom: 15px; font-size: 14px; }
+        li { margin-bottom: 8px; }
+        p { font-size: 14px; }
+        
+        .back-btn { display: inline-block; background-color: var(--win-purple); color: white; text-decoration: none; padding: 6px 15px; margin-bottom: 20px; font-weight: 600; font-size: 13px; }
+        .back-btn:active { opacity: 0.8; }
+        
+        .alert { background-color: var(--alert-bg); border-left: 4px solid #ffaa00; padding: 10px; margin: 15px 0; font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-btn">⬅ Назад в магазин</a>
+    <a href="index.html" class="back-btn">⬅ Назад</a>
 
     <h1>Инструкция по установке приложений</h1>
-    <p>Поскольку официальный магазин закрыт, файлы формата <b>.appx</b> и <b>.appxbundle</b> устанавливаются на Windows 10 Mobile вручную с помощью режима разработчика.</p>
+    <p>Официальный магазин закрыт, поэтому файлы формата <b>.appx</b>, <b>.appxbundle</b> и старые <b>.xap</b> устанавливаются вручную.</p>
 
-    <h2>Шаг 1. Включение режима разработчика на телефоне</h2>
+    <h2>Шаг 1. Включение режима разработчика</h2>
     <ol>
-        <li>Возьмите ваш смартфон и откройте <b>Параметры</b>.</li>
-        <li>Перейдите в раздел <b>Обновление и безопасность</b> ➡️ <b>Для разработчиков</b>.</li>
-        <li>Поставьте галочку или переключатель напротив пункта <b>Режим разработчика</b>.</li>
-        <li>Подтвердите действие во всплывающем окне (нажмите «Да»). Телефон может ненадолго задуматься, загружая необходимые пакеты.</li>
+        <li>На телефоне откройте <b>Параметры</b> ➡️ <b>Обновление и безопасность</b> ➡️ <b>Для разработчиков</b>.</li>
+        <li>Активируйте переключатель <b>Режим разработчика</b> и подтвердите выбор («Да»).</li>
     </ol>
 
-    <h2>Шаг 2. Простая установка (Прямо с телефона)</h2>
-    <p>Если вы скачали файл приложения напрямую через браузер вашей Lumia:</p>
+    <h2>Шаг 2. Установка через Device Portal (Для ПК)</h2>
+    <p>Это самый надежный способ, если приложение выдает ошибку при обычной установке с телефона.</p>
     <ol>
-        <li>Откройте стандартное приложение <b>Проводник</b> (Диспетчер файлов).</li>
-        <li>Найдите скачанный файл формата <code>.appx</code> или <code>.appxbundle</code> (обычно они лежат в папке «Загрузки» / Downloads).</li>
-        <li>Просто нажмите на файл один раз. На экране появится системный запрос: <i>«Установить приложение?»</i>. Нажмите <b>Установить</b>.</li>
-        <li><b>Важно:</b> Никаких полосок загрузки не появится. Смартфон будет устанавливать его в фоновом режиме. Подождите 1–2 минуты, и приложение появится в общем списке всех программ на телефоне.</li>
+        <li>Там же, в меню <b>Для разработчиков</b> на телефоне, прокрутите вниз и включите тумблер <b>Диспетчер устройств (Device Portal)</b>.</li>
+        <li>Включите пункт <b>Проводное подключение (USB)</b> или Wi-Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>11.0.1.13</code>).</li>
+        <li>Подключите телефон к компьютеру кабелем или убедитесь, что они в одной сети Wi-Fi.</li>
+        <li>Откройте любой браузер на компьютере и введите адрес, который показал телефон.</li>
+        <li>Если браузер ругается на сертификат безопасности, нажмите <i>«Дополнительно» ➡️ «Перейти на сайт (небезопасно)»</i>.</li>
+        <li>В открывшемся меню Device Portal на ПК перейдите во вкладку <b>Apps</b> (Приложения).</li>
+        <li>В блоке <b>Deploy apps</b> нажмите кнопку <i>Choose File</i> и выберите скачанный <code>.appx</code> / <code>.appxbundle</code> файл.</li>
+        <li>Если приложению нужны зависимости (пакеты из папки Dependencies), добавьте их в поле <i>Dependency</i>.</li>
+        <li>Нажмите кнопку <b>Go</b> под файлом. Дождитесь надписи <i>Success</i>. Приложение появится в списке на телефоне!</li>
     </ol>
 
-    <div class="alert">
-        <b>Внимание!</b> Если при нажатии ничего не происходит или выдает ошибку, значит, приложению нужны зависимости (дополнительные файлы), либо файл поврежден. В таком случае установку делают через ПК и функцию <b>Device Portal</b>.
-    </div>
+    <h2>Шаг 3. Простая установка (Прямо со смартфона)</h2>
+    <ol>
+        <li>Скачайте файл приложения через браузер на телефоне.</li>
+        <li>Откройте встроенное приложение <b>Проводник</b> и найдите файл в папке «Загрузки».</li>
+        <li>Нажмите на файл и подтвердите установку. Смартфон установит программу в фоновом режиме за 1–2 минуты. Полосок загрузки не будет — приложение просто тихо появится в общем списке меню «Пуск».</li>
+    </ol>
 
+    <script>
+        // Скрипт синхронизации темы
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+    </script>
 </body>
 </html>
