@@ -25,24 +25,20 @@
 
         body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', 'Segoe UI WP', sans-serif; margin: 12px; transition: background 0.2s, color 0.2s; }
         
-        /* Шапка */
         .header-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
         .header-left { display: flex; align-items: center; gap: 10px; }
         .shop-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
         h1 { color: #5133ab; font-weight: 300; font-size: 20px; margin: 0; }
         
-        /* Кнопка темы в стиле Windows 8 */
         .theme-btn { background: #5133ab; border: 2px solid transparent; color: white; padding: 5px 12px; cursor: pointer; font-family: 'Segoe UI'; font-size: 12px; font-weight: 600; }
         .theme-btn:active { background: #3f2687; }
 
         .subtitle { color: var(--sub-color); font-size: 13px; margin-bottom: 15px; margin-top: 8px; line-height: 1.4; }
         
-        /* Сетка Flexbox с безопасными отступами для старого Edge */
         .grid { display: flex; flex-wrap: wrap; margin-left: -5px; margin-right: -5px; margin-bottom: 20px; }
         
-        /* Уменьшенные кубики (минус отступы), которые не будут слипаться */
         .tile { 
-            background-color: #5133ab; /* Классический фиолетовый цвет Windows 8.1 */
+            background-color: #5133ab; 
             padding: 10px; 
             margin: 5px;
             width: calc(50% - 10px); 
@@ -58,18 +54,14 @@
         .tile-title { font-size: 14px; font-weight: 600; }
         .tile-os { font-size: 10px; opacity: 0.7; text-align: right; }
         
-        /* Соцсети сохраняют свои брендовые цвета */
         .tile-tg { background-color: #229ED9; }
         .tile-yt { background-color: #FF0000; }
         .icon { width: 24px; height: 24px; fill: white; margin-top: 5px; }
 
-        /* Блок информации */
         .info-box { background-color: var(--info-bg); border-left: 4px solid #5133ab; padding: 12px; margin-top: 25px; box-sizing: border-box; }
         .info-title { font-weight: 600; font-size: 13px; margin-bottom: 8px; line-height: 1.4; }
         .info-links a { color: #5133ab; text-decoration: none; margin-right: 15px; font-size: 13px; font-weight: bold; }
-        .info-links a:hover { text-decoration: underline; }
 
-        /* Для ПК версии размеры остаются фиксированными */
         @media (min-width: 600px) {
             .tile { width: 125px; height: 125px; }
             h1 { font-size: 24px; }
