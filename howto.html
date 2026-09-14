@@ -11,6 +11,7 @@
             --win-purple: #5133ab;
             --border-color: #333333;
             --alert-bg: #2b1d00;
+            --alert-border: #ffaa00;
         }
         [data-theme="light"] {
             --bg-color: #ffffff;
@@ -18,11 +19,12 @@
             --win-purple: #5133ab;
             --border-color: #e0e0e0;
             --alert-bg: #fff3cd;
+            --alert-border: #cc8800;
         }
 
         body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; margin: 15px; line-height: 1.6; transition: background 0.2s, color 0.2s; }
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin-top: 0; }
-        h2 { color: var(--win-purple); font-size: 16px; margin-top: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
+        h2 { color: var(--win-purple); font-size: 16px; margin-top: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
         ol, ul { padding-left: 20px; margin-bottom: 15px; font-size: 14px; }
         li { margin-bottom: 8px; }
         p { font-size: 14px; }
@@ -30,7 +32,9 @@
         .back-btn { display: inline-block; background-color: var(--win-purple); color: white; text-decoration: none; padding: 6px 15px; margin-bottom: 20px; font-weight: 600; font-size: 13px; }
         .back-btn:active { opacity: 0.8; }
         
-        .alert { background-color: var(--alert-bg); border-left: 4px solid #ffaa00; padding: 10px; margin: 15px 0; font-size: 13px; }
+        /* Стили для важного предупреждения */
+        .alert { background-color: var(--alert-bg); border-left: 4px solid var(--alert-border); padding: 12px; margin: 15px 0; font-size: 13px; box-sizing: border-box; }
+        .alert-title { font-weight: bold; color: var(--alert-border); margin-bottom: 4px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -40,6 +44,12 @@
     <h1>Инструкция по установке приложений</h1>
     <p>Официальный магазин закрыт, поэтому файлы формата <b>.appx</b>, <b>.appxbundle</b> и старые <b>.xap</b> устанавливаются вручную.</p>
 
+    <!-- ВАЖНОЕ ДОРАБОТАННОЕ ПРЕДУПРЕЖДЕНИЕ -->
+    <div class="alert">
+        <div class="alert-title">Внимание! Информация по ошибкам установки</div>
+        Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью.
+    </div>
+
     <h2>Шаг 1. Включение режима разработчика</h2>
     <ol>
         <li>На телефоне откройте <b>Параметры</b> ➡️ <b>Обновление и безопасность</b> ➡️ <b>Для разработчиков</b>.</li>
@@ -47,12 +57,12 @@
     </ol>
 
     <h2>Шаг 2. Установка через Device Portal (Для ПК)</h2>
-    <p>Это самый надежный способ, если приложение выдает ошибку при обычной установке с телефона.</p>
+    <p>Это самый надежный способ, если приложение выдает ошибку при обычной установке со смартфона.</p>
     <ol>
         <li>Там же, в меню <b>Для разработчиков</b> на телефоне, прокрутите вниз и включите тумблер <b>Диспетчер устройств (Device Portal)</b>.</li>
-        <li>Включите пункт <b>Проводное подключение (USB)</b> или Wi-Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>11.0.1.13</code>).</li>
-        <li>Подключите телефон к компьютеру кабелем или убедитесь, что они в одной сети Wi-Fi.</li>
-        <li>Откройте любой браузер на компьютере и введите адрес, который показал телефон.</li>
+        <li>Включите пункт <b>Проводное подключение (USB)</b> или Wi-Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>192.168.1.15</code>).</li>
+        <li>Подключите телефон к компьютеру кабелем или убедитесь, что они находятся в одной сети Wi-Fi.</li>
+        <li>Откройте любой браузер на компьютере и введите адрес, который выдал телефон.</li>
         <li>Если браузер ругается на сертификат безопасности, нажмите <i>«Дополнительно» ➡️ «Перейти на сайт (небезопасно)»</i>.</li>
         <li>В открывшемся меню Device Portal на ПК перейдите во вкладку <b>Apps</b> (Приложения).</li>
         <li>В блоке <b>Deploy apps</b> нажмите кнопку <i>Choose File</i> и выберите скачанный <code>.appx</code> / <code>.appxbundle</code> файл.</li>
@@ -62,9 +72,10 @@
 
     <h2>Шаг 3. Простая установка (Прямо со смартфона)</h2>
     <ol>
-        <li>Скачайте файл приложения через браузер на телефоне.</li>
-        <li>Откройте встроенное приложение <b>Проводник</b> и найдите файл в папке «Загрузки».</li>
-        <li>Нажмите на файл и подтвердите установку. Смартфон установит программу в фоновом режиме за 1–2 минуты. Полосок загрузки не будет — приложение просто тихо появится в общем списке меню «Пуск».</li>
+        <li>Скачайте ZIP-архив приложения через браузер на телефоне.</li>
+        <li>Откройте встроенное приложение <b>Проводник</b> и найдите скачанный архив в папке «Загрузки».</li>
+        <li>Нажмите на ZIP-файл — он откроется как обычная папка. Скопируйте находящийся внутри файл <code>.appx</code> / <code>.appxbundle</code> и вставьте его в любую другую обычную папку на телефоне.</li>
+        <li>Нажмите на извлеченный файл и подтвердите установку. Смартфон установит программу в фоновом режиме за 1–2 минуты. Приложение тихо появится в общем списке меню «Пуск».</li>
     </ol>
 
     <script>
