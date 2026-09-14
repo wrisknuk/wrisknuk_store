@@ -4,77 +4,119 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WP & WM10 Archive</title>
-    <!-- Подключение аватарки для вкладки браузера (формат JPG) -->
     <link rel="icon" type="image/jpeg" href="avatar.jpg">
     <link rel="apple-touch-icon" href="avatar.jpg">
     
     <style>
-        body { background-color: #000000; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; }
+        /* Базовые стили и переменные для тем */
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --sub-color: #aaaaaa;
+            --border-color: #0078d7;
+            --info-bg: #111111;
+        }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --sub-color: #555555;
+            --border-color: #0078d7;
+            --info-bg: #f3f3f3;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; margin: 20px; transition: background 0.3s, color 0.3s; }
         
-        /* Стили для блока шапки с аватаркой */
-        .header-container { display: flex; align-items: center; gap: 15px; margin-bottom: 5px; }
-        .shop-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #0078d7; }
+        /* Шапка сайта */
+        .header-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .shop-avatar { width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
         h1 { color: #0078d7; font-weight: 300; margin: 0; }
         
-        .subtitle { color: #aaaaaa; font-size: 14px; margin-bottom: 25px; margin-top: 10px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+        /* Кнопка темы */
+        .theme-btn { background: #0078d7; border: none; color: white; padding: 8px 12px; cursor: pointer; font-family: 'Segoe UI'; font-size: 14px; font-weight: 600; }
+        .theme-btn:active { background: #005a9e; }
+
+        .subtitle { color: var(--sub-color); font-size: 14px; margin-bottom: 25px; margin-top: 10px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-bottom: 30px; }
         .tile { background-color: #0078d7; padding: 15px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: white; transition: transform 0.1s; box-sizing: border-box; }
         .tile:active { transform: scale(0.95); background-color: #005a9e; }
         .tile-title { font-size: 16px; font-weight: 600; }
         .tile-os { font-size: 12px; opacity: 0.8; text-align: right; }
         
-        /* Плитка Телеграма */
+        /* Соцсети плитки */
         .tile-tg { background-color: #229ED9; }
         .tile-tg:active { background-color: #1d82b3; }
-        .tg-icon { width: 32px; height: 32px; fill: white; margin-top: 5px; }
-
-        /* Плитка YouTube */
         .tile-yt { background-color: #FF0000; }
         .tile-yt:active { background-color: #cc0000; }
-        .yt-icon { width: 32px; height: 32px; fill: white; margin-top: 5px; }
+        .icon { width: 32px; height: 32px; fill: white; margin-top: 5px; }
+
+        /* Окошко с инфо */
+        .info-box { background-color: var(--info-bg); border-left: 4px solid #0078d7; padding: 15px; margin-top: 40px; box-sizing: border-box; }
+        .info-title { font-weight: 600; font-size: 15px; margin-bottom: 10px; }
+        .info-links a { color: #0078d7; text-decoration: none; margin-right: 15px; font-size: 14px; font-weight: bold; }
+        .info-links a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
 
-    <!-- Шапка магазина с аватаркой -->
     <div class="header-container">
-        <img src="avatar.jpg" alt="Logo" class="shop-avatar" onerror="this.style.display='none'">
-        <h1>Каталог приложений WP 8.1 / WM10</h1>
+        <div class="header-left">
+            <img src="avatar.jpg" alt="Logo" class="shop-avatar" onerror="this.style.display='none'">
+            <h1>Каталог wrisknuk_store</h1>
+        </div>
+        <button class="theme-btn" id="themeToggle">Тема</button>
     </div>
     
     <div class="subtitle">Добро пожаловать. Выберите раздел или перейдите в наши соцсети:</div>
 
     <div class="grid">
-        <!-- Плитка: Программы -->
         <a href="apps.html" class="tile">
             <div class="tile-title">Программы</div>
             <div class="tile-os">XAP / APPX</div>
         </a>
 
-        <!-- Плитка: Игры -->
         <a href="games.html" class="tile">
             <div class="tile-title">Игры</div>
             <div class="tile-os">XAP / APPX</div>
         </a>
 
-        <!-- Плитка: Наш Telegram -->
         <a href="https://t.me" target="_blank" class="tile tile-tg">
             <div class="tile-title">Наш Telegram</div>
-            <svg class="tg-icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
         </a>
 
-        <!-- Плитка: YouTube -->
         <a href="https://youtube.com" target="_blank" class="tile tile-yt">
-            <div class="tile-title">YouTube канал</div>
-            <svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            <div class="tile-title">YouTube</div>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
 
-        <!-- Плитка: Инструкции -->
         <a href="howto.html" class="tile">
             <div class="tile-title">Инструкции</div>
             <div class="tile-os">Как ставить</div>
         </a>
     </div>
 
+    <!-- Окошко с информацией -->
+    <div class="info-box">
+        <div class="info-title">Разработано wrisknuk_company в поддержку виндовс мобайл</div>
+        <div class="info-links">
+            <a href="https://t.me" target="_blank">Наш Telegram</a>
+            <a href="https://youtube.com" target="_blank">Наш YouTube</a>
+        </div>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('themeToggle');
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        toggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
 </body>
 </html>
+
