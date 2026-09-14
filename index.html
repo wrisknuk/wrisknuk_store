@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WP & WM10 Archive</title>
+    <style>
+        body { background-color: #000000; color: #ffffff; font-family: 'Segoe UI', sans-serif; margin: 20px; }
+        h1 { color: #0078d7; font-weight: 300; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; margin-top: 20px; }
+        .tile { background-color: #0078d7; padding: 15px; aspect-ratio: 1; display: flex; flex-direction: column; justify-content: space-between; text-decoration: none; color: white; transition: transform 0.1s; }
+        .tile:active { transform: scale(0.95); background-color: #005a9e; }
+        .tile-title { font-size: 16px; font-weight: 600; }
+        .tile-os { font-size: 12px; opacity: 0.8; text-align: right; }
+    </style>
+</head>
+<body>
+
+    <h1>Каталог приложений WP 8.1 / WM10</h1>
+    <p>Добро пожаловать. Выберите категорию для поиска приложений:</p>
+
+    <div class="grid">
+        <!-- Плитка: Программы -->
+        <a href="apps.html" class="tile">
+            <div class="tile-title">Программы</div>
+            <div class="tile-os">XAP / APPX</div>
+        </a>
+
+        <!-- Плитка: Игры -->
+        <a href="games.html" class="tile">
+            <div class="tile-title">Игры</div>
+            <div class="tile-os">XAP / APPX</div>
+        </a>
+
+        <!-- Плитка: Инструкции -->
+        <a href="howto.html" class="tile">
+            <div class="tile-title">Инструкции</div>
+            <div class="tile-os">Как ставить</div>
+        </a>
+    </div>
+
+</body>
+</html>
