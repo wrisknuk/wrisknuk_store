@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WriskNuk_store — Добро пожаловать</title>
+    <link rel="icon" type="image/jpeg" href="avatar.jpg">
+    <link rel="apple-touch-icon" href="avatar.jpg">
+    
+    <style>
+        /* Полностью изолированный темный экран заставки, не сливающийся с фоном */
+        body { 
+            background-color: #000000; 
+            background-image: url('wp_bg.jpg'); 
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            color: #ffffff; 
+            font-family: 'Segoe UI', 'Segoe UI WP', sans-serif; 
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-sizing: border-box;
+        }
+
+        /* Затемняющий слой, чтобы текст гарантированно читался на любых обоях */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            z-index: 1;
+        }
+
+        /* Контент заставки поверх фона */
+        .content-wrap {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+        
+        .welcome-top {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Большая аватарка сверху */
+        .welcome-avatar {
+            width: 130px; 
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff0000;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.4);
+            margin-bottom: 20px;
+        }
+
+        /* Большой красный шрифт названия */
+        .welcome-title {
+            color: #FF0000; 
+            font-size: 34px;
+            font-weight: 300;
+            margin: 0 0 15px 0;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Смещенный ближе к центру текст */
+        .welcome-text {
+            color: #ffffff;
+            font-size: 16px;
+            max-width: 290px;
+            line-height: 1.5;
+            margin-top: 10px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+        }
+
+        /* Контейнер для плашки строго по центру */
+        .welcome-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        /* Плашка перехода в стиле Windows Phone */
+        .enter-btn {
+            background-color: #5133ab;
+            color: #ffffff;
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 14px 35px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            text-decoration: none;
+            transition: background 0.1s;
+        }
+        .enter-btn:active {
+            background-color: #3f2687;
+        }
+
+        /* Белый мелкий шрифт в самом подвале */
+        .welcome-footer {
+            color: #ffffff; 
+            font-size: 11px;
+            text-align: center;
+            opacity: 0.7;
+            line-height: 1.5;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="content-wrap">
+        <!-- Верхняя часть: логотип и описание -->
+        <div class="welcome-top">
+            <img src="avatar.jpg" alt="Logo Large" class="welcome-avatar" onerror="this.style.display='none'">
+            <h1 class="welcome-title">WriskNuk_store</h1>
+            <p class="welcome-text">Добро пожаловать в магазин приложений для WP 8.1 и WM 10</p>
+        </div>
+
+        <!-- Центральная часть: плашка перехода на menu.html -->
+        <div class="welcome-center">
+            <a href="menu.html" class="enter-btn">Перейти в меню</a>
+        </div>
+
+        <!-- Нижняя часть: мелкие копирайты -->
+        <div class="welcome-footer">
+            ©Все права защищены<br>
+            WriskNuk comparation<br>
+            2026
+        </div>
+    </div>
+
+</body>
+</html>
+
