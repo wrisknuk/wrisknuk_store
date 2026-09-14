@@ -12,6 +12,8 @@
             --border-color: #333333;
             --alert-bg: #2b1d00;
             --alert-border: #ffaa00;
+            --recommend-bg: #002b0c;
+            --recommend-border: #00cc33;
         }
         [data-theme="light"] {
             --bg-color: #ffffff;
@@ -20,6 +22,8 @@
             --border-color: #e0e0e0;
             --alert-bg: #fff3cd;
             --alert-border: #cc8800;
+            --recommend-bg: #d4edda;
+            --recommend-border: #28a745;
         }
 
         body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; margin: 15px; line-height: 1.6; transition: background 0.2s, color 0.2s; }
@@ -32,9 +36,14 @@
         .back-btn { display: inline-block; background-color: var(--win-purple); color: white; text-decoration: none; padding: 6px 15px; margin-bottom: 20px; font-weight: 600; font-size: 13px; }
         .back-btn:active { opacity: 0.8; }
         
-        /* Стили для важного предупреждения */
-        .alert { background-color: var(--alert-bg); border-left: 4px solid var(--alert-border); padding: 12px; margin: 15px 0; font-size: 13px; box-sizing: border-box; }
-        .alert-title { font-weight: bold; color: var(--alert-border); margin-bottom: 4px; text-transform: uppercase; }
+        /* Стили для блоков уведомлений */
+        .alert { padding: 12px; margin: 15px 0; font-size: 13px; box-sizing: border-box; }
+        
+        .alert-warning { background-color: var(--alert-bg); border-left: 4px solid var(--alert-border); }
+        .alert-warning-title { font-weight: bold; color: var(--alert-border); margin-bottom: 4px; text-transform: uppercase; }
+        
+        .alert-recommend { background-color: var(--recommend-bg); border-left: 4px solid var(--recommend-border); }
+        .alert-recommend-title { font-weight: bold; color: var(--recommend-border); margin-bottom: 4px; text-transform: uppercase; }
     </style>
 </head>
 <body>
@@ -44,9 +53,15 @@
     <h1>Инструкция по установке приложений</h1>
     <p>Официальный магазин закрыт, поэтому файлы формата <b>.appx</b>, <b>.appxbundle</b> и старые <b>.xap</b> устанавливаются вручную.</p>
 
-    <!-- ВАЖНОЕ ДОРАБОТАННОЕ ПРЕДУПРЕЖДЕНИЕ -->
-    <div class="alert">
-        <div class="alert-title">Внимание! Информация по ошибкам установки</div>
+    <!-- ЗЕЛЕНАЯ ПЛАШКА: РЕКОМЕНДАЦИЯ -->
+    <div class="alert alert-recommend">
+        <div class="alert-recommend-title">Рекомендация wrisknuk_store</div>
+        Для быстрой и стабильной установки приложений мы настоятельно <b>рекомендуем использовать Шаг 2 (способ Device Portal)</b>. Это самый надежный метод для Windows Mobile.
+    </div>
+
+    <!-- ЖЕЛТАЯ ПЛАШКА: ПРЕДУПРЕЖДЕНИЕ -->
+    <div class="alert alert-warning">
+        <div class="alert-warning-title">Внимание! Информация по ошибкам установки</div>
         Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью.
     </div>
 
@@ -85,3 +100,4 @@
     </script>
 </body>
 </html>
+
