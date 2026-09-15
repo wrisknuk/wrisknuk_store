@@ -30,13 +30,11 @@
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
 
         /* --- СТИЛИ ДЛЯ ВКЛАДОК --- */
-        .tabs-container {
-            margin-bottom: 20px;
-        }
+        .tabs-container { margin-bottom: 20px; }
         .tab-nav {
             display: flex;
             gap: 8px;
-            overflow-x: auto; /* Прокрутка на мобильных, если вкладок много */
+            overflow-x: auto;
             padding-bottom: 8px;
             -webkit-overflow-scrolling: touch;
         }
@@ -55,115 +53,4 @@
         .tab-btn.active {
             background-color: var(--win-purple);
             border-color: var(--win-purple);
-            color: white;
-            box-shadow: 0 -2px 0 var(--bg-color) inset; /* Чтобы линия не мешала */
-        }
-        .tab-btn:active {
-            opacity: 0.8;
-        }
-        .tab-content-wrapper {
-            border: 1px solid var(--sub-color);
-            border-top: none;
-            padding: 15px;
-            min-height: 200px;
-        }
-        .tab-pane {
-            display: none; /* Скрываем все по умолчанию */
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        .tab-pane.active {
-            display: block; /* Показываем активную */
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- ВАШИ СТИЛИ КАРТОЧЕК (без изменений) --- */
-        .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
-        .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
-        .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
-        .app-os { background-color: var(--win-purple); color: white; font-size: 10px; padding: 2px 6px; font-weight: bold; white-space: nowrap; }
-        .app-desc { font-size: 13px; color: var(--sub-color); margin-bottom: 12px; line-height: 1.4; }
-        .app-method { font-size: 12px; color: var(--sub-color); margin-bottom: 12px; }
-        
-        .download-btn { background-color: var(--win-purple); color: white; text-decoration: none; text-align: center; padding: 8px; font-weight: 600; font-size: 13px; display: block; box-sizing: border-box; }
-        .download-btn:active { opacity: 0.8; }
-    </style>
-</head>
-<body>
-
-    <a href="menu.html" class="back-btn">⬅ Назад</a>
-    <h1>Игры</h1>
-
-    <!-- НАВИГАЦИЯ ПО ВКЛАДКАМ -->
-    <div class="tabs-container">
-        <div class="tab-nav" id="tabNav">
-            <button class="tab-btn active" data-target="app-minecraft">Minecraft</button>
-            <button class="tab-btn" data-target="app-rider">Rider 3D</button>
-            <!-- Сюда можно добавлять новые кнопки для новых приложений -->
-        </div>
-
-        <!-- КОНТЕНТ ВКЛАДОК -->
-        <div class="tab-content-wrapper">
-            
-            <!-- ВКЛАДКА 1: MINECRAFT -->
-            <div id="app-minecraft" class="tab-pane active">
-                <div class="app-card">
-                    <div class="app-header">
-                        <div class="app-title">Minecraft</div>
-                        <div class="app-os">WP8.1 WM10</div>
-                    </div>
-                    <div class="app-desc">ОРИГИНАЛ!!! (вытащили до закрытия Microsoft store) Легендарная игра от Mojang!</div>
-                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                    <a href="https://archive.org/download/minecraft_202609/Minecraft.zip" class="download-btn">Скачать .zip</a>
-                </div>
-            </div>
-
-            <!-- ВКЛАДКА 2: RIDER 3D -->
-            <div id="app-rider" class="tab-pane">
-                <div class="app-card">
-                    <div class="app-header">
-                        <div class="app-title">Rider 3D</div>
-                        <div class="app-os">WP 8.1 / WM10</div>
-                    </div>
-                    <div class="app-desc">Rider 3D знаменитая игра. (ОРИГИНАЛ!!! вытазено до закрытия проекта Astoria 2016)</div>
-                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                    <a href="https://archive.org/download/minecraft_202609/1753666706_Rider3D.zip" class="download-btn">Скачать в .ZIP архиве</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    <script>
-        // Логика переключения вкладок
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabPanes = document.querySelectorAll('.tab-pane');
-
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // 1. Убираем активный класс у кнопок и панелей
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabPanes.forEach(p => p.classList.remove('active'));
-
-                // 2. Добавляем активный класс нажатой кнопке
-                btn.classList.add('active');
-
-                // 3. Получаем ID целевой панели из data-target
-                const targetId = btn.getAttribute('data-target');
-                const targetPane = document.getElementById(targetId);
-
-                // 4. Показываем нужную панель
-                if (targetPane) {
-                    targetPane.classList.add('active');
-                }
-            });
-        });
-
-        // Сохранение темы
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-    </script>
-</body>
-</html>
+            color:
