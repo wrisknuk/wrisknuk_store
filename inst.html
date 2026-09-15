@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Магазин — wrisknuk_store</title>
+    <title>Инструменты и банки — wrisknuk_store</title>
     <link rel="icon" type="image/jpeg" href="avatar.jpg">
     
     <style>
@@ -29,8 +29,10 @@
 
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
 
-        /* --- СТИЛИ ВКЛАДОК --- */
-        .tabs-container { margin-bottom: 20px; }
+        /* --- СТИЛИ ДЛЯ ВКЛАДОК --- */
+        .tabs-container {
+            margin-bottom: 20px;
+        }
         .tab-nav {
             display: flex;
             gap: 8px;
@@ -54,25 +56,37 @@
             background-color: var(--win-purple);
             border-color: var(--win-purple);
             color: white;
+            box-shadow: 0 -2px 0 var(--bg-color) inset;
         }
-        .tab-btn:active { opacity: 0.8; }
+        .tab-btn:active {
+            opacity: 0.8;
+        }
         .tab-content-wrapper {
             border: 1px solid var(--sub-color);
             border-top: none;
             padding: 15px;
-            min-height: 300px;
+            min-height: 250px;
         }
-        .tab-pane { display: none; }
-        .tab-pane.active { display: block; }
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* --- СТИЛИ КАРТОЧЕК --- */
-        .apps-list { display: flex; flex-direction: column; gap: 12px; }
         .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
         .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
         .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
         .app-os { background-color: var(--win-purple); color: white; font-size: 10px; padding: 2px 6px; font-weight: bold; white-space: nowrap; }
         .app-desc { font-size: 13px; color: var(--sub-color); margin-bottom: 12px; line-height: 1.4; }
         .app-method { font-size: 12px; color: var(--sub-color); margin-bottom: 12px; }
+        
         .download-btn { background-color: var(--win-purple); color: white; text-decoration: none; text-align: center; padding: 8px; font-weight: 600; font-size: 13px; display: block; box-sizing: border-box; }
         .download-btn:active { opacity: 0.8; }
     </style>
@@ -80,135 +94,70 @@
 <body>
 
     <a href="menu.html" class="back-btn">⬅ Назад</a>
-    <h1>Магазин приложений</h1>
+    <h1>Инструменты и банки</h1>
 
-    <!-- НАВИГАЦИЯ ПО РАЗДЕЛАМ -->
+    <!-- НАВИГАЦИЯ ПО ВКЛАДКАМ -->
     <div class="tabs-container">
         <div class="tab-nav" id="tabNav">
-            <button class="tab-btn active" data-target="tab-social">Соц. сети</button>
-            <button class="tab-btn" data-target="tab-instruments">Инструменты</button>
-            <button class="tab-btn" data-target="tab-video">Видео</button>
-            <button class="tab-btn" data-target="tab-banks">Банки</button>
+            <button class="tab-btn active" data-target="app-sberqml">SberQML</button>
+            <button class="tab-btn" data-target="app-installer">AppInstaller</button>
+            <button class="tab-btn" data-target="app-happ">HAPP (Metro_box)</button>
+            <button class="tab-btn" data-target="app-github">GitHub</button>
         </div>
 
+        <!-- КОНТЕНТ ВКЛАДОК -->
         <div class="tab-content-wrapper">
-
-            <!-- ════════════ ВКЛАДКА: СОЦ. СЕТИ ════════════ -->
-            <div id="tab-social" class="tab-pane active">
-                <div class="apps-list">
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">Unigram Mobile (Telegram Client)</div>
-                            <div class="app-os">WP8.1 WM10</div>
-                        </div>
-                        <div class="app-desc">Неофициальный клиент Telegram для смартфонов на Windows 10 Mobile. Версия с базовыми функциями чатов и каналов, адаптированная под архитектуру ARM.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/unigram-mobile-22.12.6076.0_202609/UnigramMobile_22.12.6076.0.zip" class="download-btn">Скачать .zip</a>
+            
+            <!-- ВКЛАДКА 1: SBERQML -->
+            <div id="app-sberqml" class="tab-pane active">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">SberQML</div>
+                        <div class="app-os">WP8.1 WM10</div>
                     </div>
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">MAX</div>
-                            <div class="app-os">WP 8.1 / WM10</div>
-                        </div>
-                        <div class="app-desc">MAX — неофициальный клиент мессенджера MAX теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/max-port/%D0%9B%D0%BE%D0%B2%D0%B8%D1%82%28max%20port%29.zip" class="download-btn">Скачать в .ZIP архиве</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">Unison</div>
-                            <div class="app-os">WP 8.1 / WM10</div>
-                        </div>
-                        <div class="app-desc">Unison — неофициальный клиент мессенджера WhatsApp теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/1746-unison-v.-1.0.0.0/1746_Unison_v.1.0.0.0.zip" class="download-btn">Скачать в .ZIP архиве</a>
-                    </div>
-
+                    <div class="app-desc">SberQML — очень хороший, похожий на Android клиент Сбербанка, адаптированный под архитектуру ARM.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <a href="https://archive.org/download/1766168631-sber-qml-0.6.0.0-arm/1766168631_SberQML_0.6.0.0_ARM.zip" class="download-btn">Скачать .zip</a>
                 </div>
             </div>
 
-            <!-- ════════════ ВКЛАДКА: ИНСТРУМЕНТЫ ════════════ -->
-            <div id="tab-instruments" class="tab-pane">
-                <div class="apps-list">
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">AppInstaller</div>
-                            <div class="app-os">WP 8.1 / WM10</div>
-                        </div>
-                        <div class="app-desc">AppInstaller — кастомный установщик приложений, который показывает ошибки и т.д.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/1778-app-installer-by-ms-3/1778_AppInstaller_by_MS__3_.zip" class="download-btn">Скачать в .ZIP архиве</a>
+            <!-- ВКЛАДКА 2: APPINSTALLER -->
+            <div id="app-installer" class="tab-pane">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">AppInstaller</div>
+                        <div class="app-os">WP 8.1 / WM10</div>
                     </div>
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">HAPP (Metro_box)</div>
-                            <div class="app-os">WM10</div>
-                        </div>
-                        <div class="app-desc">HAPP в стиле Metro_box — утилита для работы с системой и интерфейсами в духе Metro.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <!-- Замените ссылку ниже на реальную, если она другая -->
-                        <a href="https://archive.org/download/vless-app-1.3.0.0-arm/VlessApp_1.3.0.0_arm.zip" class="download-btn">Скачать в .ZIP архиве</a>
-                    </div>
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">GitHub</div>
-                            <div class="app-os">WP8.1 WM10</div>
-                        </div>
-                        <div class="app-desc">GitHub — неофициальный, но очень хороший клиент.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/unigram-mobile-22.12.6076.0/GitHubLegacy_1.0.0.35_ARM_Test.zip" class="download-btn">Скачать .zip</a>
-                    </div>
-
+                    <div class="app-desc">AppInstaller — кастомный установщик приложений, который показывает ошибки и т.д.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <a href="https://archive.org/download/1778-app-installer-by-ms-3/1778_AppInstaller_by_MS__3_.zip" class="download-btn">Скачать в .ZIP архиве</a>
                 </div>
             </div>
 
-            <!-- ════════════ ВКЛАДКА: ВИДЕО ════════════ -->
-            <div id="tab-video" class="tab-pane">
-                <div class="apps-list">
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">YouTube</div>
-                            <div class="app-os">WP8.1 WM10</div>
-                        </div>
-                        <div class="app-desc">Неофициальный клиент YouTube. Дизайн и функциональность максимально приближены к оригиналу, вход в аккаунт Google осуществляется через сканирование QR-кода на устройстве с вашим аккаунтом Google.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/unigram-mobile-22.12.6076.0/YouTube_3.2.1.0_arm_Debug.zip" class="download-btn">Скачать .zip</a>
+            <!-- ВКЛАДКА 3: HAPP (Metro_box) -->
+            <div id="app-happ" class="tab-pane">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">HAPP (Metro_box)</div>
+                        <div class="app-os">WM10</div>
                     </div>
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">Rutube</div>
-                            <div class="app-os">WP 8.1 / WM10</div>
-                        </div>
-                        <div class="app-desc">Rutube-клиент теперь и на Windows Phone 8.1 / Windows 10 Mobile! В скором времени будет добавление видео.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/ru-tube.v.-1.0.0.0/RuTube.v.1.0.0.0.zip" class="download-btn">Скачать в .ZIP архиве</a>
-                    </div>
-
+                    <div class="app-desc">HAPP в стиле Metro_box — утилита для работы с системой и интерфейсами в духе Metro.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <!-- Замените ссылку ниже на реальную, если она у тебя другая -->
+                    <a href="https://archive.org/download/vless-app-1.3.0.0-arm/VlessApp_1.3.0.0_arm.zip" class="download-btn">Скачать в .ZIP архиве</a>
                 </div>
             </div>
 
-            <!-- ════════════ ВКЛАДКА: БАНКИ ════════════ -->
-            <div id="tab-banks" class="tab-pane">
-                <div class="apps-list">
-
-                    <div class="app-card">
-                        <div class="app-header">
-                            <div class="app-title">SberQML</div>
-                            <div class="app-os">WP8.1 WM10</div>
-                        </div>
-                        <div class="app-desc">SberQML — очень хороший, похожий на Android клиент Сбербанка, адаптированный под архитектуру ARM.</div>
-                        <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                        <a href="https://archive.org/download/1766168631-sber-qml-0.6.0.0-arm/1766168631_SberQML_0.6.0.0_ARM.zip" class="download-btn">Скачать .zip</a>
+            <!-- ВКЛАДКА 4: GITHUB -->
+            <div id="app-github" class="tab-pane">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">GitHub</div>
+                        <div class="app-os">WP8.1 WM10</div>
                     </div>
-
+                    <div class="app-desc">GitHub — неофициальный, но очень хороший клиент.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <a href="https://archive.org/download/unigram-mobile-22.12.6076.0/GitHubLegacy_1.0.0.35_ARM_Test.zip" class="download-btn">Скачать .zip</a>
                 </div>
             </div>
 
@@ -216,6 +165,7 @@
     </div>
 
     <script>
+        // Логика переключения вкладок
         const tabBtns = document.querySelectorAll('.tab-btn');
         const tabPanes = document.querySelectorAll('.tab-pane');
 
@@ -235,6 +185,7 @@
             });
         });
 
+        // Сохранение темы
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
     </script>
