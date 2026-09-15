@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Видео — wrisknuk_store</title>
+    <link rel="icon" type="image/jpeg" href="avatar.jpg">
+    
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --card-bg: #111111;
+            --sub-color: #aaaaaa;
+            --win-purple: #5133ab;
+        }
+        [data-theme="light"] {
+            --bg-color: #ffffff;
+            --text-color: #000000;
+            --card-bg: #f3f3f3;
+            --sub-color: #555555;
+            --win-purple: #5133ab;
+        }
+
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', 'Segoe UI WP', sans-serif; margin: 12px; transition: background 0.2s, color 0.2s; }
+        
+        .back-btn { display: inline-block; background-color: var(--win-purple); color: white; text-decoration: none; padding: 6px 15px; font-weight: 600; font-size: 13px; margin-bottom: 15px; }
+        .back-btn:active { opacity: 0.8; }
+
+        h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
+        
+        .apps-list { display: flex; flex-direction: column; gap: 12px; }
+        
+        /* Стили карточки, которые не "поплывут" на HP Elite x3 */
+        .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
+        .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
+        .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
+        .app-os { background-color: var(--win-purple); color: white; font-size: 10px; padding: 2px 6px; font-weight: bold; white-space: nowrap; }
+        .app-desc { font-size: 13px; color: var(--sub-color); margin-bottom: 12px; line-height: 1.4; }
+        
+        .download-btn { background-color: var(--win-purple); color: white; text-decoration: none; text-align: center; padding: 8px; font-weight: 600; font-size: 13px; display: block; box-sizing: border-box; }
+        .download-btn:active { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <a href="menu.html" class="back-btn">⬅ Назад</a>
+    <h1>Игры</h1>
+
+    <div class="apps-list">
+
+        <!-- КАРТОЧКА 1: ПРИМЕР ПРИЛОЖЕНИЯ -->
+        <div class="app-card">
+            <div class="app-header">
+                <div class="app-title">Minecraft</div>
+                <div class="alert alert-recommend">
+        <div class="alert-recommend-title">Рекомендация wrisknuk_store</div>
+        Оригинальное приложение! (взято до закрытие Microsoft Stor)
+     <div class="app-os">WP8.1 WM10</div>
+            </div>
+            <div class="app-desc">Легендарная игра mojang</div>
+            <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+            <!-- Замените https://archive.org/details/unigram-mobile-22.12.6076.0 на реальный прямой адрес файла -->
+            <a href="https://archive.org/download/minecraft_202609/Minecraft.zip" class="download-btn">Скачать .zip</a>
+        </div>
+        
+        <!-- КАРТОЧКА 1: ПРИМЕР ПРИЛОЖЕНИЯ -->
+        <div class="app-card">
+            <div class="app-header">
+                <div class="app-title">Minecraft</div>
+                <div class="alert alert-recommend">
+        <div class="alert-recommend-title">Рекомендация wrisknuk_store</div>
+        Оригинальное приложение! (Портировано с Android до закрытия Astoria)
+     <div class="app-os">WP8.1 WM10</div>
+            </div>
+            <div class="app-desc">Легендарная игра mojang</div>
+            <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+            <!-- Замените https://archive.org/details/unigram-mobile-22.12.6076.0 на реальный прямой адрес файла -->
+            <a href="https://archive.org/download/minecraft_202609/1753666706_Rider3D.zip">Скачать .zip</a>
+        </div>
+        
+        <!-- СЮДА ВЫ МОЖЕТЕ ВСТАВЛЯТЬ НОВЫЕ КАРТОЧКИ (ПРОСТО КОПИРУЙТЕ БЛОК ВЫШЕ) -->
+
+    </div>
+
+    <script>
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+    </script>
+</body>
+</html>
