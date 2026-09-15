@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -29,15 +28,64 @@
         .back-btn:active { opacity: 0.8; }
 
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
-        
-        .apps-list { display: flex; flex-direction: column; gap: 12px; }
-        
-        /* Стили карточки, которые не "поплывут" на HP Elite x3 */
+
+        /* --- СТИЛИ ДЛЯ ВКЛАДОК --- */
+        .tabs-container {
+            margin-bottom: 20px;
+        }
+        .tab-nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            -webkit-overflow-scrolling: touch;
+        }
+        .tab-btn {
+            flex: 0 0 auto;
+            padding: 8px 16px;
+            background-color: transparent;
+            border: 1px solid var(--sub-color);
+            color: var(--sub-color);
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background-color: var(--win-purple);
+            border-color: var(--win-purple);
+            color: white;
+            box-shadow: 0 -2px 0 var(--bg-color) inset;
+        }
+        .tab-btn:active {
+            opacity: 0.8;
+        }
+        .tab-content-wrapper {
+            border: 1px solid var(--sub-color);
+            border-top: none;
+            padding: 15px;
+            min-height: 250px;
+        }
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .tab-pane.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- СТИЛИ КАРТОЧЕК --- */
         .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
         .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
         .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
         .app-os { background-color: var(--win-purple); color: white; font-size: 10px; padding: 2px 6px; font-weight: bold; white-space: nowrap; }
         .app-desc { font-size: 13px; color: var(--sub-color); margin-bottom: 12px; line-height: 1.4; }
+        .app-method { font-size: 12px; color: var(--sub-color); margin-bottom: 12px; }
         
         .download-btn { background-color: var(--win-purple); color: white; text-decoration: none; text-align: center; padding: 8px; font-weight: 600; font-size: 13px; display: block; box-sizing: border-box; }
         .download-btn:active { opacity: 0.8; }
@@ -48,37 +96,67 @@
     <a href="menu.html" class="back-btn">⬅ Назад</a>
     <h1>Видео</h1>
 
-    <div class="apps-list">
-
-        <!-- КАРТОЧКА 1: ПРИМЕР ПРИЛОЖЕНИЯ -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">YouTube</div>
-                <div class="app-os">WP8.1 WM10</div>
-            </div>
-            <div class="app-desc">Неофициальный клиент YouTube. Дизайн и функциональность максимального приближения к терминалу, вход в аккаунт Гугл осуществляется через проверку qr-кода на устройстве с вашим аккаунтом Гугл.</div>
-            <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-            <!-- Замените https://archive.org/details/unigram-mobile-22.12.6076.0 на реальный прямой адрес файла -->
-            <a href="https://archive.org/download/unigram-mobile-22.12.6076.0/YouTube_3.2.1.0_arm_Debug.zip" class="download-btn">Скачать .zip</a>
+    <!-- НАВИГАЦИЯ ПО ВКЛАДКАМ -->
+    <div class="tabs-container">
+        <div class="tab-nav" id="tabNav">
+            <button class="tab-btn active" data-target="app-youtube">YouTube</button>
+            <button class="tab-btn" data-target="app-rutube">Rutube</button>
         </div>
-        
-        <!-- КАРТОЧКА 2: ЛОВИТ (MAX PORT) -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Rutube</div>
-                <div class="app-os">WP 8.1 / WM10</div>
-            </div>
-            <div class="app-desc">Rutube-клиент теперь и на Windows Phone 8.1 / Windows 10 Mobile! В скором времени будет добавление видео.</div>
-            <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-            <!-- Замените ССЫЛКА_С_ARCHIVE_ORG на реальную прямую ссылку на ваш zip-файл -->
-            <a href="https://archive.org/download/ru-tube.v.-1.0.0.0/RuTube.v.1.0.0.0.zip" class="download-btn">Скачать в .ZIP архиве</a>
-        </div>
-        
-        <!-- СЮДА ВЫ МОЖЕТЕ ВСТАВЛЯТЬ НОВЫЕ КАРТОЧКИ (ПРОСТО КОПИРУЙТЕ БЛОК ВЫШЕ) -->
 
+        <!-- КОНТЕНТ ВКЛАДОК -->
+        <div class="tab-content-wrapper">
+            
+            <!-- ВКЛАДКА 1: YOUTUBE -->
+            <div id="app-youtube" class="tab-pane active">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">YouTube</div>
+                        <div class="app-os">WP8.1 WM10</div>
+                    </div>
+                    <div class="app-desc">Неофициальный клиент YouTube. Дизайн и функциональность максимального приближения к терминалу, вход в аккаунт Google осуществляется через проверку QR-кода на устройстве с вашим аккаунтом Google.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <a href="https://archive.org/download/unigram-mobile-22.12.6076.0/YouTube_3.2.1.0_arm_Debug.zip" class="download-btn">Скачать .zip</a>
+                </div>
+            </div>
+
+            <!-- ВКЛАДКА 2: RUTUBE -->
+            <div id="app-rutube" class="tab-pane">
+                <div class="app-card">
+                    <div class="app-header">
+                        <div class="app-title">Rutube</div>
+                        <div class="app-os">WP 8.1 / WM10</div>
+                    </div>
+                    <div class="app-desc">Rutube-клиент теперь и на Windows Phone 8.1 / Windows 10 Mobile! В скором времени будет добавление видео.</div>
+                    <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <a href="https://archive.org/download/ru-tube.v.-1.0.0.0/RuTube.v.1.0.0.0.zip" class="download-btn">Скачать в .ZIP архиве</a>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script>
+        // Логика переключения вкладок
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabBtns.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                btn.classList.add('active');
+
+                const targetId = btn.getAttribute('data-target');
+                const targetPane = document.getElementById(targetId);
+
+                if (targetPane) {
+                    targetPane.classList.add('active');
+                }
+            });
+        });
+
+        // Сохранение темы
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
     </script>
