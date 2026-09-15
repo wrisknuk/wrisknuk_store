@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -30,14 +29,14 @@
 
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
 
-        /* --- СТИЛИ ДЛЯ ВКЛАДОК (НОВЫЕ) --- */
+        /* --- СТИЛИ ДЛЯ ВКЛАДОК --- */
         .tabs-container {
             margin-bottom: 20px;
         }
         .tab-nav {
             display: flex;
             gap: 8px;
-            overflow-x: auto; /* Прокрутка на мобильных */
+            overflow-x: auto;
             padding-bottom: 8px;
             -webkit-overflow-scrolling: touch;
         }
@@ -66,7 +65,7 @@
             border: 1px solid var(--sub-color);
             border-top: none;
             padding: 15px;
-            min-height: 250px; /* Чуть выше, чтобы контент не прыгал */
+            min-height: 250px;
         }
         .tab-pane {
             display: none;
@@ -80,7 +79,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ВАШИ СТИЛИ КАРТОЧЕК (БЕЗ ИЗМЕНЕНИЙ) --- */
+        /* --- ВАШИ СТИЛИ КАРТОЧЕК --- */
         .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
         .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
         .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
@@ -101,7 +100,7 @@
     <div class="tabs-container">
         <div class="tab-nav" id="tabNav">
             <button class="tab-btn active" data-target="app-unigram">Unigram</button>
-            <button class="tab-btn" data-target="app-lovit">Ловит</button>
+            <button class="tab-btn" data-target="app-max">MAX</button>
             <button class="tab-btn" data-target="app-unison">Unison</button>
         </div>
 
@@ -121,14 +120,14 @@
                 </div>
             </div>
 
-            <!-- ВКЛАДКА 2: ЛОВИТ -->
-            <div id="app-lovit" class="tab-pane">
+            <!-- ВКЛАДКА 2: MAX -->
+            <div id="app-max" class="tab-pane">
                 <div class="app-card">
                     <div class="app-header">
-                        <div class="app-title">Ловит (max port)</div>
+                        <div class="app-title">MAX (ранее Ловит)</div>
                         <div class="app-os">WP 8.1 / WM10</div>
                     </div>
-                    <div class="app-desc">Ловит – неофициальный клиент мессенджера Мах теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
+                    <div class="app-desc">MAX — неофициальный клиент мессенджера Мах теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
                     <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
                     <a href="https://archive.org/download/max-port/%D0%9B%D0%BE%D0%B2%D0%B8%D1%82%28max%20port%29.zip" class="download-btn">Скачать в .ZIP архиве</a>
                 </div>
@@ -141,7 +140,7 @@
                         <div class="app-title">Unison</div>
                         <div class="app-os">WP 8.1 / WM10</div>
                     </div>
-                    <div class="app-desc">Unison – неофициальный клиент мессенджера Ватсап теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
+                    <div class="app-desc">Unison — неофициальный клиент мессенджера Ватсап теперь и на Windows Phone 8.1 / Windows 10 Mobile!</div>
                     <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
                     <a href="https://archive.org/download/1746-unison-v.-1.0.0.0/1746_Unison_v.1.0.0.0.zip" class="download-btn">Скачать в .ZIP архиве</a>
                 </div>
@@ -157,18 +156,14 @@
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 1. Убираем активный класс у кнопок и панелей
                 tabBtns.forEach(b => b.classList.remove('active'));
                 tabPanes.forEach(p => p.classList.remove('active'));
 
-                // 2. Добавляем активный класс нажатой кнопке
                 btn.classList.add('active');
 
-                // 3. Получаем ID целевой панели из data-target
                 const targetId = btn.getAttribute('data-target');
                 const targetPane = document.getElementById(targetId);
 
-                // 4. Показываем нужную панель
                 if (targetPane) {
                     targetPane.classList.add('active');
                 }
@@ -181,3 +176,4 @@
     </script>
 </body>
 </html>
+
