@@ -29,14 +29,14 @@
 
         h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin: 0 0 15px 0; }
 
-        /* --- СТИЛИ ДЛЯ ВКЛАДОК (НОВЫЕ) --- */
+        /* --- СТИЛИ ДЛЯ ВКЛАДОК --- */
         .tabs-container {
             margin-bottom: 20px;
         }
         .tab-nav {
             display: flex;
             gap: 8px;
-            overflow-x: auto; /* Прокрутка на мобильных */
+            overflow-x: auto;
             padding-bottom: 8px;
             -webkit-overflow-scrolling: touch;
         }
@@ -79,7 +79,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ВАШИ СТИЛИ КАРТОЧЕК (БЕЗ ИЗМЕНЕНИЙ) --- */
+        /* --- СТИЛИ КАРТОЧЕК --- */
         .app-card { background-color: var(--card-bg); border-left: 4px solid var(--win-purple); padding: 12px; display: flex; flex-direction: column; box-sizing: border-box; }
         .app-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 6px; }
         .app-title { font-weight: 600; font-size: 15px; color: var(--text-color); }
@@ -101,7 +101,7 @@
         <div class="tab-nav" id="tabNav">
             <button class="tab-btn active" data-target="app-sberqml">SberQML</button>
             <button class="tab-btn" data-target="app-installer">AppInstaller</button>
-            <button class="tab-btn" data-target="app-vless">VlessApp</button>
+            <button class="tab-btn" data-target="app-happ">HAPP (Metro_box)</button>
             <button class="tab-btn" data-target="app-github">GitHub</button>
         </div>
 
@@ -134,15 +134,16 @@
                 </div>
             </div>
 
-            <!-- ВКЛАДКА 3: VLESSAPP -->
-            <div id="HAPP(MetroBox)" class="tab-pane">
+            <!-- ВКЛАДКА 3: HAPP (Metro_box) -->
+            <div id="app-happ" class="tab-pane">
                 <div class="app-card">
                     <div class="app-header">
-                        <div class="app-title">HAPP(MetroBox)</div>
+                        <div class="app-title">HAPP (Metro_box)</div>
                         <div class="app-os">WM10</div>
                     </div>
-                    <div class="app-desc">Первый и единственный Vless-клиент.</div>
+                    <div class="app-desc">HAPP в стиле Metro_box — утилита для работы с системой и интерфейсами в духе Metro.</div>
                     <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
+                    <!-- Замените ссылку ниже на реальную, если она у тебя другая -->
                     <a href="https://archive.org/download/vless-app-1.3.0.0-arm/VlessApp_1.3.0.0_arm.zip" class="download-btn">Скачать в .ZIP архиве</a>
                 </div>
             </div>
@@ -170,18 +171,14 @@
 
         tabBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // 1. Убираем активный класс у кнопок и панелей
                 tabBtns.forEach(b => b.classList.remove('active'));
                 tabPanes.forEach(p => p.classList.remove('active'));
 
-                // 2. Добавляем активный класс нажатой кнопке
                 btn.classList.add('active');
 
-                // 3. Получаем ID целевой панели из data-target
                 const targetId = btn.getAttribute('data-target');
                 const targetPane = document.getElementById(targetId);
 
-                // 4. Показываем нужную панель
                 if (targetPane) {
                     targetPane.classList.add('active');
                 }
