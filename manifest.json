@@ -1,6 +1,7 @@
 {
   "name": "WriskNuk_Store",
   "short_name": "WriskNuk_Store",
+  "description": "Магазин приложений для Windows Phone 8.1 и Windows 10 Mobile от WriskNuk Corporation.",
   "developer": {
     "name": "WriskNuk_Corporation"
   },
@@ -17,8 +18,8 @@
     }
   ],
   "start_url": "./index.html",
-  "background_color": "#0078d7",
-  "theme_color": "#0078d7",
+  "background_color": "#000000",
+  "theme_color": "#5133ab",
   "display": "standalone",
   "orientation": "portrait"
 }
