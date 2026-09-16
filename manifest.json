@@ -3,24 +3,26 @@
   "name": "WriskNuk_Store",
   "short_name": "WriskNuk_Store",
   "description": "Магазин приложений для Windows Phone 8.1 и Windows 10 Mobile от WriskNuk Corporation.",
-  "developer": {
-    "name": "WriskNuk_Corporation"
-  },
-  "icons": [
-    {
-      "src": "Logo44 (1).png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "avatar.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
   "start_url": "./index.html",
   "background_color": "#000000",
   "theme_color": "#5133ab",
   "display": "standalone",
-  "orientation": "portrait"
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "uwp_manifest": {
+    "publisher": "CN=WriskNuk_Corporation",
+    "publisher_display_name": "WriskNuk_Corporation",
+    "package_name": "WriskNuk.Store"
+  }
 }
