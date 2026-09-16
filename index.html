@@ -7,6 +7,9 @@
     <link rel="icon" type="image/jpeg" href="avatar.jpg">
     <link rel="apple-touch-icon" href="avatar.jpg">
     
+    <!-- Подключаем манифест PWA -->
+    <link rel="manifest" href="manifest.json">
+    
     <style>
         /* Полностью изолированный темный экран заставки, не сливающийся с фоном */
         body { 
@@ -146,11 +149,23 @@
         <!-- Нижняя часть: мелкие копирайты -->
         <div class="welcome-footer">
             ©Все права защищены<br>
-            WriskNuk comparation<br>
+            WriskNuk Corporation<br>
             2026
         </div>
     </div>
 
+    <!-- Скрипт активации PWA для старого Edge/Windows Mobile -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('sw.js').then(function(registration) {
+                    console.log('ServiceWorker успешно зарегистрирован');
+                }, function(err) {
+                    console.log('Ошибка регистрации ServiceWorker: ', err);
+                });
+            });
+        }
+    </script>
+
 </body>
 </html>
-
