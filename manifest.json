@@ -1,0 +1,24 @@
+{
+  "name": "WriskNuk_Store",
+  "short_name": "WriskNuk_Store",
+  "developer": {
+    "name": "WriskNuk_Corporation"
+  },
+  "icons": [
+    {
+      "src": "avatar.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "avatar.jpg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#0078d7",
+  "theme_color": "#0078d7",
+  "display": "standalone",
+  "orientation": "portrait"
+}
