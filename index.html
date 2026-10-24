@@ -9,31 +9,62 @@
     <link rel="manifest" href="manifest.json">
     
     <style>
+        :root {
+            --bg-color: #0055a4;
+            --text-color: #ffffff;
+            --accent-btn: #d8107a;
+            --accent-btn-hover: #a00c5a;
+            --panel-bg: rgba(0, 0, 0, 0.5);
+            --panel-border: rgba(255, 255, 255, 0.2);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f0f4f8;
+            --text-color: #1a1a1d;
+            --accent-btn: #b00060;
+            --accent-btn-hover: #850048;
+            --panel-bg: rgba(255, 255, 255, 0.7);
+            --panel-border: rgba(0, 0, 0, 0.15);
+        }
+
         body { 
-            background-color: #0055a4;
+            background-color: var(--bg-color);
+            color: var(--text-color); 
+            font-family: 'Segoe WP', 'Segoe UI', 'Segoe UI Symbol', sans-serif; 
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Опционально: фон-картинка только если она реально есть */
+        .page-bg-image {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: -1;
             background-image: url('wp_bg.jpg'); 
             background-size: cover; 
             background-position: center; 
             background-attachment: fixed;
-            color: #ffffff; 
-            font-family: 'Segoe WP', 'Segoe UI', 'Segoe UI Symbol', sans-serif; 
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-sizing: border-box;
-            overflow: hidden;
+            opacity: 0.8;
+        }
+        [data-theme="light"] .page-bg-image {
+            opacity: 0.6;
         }
 
         .content-wrap {
             width: 100%;
             max-width: 480px;
             text-align: center;
-            padding: 40px 20px;
+            padding: 32px 20px;
             box-sizing: border-box;
+            position: relative;
+            z-index: 1;
         }
         
         .avatar-wrapper {
@@ -46,7 +77,7 @@
             height: 120px;
             border-radius: 12px;
             object-fit: cover;
-            border: 4px solid #ffffff;
+            border: 4px solid var(--text-color);
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
@@ -55,34 +86,36 @@
         }
 
         .welcome-title {
-            color: #ffffff; 
+            color: var(--text-color); 
             font-size: 28px;
             font-weight: 300;
             margin: 0 0 10px 0;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            background-color: rgba(0, 0, 0, 0.4);
+            background-color: var(--panel-bg);
             padding: 8px 16px;
             border-radius: 4px;
             display: inline-block;
+            backdrop-filter: blur(4px);
         }
 
         .welcome-text {
-            color: #e6e6e6;
+            color: rgba(var(--text-color), 0.9);
             font-size: 14px;
             line-height: 1.4;
             margin: 0;
             max-width: 300px;
             margin: 0 auto;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: var(--panel-bg);
             padding: 10px 16px;
             border-radius: 4px;
+            backdrop-filter: blur(4px);
         }
 
         .enter-btn {
             display: block;
             width: 100%;
-            background-color: #d8107a;
+            background-color: var(--accent-btn);
             color: #ffffff;
             border: none;
             padding: 22px 0;
@@ -92,33 +125,97 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.4); 
-            transition: background-color 0.1s ease, transform 0.1s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
+            transition: background-color 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+            border-radius: 6px;
         }
         
         .enter-btn:active {
-            background-color: #a00c5a;
+            background-color: var(--accent-btn-hover);
             transform: scale(0.98);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .controls-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.25);
+            color: var(--text-color);
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle-btn:hover {
+            background: rgba(255,255,255,0.25);
+            border-color: rgba(255,255,255,0.4);
+        }
+        [data-theme="light"] .theme-toggle-btn {
+            background: rgba(0,0,0,0.1);
+            border-color: rgba(0,0,0,0.2);
+        }
+        [data-theme="light"] .theme-toggle-btn:hover {
+            background: rgba(0,0,0,0.15);
+        }
+        .icon-box {
+            font-size: 18px;
+            line-height: 0;
+        }
+
+        .bg-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid rgba(var(--text-color), 0.3);
+            color: var(--text-color);
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 11px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .bg-toggle-btn:hover {
+            border-color: rgba(var(--text-color), 0.6);
+            background: rgba(var(--text-color), 0.08);
+        }
+        [data-theme="light"] .bg-toggle-btn:hover {
+            background: rgba(0,0,0,0.06);
         }
 
         .welcome-footer {
-            margin-top: 40px;
-            color: #ffffff; /* Белый цвет вместо серого для лучшей видимости */
+            margin-top: 36px;
+            color: var(--text-color);
             font-size: 11px;
             text-align: center;
             line-height: 1.4;
             opacity: 0.9;
-            /* Полупрозрачная плашка под футером, чтобы текст читался на любом фоне */
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: var(--panel-bg);
             padding: 8px 16px;
             border-radius: 4px;
             display: inline-block;
             width: 100%;
             box-sizing: border-box;
+            backdrop-filter: blur(4px);
         }
     </style>
 </head>
 <body>
+
+    <!-- Фон-картинка вынесен в отдельный блок, чтобы его можно было скрыть -->
+    <div class="page-bg-image"></div>
 
     <div class="content-wrap">
         <div class="avatar-wrapper">
@@ -132,6 +229,17 @@
 
         <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
+        <!-- Панель управления: тема и фон -->
+        <div class="controls-row">
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span class="icon-box" id="themeIcon">🌙</span>
+                <span>Тема</span>
+            </button>
+            <button class="bg-toggle-btn" id="bgToggle">
+                <span>Фон</span>
+            </button>
+        </div>
+
         <div class="welcome-footer">
             ©Все права защищены<br>
             WriskNuk Corporation<br>
@@ -140,6 +248,52 @@
     </div>
 
     <script>
+        // Инициализация темы
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+
+        const toggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const bgToggle = document.getElementById('bgToggle');
+        const pageBg = document.querySelector('.page-bg-image');
+
+        function updateThemeButton() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+        }
+        updateThemeButton();
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                let newTheme = theme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeButton();
+            });
+        }
+
+        // Переключатель фона
+        if (bgToggle && pageBg) {
+            let bgEnabled = localStorage.getItem('bgEnabled') !== 'false';
+            if (!bgEnabled) {
+                pageBg.style.opacity = '0';
+                bgToggle.innerHTML = '<span>Показать фон</span>';
+            }
+
+            bgToggle.addEventListener('click', () => {
+                bgEnabled = !bgEnabled;
+                localStorage.setItem('bgEnabled', bgEnabled);
+                if (bgEnabled) {
+                    pageBg.style.opacity = '0.8';
+                    bgToggle.innerHTML = '<span>Скрыть фон</span>';
+                } else {
+                    pageBg.style.opacity = '0';
+                    bgToggle.innerHTML = '<span>Показать фон</span>';
+                }
+            });
+        }
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('sw.js').then(function(registration) {
@@ -150,6 +304,5 @@
             });
         }
     </script>
-
 </body>
 </html>
