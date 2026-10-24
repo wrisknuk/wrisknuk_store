@@ -113,7 +113,6 @@
             backdrop-filter: blur(4px);
         }
 
-        /* Большая кнопка «Перейти в меню» */
         .enter-btn {
             display: block;
             width: 100%;
@@ -137,7 +136,6 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Панель управления (тема + фон) */
         .controls-row {
             display: flex;
             justify-content: space-between;
@@ -197,7 +195,7 @@
             background: rgba(0,0,0,0.06);
         }
 
-        /* МАЛЕНЬКАЯ КНОПКА МАГАЗИНА — как ты просил: маленькая, стрелочка, текст столбиком */
+        /* Кнопка магазина: только стрелочка, по центру */
         .mini-shop-btn {
             display: inline-flex;
             align-items: center;
@@ -213,7 +211,8 @@
             text-decoration: none;
             transition: transform 0.1s ease, background-color 0.2s ease;
             white-space: nowrap;
-            margin-top: 16px;
+            /* Центрирование: auto по бокам + небольшой отступ сверху */
+            margin: 16px auto 0; 
         }
         .mini-shop-btn:active {
             transform: scale(0.96);
@@ -221,19 +220,8 @@
         .mini-shop-btn:hover {
             background: #6a46d0;
         }
-        .shop-label {
-            display: block;
-            line-height: 1.1;
-            text-align: left;
-            margin-left: 8px;
-        }
-        .shop-line {
-            display: block;
-            font-size: 11px;
-        }
         .shop-arrow {
             font-size: 14px;
-            margin-right: 6px;
             display: block;
         }
 
@@ -270,7 +258,6 @@
 
         <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
-        <!-- Панель управления: тема и фон -->
         <div class="controls-row">
             <button class="theme-toggle-btn" id="themeToggle">
                 <span class="icon-box" id="themeIcon">🌙</span>
@@ -281,13 +268,9 @@
             </button>
         </div>
 
-        <!-- Маленькая кнопка магазина: стрелочка + текст столбиком -->
+        <!-- Кнопка: только стрелочка, текст убран, центрирована -->
         <a href="https://wrisknuk.github.io/wrisknuk_store/" class="mini-shop-btn" target="_blank">
             <span class="shop-arrow">→</span>
-            <span class="shop-label">
-                <span class="shop-line">магазин</span>
-                <span class="shop-line">WP и WM</span>
-            </span>
         </a>
 
         <div class="welcome-footer">
@@ -298,7 +281,6 @@
     </div>
 
     <script>
-        // Инициализация темы
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
 
@@ -323,7 +305,6 @@
             });
         }
 
-        // Переключатель фона
         if (bgToggle && pageBg) {
             let bgEnabled = localStorage.getItem('bgEnabled') !== 'false';
             if (!bgEnabled) {
