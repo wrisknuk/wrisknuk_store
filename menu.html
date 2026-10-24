@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,6 +76,36 @@
         }
         .theme-btn:active { background: #3f2687; }
 
+        /* Кнопка «Магазин» маленькая со стрелочкой, текст столбиком */
+        .mini-shop-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid var(--sub-color);
+            color: var(--sub-color);
+            padding: 6px 10px;
+            font-family: inherit;
+            font-size: 13px;
+            cursor: pointer;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+        .mini-shop-btn span {
+            line-height: 1.2;
+            white-space: nowrap;
+        }
+        .mini-shop-btn:hover {
+            border-color: var(--border-color);
+            color: var(--border-color);
+            background: rgba(81, 51, 171, 0.1);
+        }
+        .mini-shop-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
         .subtitle { 
             color: var(--sub-color); 
             font-size: 14px; 
@@ -88,16 +118,18 @@
         }
         [data-theme="light"] .subtitle { background: rgba(255,255,255,0.3); }
 
-        .grid { display: flex; flex-wrap: wrap; margin-left: -8px; margin-right: -8px; }
+        .grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 12px;
+            margin-top: 4px;
+        }
         
         .tile { 
             background-color: var(--tile-purple);
             backdrop-filter: blur(4px); 
             -webkit-backdrop-filter: blur(4px);
             padding: 12px; 
-            margin: 8px;
-            width: calc(50% - 16px); 
-            height: 115px; 
             display: flex; 
             flex-direction: column; 
             justify-content: space-between; 
@@ -107,6 +139,7 @@
             border: 1px solid rgba(255,255,255,0.1);
             border-radius: 4px;
             transition: transform 0.1s, opacity 0.1s;
+            min-height: 115px;
         }
         .tile:active { opacity: 0.7; transform: scale(0.98); }
         .tile-title { font-size: 15px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
@@ -116,7 +149,7 @@
         .tile-yt { background-color: rgba(255, 0, 0, 0.75); }
         .tile-pik { background-color: #e52e2e; }
         
-        .icon { width: 24px; height: 24px; fill: white; margin-top: 5px; }
+        .icon { width: 24px; height: 24px; fill: white; margin-top: auto; }
 
         .info-box { 
             background-color: var(--info-bg); 
@@ -151,9 +184,9 @@
             opacity: 0.8;
         }
 
-        @media (min-width: 600px) {
-            .tile { width: 130px; height: 130px; }
-            h1 { font-size: 26px; }
+        @media (max-width: 599px) {
+            .grid { grid-template-columns: 1fr 1fr; }
+            h1 { font-size: 20px; }
         }
     </style>
 </head>
@@ -164,7 +197,14 @@
             <img src="avatar.png" alt="Logo" class="shop-avatar" onerror="this.style.display='none'">
             <h1>Каталог WN/OLD STORE</h1>
         </div>
-        <button class="theme-btn" id="themeToggle">Тема</button>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <!-- Маленькая кнопка «Магазин» со стрелочкой -->
+            <a href="magaz.html" class="mini-shop-btn">
+                <span>Магазин<br>WP и WM</span>
+                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+            </a>
+            <button class="theme-btn" id="themeToggle">Тема</button>
+        </div>
     </div>
     
     <div class="subtitle">Добро пожаловать. Выберите раздел или перейдите в наши соцсети:</div>
@@ -200,43 +240,19 @@
             <div class="tile-os">Как ставить</div>
         </a>
         
-        <!-- Плитка Telegram (ссылка сохранена точно как у тебя) -->
-        <a href="https://telegram.me/wrisknuk_life" target="_blank" class="tile tile-tg">
+        <!-- Плитка Telegram -->
+        <a href="https://telegram.me/wrisknuk_life" target="_blank" rel="noopener" class="tile tile-tg">
             <div class="tile-title">Наш Telegram</div>
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
         </a>
 
-        <!-- Плитка YouTube (ссылка сохранена точно как у тебя) -->
-        <a href="https://www.youtube.com/@Tehno_WriskNuk_official" target="_blank" class="tile tile-yt">
+        <!-- Плитка YouTube -->
+        <a href="https://www.youtube.com/@Tehno_WriskNuk_official" target="_blank" rel="noopener" class="tile tile-yt">
             <div class="tile-title">YouTube канал</div>
             <svg class="icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
         
-        <!-- Плитка Pik (ссылка сохранена точно как у тебя, цвет красный) -->
-        <a href="https://aero-pik.vercel.app/@wrisknuk_life" target="_blank" class="tile tile-pik">
+        <!-- Плитка Pik -->
+        <a href="https://aero-pik.vercel.app/@wrisknuk_life" target="_blank" rel="noopener" class="tile tile-pik">
             <div class="tile-title">Наш Pik</div>
-            <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-        </a>
-    </div>
-
-    <!-- Исправленный блок информации -->
-    <div class="info-box">
-        <div class="info-title">Советуем скачать набор популярных зависимостей для корректной работы приложений</div>
-        <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Dependencies.zip" class="download-btn" download>Скачать Dependencies.zip</a>
-        <span class="version-tag">Версия 2.0</span>
-    </div>
-
-    <script>
-        const toggleBtn = document.getElementById('themeToggle');
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-
-        toggleBtn.addEventListener('click', () => {
-            let theme = document.documentElement.getAttribute('data-theme');
-            let newTheme = theme === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-        });
-    </script>
-</body>
-</html>
+            <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12
