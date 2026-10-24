@@ -31,13 +31,25 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Segoe WP', system-ui, sans-serif; }
         body { background: var(--bg); color: var(--text); padding: 12px; transition: background 0.2s, color 0.2s; }
 
-        .header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px; }
+        .page-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
 
         /* Кнопка «Магазин WP и WM» — маленькая, со стрелочкой, текст столбиком */
         .shop-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             background: rgba(255,255,255,0.06);
             border: 1px solid var(--border);
             color: var(--text);
@@ -48,9 +60,12 @@
             border-radius: 6px;
             transition: all 0.15s ease;
         }
-        .shop-btn:hover { background: rgba(255,255,255,0.12); transform: translateY(-1px); }
+        .shop-btn:hover {
+            background: rgba(255,255,255,0.12);
+            transform: translateY(-1px);
+        }
         .shop-btn span { text-align: left; }
-        .shop-btn .arrow { font-size: 12px; display: block; }
+        .shop-btn .arrow { font-size: 13px; display: block; }
 
         .back-btn {
             background: var(--accent);
@@ -62,7 +77,7 @@
             border-radius: 6px;
         }
 
-        /* Улучшенная кнопка смены темы с эмодзи */
+        /* Кнопка смены темы с эмодзи */
         .theme-toggle-btn {
             display: flex;
             align-items: center;
@@ -83,11 +98,24 @@
         }
         .theme-toggle-btn span.icon { font-size: 16px; line-height: 0; }
 
-        h1 { color: var(--accent); font-weight: 400; font-size: 24px; margin: 0 0 20px 0; letter-spacing: 0.5px; }
+        h1 {
+            color: var(--accent);
+            font-weight: 400;
+            font-size: 26px;
+            margin: 0 0 24px 0;
+            letter-spacing: 0.5px;
+        }
 
-        .apps-list { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 960px; }
-        @media (min-width: 640px) {
-            .apps-list { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        .apps-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+        @media (min-width: 500px) {
+            .apps-list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        }
+        @media (min-width: 900px) {
+            .apps-list { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
         }
 
         .app-card {
@@ -101,7 +129,13 @@
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
-        .app-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 6px; }
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
         .app-title {
             font-weight: 700;
             font-size: 17px;
@@ -119,7 +153,12 @@
         }
         [data-theme="light"] .app-os { color: #fff; }
 
-        .app-desc { font-size: 13px; color: var(--muted); line-height: 1.4; flex: 1; }
+        .app-desc {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.4;
+            flex: 1;
+        }
         .app-method {
             font-size: 11px;
             color: var(--muted);
@@ -144,144 +183,142 @@
         .download-btn:active { transform: scale(0.98); }
         .download-btn:hover { box-shadow: 0 6px 16px rgba(163, 143, 240, 0.3); }
     </style>
-</head>
-<body>
-
-    <div class="header-row">
-        <a href="menu.html" class="back-btn">⬅ Назад</a>
-        
-        <!-- Компактная кнопка «Магазин WP и WM» со стрелочкой и текстом столбиком -->
-        <a href="https://wrisknuk.github.io/wrisknuk_store/" class="shop-btn">
-            <span>
-                Магазин<br>
-                WP и WM
-            </span>
-            <span class="arrow">→</span>
-        </a>
-
-        <!-- Кнопка смены темы: теперь с эмодзи и более заметная -->
-        <button class="theme-toggle-btn" id="themeToggle">
-            <span class="icon">🌙</span>
-            <span>Тема</span>
-        </button>
-    </div>
-
-    <h1>Игры</h1>
-
-    <div class="apps-list">
-
-        <!-- КАРТОЧКА 1: MINECRAFT -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Minecraft</div>
-                <div class="app-os">WM10</div>
-            </div>
-            <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Легендарная игра от Mojang.</div>
-            <div class="app-method">Установка: через проводник (режим разработчика) или Device Portal с ПК.</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Minecraft.appxbundle" class="download-btn">Скачать appx</a>
-        </div>
-        
-        <!-- КАРТОЧКА 2: RIDER 3D -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Rider 3D</div>
-                <div class="app-os">WM10</div>
-            </div>
-            <div class="app-desc">Знаменитая игра. Оригинал (вытащен до закрытия проекта Astoria, 2016).</div>
-            <div class="app-method">Установка: через проводник или Device Portal.</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753666706_Rider3D.appxbundle" class="download-btn">Скачать appx</a>
-        </div>
-        
-        <!-- КАРТОЧКА 3: EDGE SURF -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">EDGE Surf</div>
-                <div class="app-os">WM10</div>
-            </div>
-            <div class="app-desc">Порт игры из ПК‑версии браузера EDGE.</div>
-            <div class="app-method">Установка: через проводник или Device Portal.</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/EdgeSurf2_1.0.11.0_neutral.2.appx" class="download-btn">Скачать appx</a>
-        </div>
-
-        <!-- КАРТОЧКА 4: MYMINECRAF LAUNCHER -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">MyMinecraft Launcher</div>
-                <div class="app-os">WM10</div>
-            </div>
-            <div class="app-desc">Лаунчер с тремя версиями Minecraft. Легендарная игра от Mojang.</div>
-            <div class="app-method">Установка: через проводник или Device Portal.</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MyMinecraftLauncher_1.0.2.0_Debug_Test.2FMyMinecraftLauncher_1.0.2.0_arm_Debug.appxbundle" class="download-btn">Скачать appx</a>
-        </div>
-
-        <!-- КАРТОЧКА 5: DOODLE JUMP -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Doodle Jump</div>
-                <div class="app-os">WP8 WP8.1</div>
-            </div>
-            <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
-            <div class="app-method">Установка: через проводник (режим разработчика).</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754602893_Doodle_Jump_1.0.3.0.xap" class="download-btn">Скачать xap</a>
-        </div>
-
-        <!-- КАРТОЧКА 6: FLY THE NYAN CAT (с твоей ссылкой) -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Fly The Nyan Cat</div>
-                <div class="app-os">WP8 WP8.1</div>
-            </div>
-            <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Культовая классика для WP.</div>
-            <div class="app-method">Установка: через проводник (режим разработчика).</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753026165_Fly_The_Nyan_Cat.xap" class="download-btn">Скачать xap</a>
-        </div>
-
-        <!-- КАРТОЧКА 7: SMASH HIT -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Smash Hit</div>
-                <div class="app-os">WP8 WP8.1</div>
-            </div>
-            <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
-            <div class="app-method">Установка: через проводник (режим разработчика).</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754838859_20512_Smash_hit_v1.0.0.1.xap" class="download-btn">Скачать xap</a>
-        </div>
-
-         <!-- КАРТОЧКА 8: FRUIT NINJA -->
-        <div class="app-card">
-            <div class="app-header">
-                <div class="app-title">Fruit Ninja</div>
-                <div class="app-os">WP8 WP8.1</div>
-            </div>
-            <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
-            <div class="app-method">Установка: через проводник или Device Portal.</div>
-            <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1761817711_Fruit_Ninja___v1100.xap" class="download-btn">Скачать xap</a>
-        </div>
-        
-    </div>
 
     <script>
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
 
-        // Обновляем иконку при загрузке
-        const toggleBtn = document.getElementById('themeToggle');
         function updateThemeButton() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const toggleBtn = document.getElementById('themeToggle');
+            if (!toggleBtn) return;
             const iconSpan = toggleBtn.querySelector('.icon');
             iconSpan.textContent = isDark ? '☀️' : '🌙';
         }
         updateThemeButton();
 
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-                let theme = document.documentElement.getAttribute('data-theme');
-                let newTheme = theme === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', newTheme);
-                localStorage.setItem('theme', newTheme);
-                updateThemeButton(); // меняем иконку
-            });
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('themeToggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    let theme = document.documentElement.getAttribute('data-theme');
+                    let newTheme = theme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateThemeButton();
+                });
+            }
+        });
     </script>
-</body>
-</html>
+</head>
+<body>
+    <div class="page-container">
+        <div class="header-row">
+            <a href="menu.html" class="back-btn">⬅ Назад</a>
+            
+            <!-- Компактная кнопка «Магазин WP и WM» со стрелочкой и текстом столбиком -->
+            <a href="https://wrisknuk.github.io/wrisknuk_store/" class="shop-btn">
+                <span>
+                    Магазин<br>
+                    WP и WM
+                </span>
+                <span class="arrow">→</span>
+            </a>
+
+            <!-- Кнопка смены темы -->
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span class="icon">🌙</span>
+                <span>Тема</span>
+            </button>
+        </div>
+
+        <h1>Игры</h1>
+
+        <div class="apps-list">
+
+            <!-- КАРТОЧКА 1: MINECRAFT -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Minecraft</div>
+                    <div class="app-os">WM10</div>
+                </div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Легендарная игра от Mojang.</div>
+                <div class="app-method">Установка: через проводник (режим разработчика) или Device Portal с ПК.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Minecraft.appxbundle" class="download-btn">Скачать appx</a>
+            </div>
+            
+            <!-- КАРТОЧКА 2: RIDER 3D -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Rider 3D</div>
+                    <div class="app-os">WM10</div>
+                </div>
+                <div class="app-desc">Знаменитая игра. Оригинал (вытащен до закрытия проекта Astoria, 2016).</div>
+                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753666706_Rider3D.appxbundle" class="download-btn">Скачать appx</a>
+            </div>
+            
+            <!-- КАРТОЧКА 3: EDGE SURF -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">EDGE Surf</div>
+                    <div class="app-os">WM10</div>
+                </div>
+                <div class="app-desc">Порт игры из ПК‑версии браузера EDGE.</div>
+                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/EdgeSurf2_1.0.11.0_neutral.2.appx" class="download-btn">Скачать appx</a>
+            </div>
+
+            <!-- КАРТОЧКА 4: MYMINECRAF LAUNCHER -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">MyMinecraft Launcher</div>
+                    <div class="app-os">WM10</div>
+                </div>
+                <div class="app-desc">Лаунчер с тремя версиями Minecraft. Легендарная игра от Mojang.</div>
+                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MyMinecraftLauncher_1.0.2.0_Debug_Test.2FMyMinecraftLauncher_1.0.2.0_arm_Debug.appxbundle" class="download-btn">Скачать appx</a>
+            </div>
+
+            <!-- КАРТОЧКА 5: DOODLE JUMP -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Doodle Jump</div>
+                    <div class="app-os">WP8 WP8.1</div>
+                </div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
+                <div class="app-method">Установка: через проводник (режим разработчика).</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754602893_Doodle_Jump_1.0.3.0.xap" class="download-btn">Скачать xap</a>
+            </div>
+
+            <!-- КАРТОЧКА 6: FLY THE NYAN CAT -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Fly The Nyan Cat</div>
+                    <div class="app-os">WP8 WP8.1</div>
+                </div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Культовая классика для WP.</div>
+                <div class="app-method">Установка: через проводник (режим разработчика).</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753026165_Fly_The_Nyan_Cat.xap" class="download-btn">Скачать xap</a>
+            </div>
+
+            <!-- КАРТОЧКА 7: SMASH HIT -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Smash Hit</div>
+                    <div class="app-os">WP8 WP8.1</div>
+                </div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
+                <div class="app-method">Установка: через проводник (режим разработчика).</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754838859_20512_Smash_hit_v1.0.0.1.xap" class="download-btn">Скачать xap</a>
+            </div>
+
+             <!-- КАРТОЧКА 8: FRUIT NINJA -->
+            <div class="app-card">
+                <div class="app-header">
+                    <div class="app-title">Fruit Ninja</div>
+                    <div class="app-os">WP8 WP8.1</div>
+                </div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
+                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <a href
