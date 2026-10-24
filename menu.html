@@ -13,16 +13,16 @@
             --text-color: #ffffff;
             --sub-color: #aaaaaa;
             --border-color: #5133ab;
-            --info-bg: rgba(17, 17, 17, 0.75);
+            --info-bg: rgba(255, 255, 255, 0.75); /* полупрозрачный белый */
             --tile-purple: rgba(81, 51, 171, 0.75);
             --accent-magenta: #d8107a;
         }
         [data-theme="light"] {
             --bg-color: #ffffff;
             --text-color: #000000;
-            --sub-color: #555555;
+            --sub-color: #333333;
             --border-color: #5133ab;
-            --info-bg: rgba(243, 243, 243, 0.75);
+            --info-bg: rgba(0, 0, 0, 0.75); /* для светлой темы фон текста будет тёмным */
             --tile-purple: rgba(81, 51, 171, 0.85);
         }
 
@@ -44,12 +44,14 @@
             align-items: center; 
             justify-content: space-between; 
             margin-bottom: 15px; 
-            background: rgba(0,0,0,0.4); 
+            /* фон полупрозрачный белый, как просил */
+            background: var(--info-bg); 
             padding: 10px; 
             box-sizing: border-box; 
             border-radius: 8px;
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
         }
-        [data-theme="light"] .header-container { background: rgba(255,255,255,0.4); }
         
         .header-left { display: flex; align-items: center; gap: 10px; }
         .shop-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
@@ -62,63 +64,21 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.8); 
         }
         [data-theme="light"] h1 { text-shadow: none; }
-        
-        .theme-btn { 
-            background: var(--border-color); 
-            border: 2px solid transparent; 
-            color: white; 
-            padding: 8px 16px; 
-            cursor: pointer; 
-            font-family: 'Segoe UI'; 
-            font-size: 14px; 
-            font-weight: 600; 
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-        .theme-btn:active { background: #3f2687; }
-
-        /* Кнопка «Магазин» маленькая со стрелочкой, текст столбиком */
-        .mini-shop-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: transparent;
-            border: 1px solid var(--sub-color);
-            color: var(--sub-color);
-            padding: 6px 10px;
-            font-family: inherit;
-            font-size: 13px;
-            cursor: pointer;
-            border-radius: 6px;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-        .mini-shop-btn span {
-            line-height: 1.2;
-        }
-        .mini-shop-btn:hover {
-            border-color: var(--border-color);
-            color: var(--border-color);
-            background: rgba(81, 51, 171, 0.1);
-        }
-        .mini-shop-btn svg {
-            width: 14px;
-            height: 14px;
-            fill: currentColor;
-        }
 
         .subtitle { 
             color: var(--sub-color); 
             font-size: 14px; 
             margin-bottom: 20px; 
             line-height: 1.4; 
-            background: rgba(0,0,0,0.3); 
+            /* полупрозрачный белый фон */
+            background: var(--info-bg); 
             padding: 8px 12px; 
             display: inline-block; 
             border-radius: 4px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
-        [data-theme="light"] .subtitle { background: rgba(255,255,255,0.3); }
-
+        
         .grid { 
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -197,14 +157,7 @@
             <img src="avatar.png" alt="Logo" class="shop-avatar" onerror="this.style.display='none'">
             <h1>Каталог WN/OLD STORE</h1>
         </div>
-        <div style="display: flex; gap: 8px; align-items: center;">
-            <!-- Маленькая кнопка «Магазин» со стрелочкой -->
-            <a href="magaz.html" class="mini-shop-btn">
-                <span>Магазин<br>WP и WM</span>
-                <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
-            </a>
-            <button class="theme-btn" id="themeToggle">Тема</button>
-        </div>
+        <!-- Кнопки Тема и Магазин удалены -->
     </div>
     
     <div class="subtitle">Добро пожаловать. Выберите раздел или перейдите в наши соцсети:</div>
@@ -255,4 +208,15 @@
         <!-- Плитка Pik -->
         <a href="https://aero-pik.vercel.app/@wrisknuk_life" target="_blank" rel="noopener" class="tile tile-pik">
             <div class="tile-title">Наш Pik</div>
-            <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.0
+            <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        </a>
+    </div>
+
+    <!-- Блок с рекомендацией и кнопкой скачивания -->
+    <div class="info-box">
+        <div class="info-title">Советуем скачать набор популярных зависимостей для корректной работы приложений</div>
+        <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Dependencies.zip" class="download-btn" download>Скачать Dependencies.zip</a>
+        <span class="version-tag">Версия 2.0</span>
+    </div>
+</body>
+</html>
