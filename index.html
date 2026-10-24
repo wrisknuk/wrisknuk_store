@@ -2,136 +2,115 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Для корректного отображения на мобильных экранах WP -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>WN/OLD STORE — Добро пожаловать</title>
+    
+    <!-- Иконки (оставляем как было) -->
     <link rel="icon" type="image/png" href="avatar.png">
     <link rel="apple-touch-icon" href="avatar.png">
-    
-    <!-- Подключаем манифест PWA -->
     <link rel="manifest" href="manifest.json">
     
     <style>
-        /* Полностью изолированный темный экран заставки, не сливающийся с фоном */
+        /* Базовые настройки для стиля Windows Phone */
         body { 
-            background-color: #000000; 
+            background-color: #2b2b2b; /* Тёмно-серый фон вместо чёрного для контраста */
             background-image: url('wp_bg.jpg'); 
             background-size: cover; 
             background-position: center; 
-            background-attachment: fixed;
             color: #ffffff; 
-            font-family: 'Segoe UI', 'Segoe UI WP', sans-serif; 
+            font-family: 'Segoe WP', 'Segoe UI', 'Segoe UI Symbol', sans-serif; 
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
+            justify-content: center; /* Центрируем главный блок */
             box-sizing: border-box;
+            overflow: hidden;
         }
 
-        /* Затемняющий слой, чтобы текст гарантированно читался на любых обоях */
-        .overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 1;
-        }
-
-        /* Контент заставки поверх фона */
+        /* Контейнер в стиле "Hub" или главного экрана */
         .content-wrap {
-            position: relative;
-            z-index: 2;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 40px 20px;
-            box-sizing: border-box;
+            width: 90%;
+            max-width: 400px; /* Ограничение ширины как на экране телефона */
+            text-align: center;
+            z-index: 10;
         }
         
-        .welcome-top {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin-top: 10px;
-        }
-
-        /* Большая аватарка сверху */
+        /* Аватарка в стиле иконки приложения WP */
         .welcome-avatar {
-            width: 130px; 
-            height: 130px;
-            border-radius: 50%;
+            width: 120px; 
+            height: 120px;
+            border-radius: 20px; /* Квадратные углы с легким скруглением, как у плиток */
             object-fit: cover;
-            border: 3px solid #ff0000;
-            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.4);
-            margin-bottom: 20px;
+            border: 4px solid #ffffff; /* Белая рамка как у иконок на тёмном фоне */
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
-        /* Большой красный шрифт названия */
+        /* Заголовок: крупный, тонкий, без засечек */
         .welcome-title {
-            color: #FF0000; 
-            font-size: 34px;
-            font-weight: 300;
-            margin: 0 0 15px 0;
+            color: #ffffff; 
+            font-size: 28px;
+            font-weight: 300; /* Light начертание — фишка Segoe WP */
+            margin: 0 0 10px 0;
             letter-spacing: 1px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            text-transform: uppercase; /* В стиле заголовков WP */
         }
 
-        /* Смещенный ближе к центру текст */
+        /* Подзаголовок: мелкий, серый, поясняющий */
         .welcome-text {
-            color: #ffffff;
-            font-size: 16px;
-            max-width: 290px;
-            line-height: 1.5;
-            margin-top: 10px;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.9);
-        }
-
-        /* Контейнер для плашки строго по центру */
-        .welcome-center {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-grow: 1;
-        }
-
-        /* Плашка перехода в стиле Windows Phone */
-        .enter-btn {
-            background-color: #5133ab;
-            color: #ffffff;
-            border: 2px solid rgba(255,255,255,0.3);
-            padding: 14px 35px;
+            color: #cccccc;
             font-size: 14px;
+            line-height: 1.4;
+            margin-top: 5px;
+            max-width: 320px;
+        }
+
+        /* Отступ для кнопки */
+        .spacer-large {
+            height: 60px;
+        }
+
+        /* Кнопка-плитка в стиле Windows Phone */
+        .enter-btn {
+            display: block;
+            width: 100%;
+            background-color: #d8107a; /* Акцентный цвет (Magenta) */
+            color: #ffffff;
+            border: none;
+            padding: 20px 0; /* Высокая кнопка */
+            font-size: 16px;
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-            text-decoration: none;
-            transition: background 0.1s;
+            transition: background-color 0.2s ease;
+            
+            /* Тень в стиле WP: не размытая, а смещенная */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.4); 
         }
         .enter-btn:active {
-            background-color: #3f2687;
+            background-color: #a00c5a; /* Затемнение при нажатии */
+            transform: scale(0.98); /* Лёгкое уменьшение */
         }
 
-        /* Белый мелкий шрифт в самом подвале */
+        /* Футер: мелкий текст внизу */
         .welcome-footer {
-            color: #ffffff; 
+            margin-top: 40px;
+            color: #666666; 
             font-size: 11px;
             text-align: center;
-            opacity: 0.7;
             line-height: 1.5;
-            letter-spacing: 0.5px;
+            opacity: 0.8;
         }
     </style>
 </head>
 <body>
-
-    <div class="overlay"></div>
 
     <div class="content-wrap">
         <!-- Верхняя часть: логотип и описание -->
@@ -141,10 +120,10 @@
             <p class="welcome-text">Добро пожаловать в магазин приложений для WP 8.1 и WM 10</p>
         </div>
 
-        <!-- Центральная часть: плашка перехода на menu.html -->
-        <div class="welcome-center">
-            <a href="menu.html" class="enter-btn">Перейти в меню</a>
-        </div>
+        <div class="spacer-large"></div>
+
+        <!-- Центральная часть: плашка перехода (плитка) -->
+        <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
         <!-- Нижняя часть: мелкие копирайты -->
         <div class="welcome-footer">
@@ -154,7 +133,7 @@
         </div>
     </div>
 
-    <!-- Скрипт активации PWA для старого Edge/Windows Mobile -->
+    <!-- Скрипт активации PWA -->
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
