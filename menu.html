@@ -6,8 +6,7 @@
     <title>WP & WM10 Archive</title>
     <link rel="icon" type="image/png" href="avatar.png">
     <link rel="apple-touch-icon" href="avatar.png">
-</head>
-       
+    
     <style>
         :root {
             --bg-color: #000000;
@@ -16,6 +15,7 @@
             --border-color: #5133ab;
             --info-bg: rgba(17, 17, 17, 0.75);
             --tile-purple: rgba(81, 51, 171, 0.75);
+            --accent-magenta: #d8107a;
         }
         [data-theme="light"] {
             --bg-color: #ffffff;
@@ -35,31 +35,68 @@
             color: var(--text-color); 
             font-family: 'Segoe UI', 'Segoe UI WP', sans-serif; 
             margin: 12px; 
+            padding: 0;
             transition: background 0.2s, color 0.2s; 
         }
         
-        .header-container { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; background: rgba(0,0,0,0.4); padding: 5px; box-sizing: border-box; }
+        .header-container { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 15px; 
+            background: rgba(0,0,0,0.4); 
+            padding: 10px; 
+            box-sizing: border-box; 
+            border-radius: 8px;
+        }
         [data-theme="light"] .header-container { background: rgba(255,255,255,0.4); }
+        
         .header-left { display: flex; align-items: center; gap: 10px; }
-        .shop-avatar { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
-        h1 { color: #5133ab; font-weight: 300; font-size: 20px; margin: 0; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+        .shop-avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border-color); }
+        
+        h1 { 
+            color: var(--border-color); 
+            font-weight: 300; 
+            font-size: 22px; 
+            margin: 0; 
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8); 
+        }
         [data-theme="light"] h1 { text-shadow: none; }
         
-        .theme-btn { background: #5133ab; border: 2px solid transparent; color: white; padding: 5px 12px; cursor: pointer; font-family: 'Segoe UI'; font-size: 12px; font-weight: 600; }
+        .theme-btn { 
+            background: var(--border-color); 
+            border: 2px solid transparent; 
+            color: white; 
+            padding: 8px 16px; 
+            cursor: pointer; 
+            font-family: 'Segoe UI'; 
+            font-size: 14px; 
+            font-weight: 600; 
+            border-radius: 4px;
+        }
         .theme-btn:active { background: #3f2687; }
 
-        .subtitle { color: var(--sub-color); font-size: 13px; margin-bottom: 15px; margin-top: 8px; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 3px; display: inline-block; }
+        .subtitle { 
+            color: var(--sub-color); 
+            font-size: 14px; 
+            margin-bottom: 20px; 
+            line-height: 1.4; 
+            background: rgba(0,0,0,0.3); 
+            padding: 8px 12px; 
+            display: inline-block; 
+            border-radius: 4px;
+        }
         [data-theme="light"] .subtitle { background: rgba(255,255,255,0.3); }
 
-        .grid { display: flex; flex-wrap: wrap; margin-left: -5px; margin-right: -5px; margin-bottom: 20px; }
+        .grid { display: flex; flex-wrap: wrap; margin-left: -8px; margin-right: -8px; }
         
         .tile { 
             background-color: var(--tile-purple);
             backdrop-filter: blur(4px); 
             -webkit-backdrop-filter: blur(4px);
-            padding: 10px; 
-            margin: 5px;
-            width: calc(50% - 10px); 
+            padding: 12px; 
+            margin: 8px;
+            width: calc(50% - 16px); 
             height: 115px; 
             display: flex; 
             flex-direction: column; 
@@ -68,23 +105,55 @@
             color: white; 
             box-sizing: border-box; 
             border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            transition: transform 0.1s, opacity 0.1s;
         }
-        .tile:active { opacity: 0.5; }
-        .tile-title { font-size: 14px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
-        .tile-os { font-size: 10px; opacity: 0.8; text-align: right; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .tile:active { opacity: 0.7; transform: scale(0.98); }
+        .tile-title { font-size: 15px; font-weight: 600; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .tile-os { font-size: 11px; opacity: 0.8; text-align: right; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
         
         .tile-tg { background-color: rgba(34, 158, 217, 0.75); }
         .tile-yt { background-color: rgba(255, 0, 0, 0.75); }
+        .tile-pik { background-color: #e52e2e; }
+        
         .icon { width: 24px; height: 24px; fill: white; margin-top: 5px; }
 
-        .info-box { background-color: var(--info-bg); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border-left: 4px solid #5133ab; padding: 12px; margin-top: 25px; box-sizing: border-box; }
-        .info-title { font-weight: 600; font-size: 13px; margin-bottom: 8px; line-height: 1.4; }
-        .info-links a { color: #00b7c3; text-decoration: none; margin-right: 15px; font-size: 13px; font-weight: bold; }
-        [data-theme="light"] .info-links a { color: #5133ab; }
+        .info-box { 
+            background-color: var(--info-bg); 
+            backdrop-filter: blur(4px); 
+            -webkit-backdrop-filter: blur(4px); 
+            border-left: 4px solid var(--border-color); 
+            padding: 16px; 
+            margin-top: 25px; 
+            box-sizing: border-box; 
+            border-radius: 4px;
+        }
+        .info-title { font-weight: 600; font-size: 14px; margin-bottom: 12px; line-height: 1.4; }
+        
+        .download-btn {
+            display: inline-block;
+            background-color: var(--accent-magenta);
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: background-color 0.2s;
+        }
+        .download-btn:hover { background-color: #a00c5a; }
+
+        .version-tag {
+            display: block;
+            margin-top: 10px;
+            font-size: 12px;
+            color: var(--sub-color);
+            opacity: 0.8;
+        }
 
         @media (min-width: 600px) {
-            .tile { width: 125px; height: 125px; }
-            h1 { font-size: 24px; }
+            .tile { width: 130px; height: 130px; }
+            h1 { font-size: 26px; }
         }
     </style>
 </head>
@@ -95,7 +164,7 @@
             <img src="avatar.png" alt="Logo" class="shop-avatar" onerror="this.style.display='none'">
             <h1>Каталог WN/OLD STORE</h1>
         </div>
-        <button class="theme-btn" id="themeToggle">Теma</button>
+        <button class="theme-btn" id="themeToggle">Тема</button>
     </div>
     
     <div class="subtitle">Добро пожаловать. Выберите раздел или перейдите в наши соцсети:</div>
@@ -107,8 +176,7 @@
         </a>
 
         <a href="inst.html" class="tile">
-            <div class="tile-title">Инструменты
-            и банк</div>
+            <div class="tile-title">Инструменты и банк</div>
             <div class="tile-os">XAP / APPX</div>
         </a>
         
@@ -132,34 +200,30 @@
             <div class="tile-os">Как ставить</div>
         </a>
         
-        <!-- Плитка Telegram: Ваша точная ссылка сохранена без изменений -->
+        <!-- Плитка Telegram (ссылка сохранена точно как у тебя) -->
         <a href="https://telegram.me/wrisknuk_life" target="_blank" class="tile tile-tg">
             <div class="tile-title">Наш Telegram</div>
             <svg class="icon" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
         </a>
 
-        <!-- Плитка YouTube: Ваша точная ссылка сохранена без изменений -->
+        <!-- Плитка YouTube (ссылка сохранена точно как у тебя) -->
         <a href="https://www.youtube.com/@Tehno_WriskNuk_official" target="_blank" class="tile tile-yt">
             <div class="tile-title">YouTube канал</div>
             <svg class="icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
         </a>
         
-      <!-- Плитка Telegram: Ссылка сохранена строго по твоему адресу -->
-<a
-href="https://aero-pik.vercel.app/@wrisknuk_life" target="_blank" class="tile tile-tg" style="background-color: #e52e2e !important;">
-    <div class="tile-title">Наш Pik</div>
-    <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff !important;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
-</a>
-        
+        <!-- Плитка Pik (ссылка сохранена точно как у тебя, цвет красный) -->
+        <a href="https://aero-pik.vercel.app/@wrisknuk_life" target="_blank" class="tile tile-pik">
+            <div class="tile-title">Наш Pik</div>
+            <svg class="icon" viewBox="0 0 24 24" style="fill: #ffffff;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-1-.65-.35-1 .22-1.62.15-.15 2.73-2.5 2.78-2.72.01-.03.01-.13-.05-.18-.06-.05-.15-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.37.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+        </a>
     </div>
 
-    <!-- Инфо-бокс с вашими точными ссылками -->
+    <!-- Исправленный блок информации -->
     <div class="info-box">
-        <div class="info-title">Cоветуем скачать большинство популярных зависимостей</div>
-         <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Dependencies.zip" class="download-btn">Скачать appx</a>
-        </div class="info-links">
-            <a Версия 2.0
-        </div>
+        <div class="info-title">Советуем скачать набор популярных зависимостей для корректной работы приложений</div>
+        <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Dependencies.zip" class="download-btn" download>Скачать Dependencies.zip</a>
+        <span class="version-tag">Версия 2.0</span>
     </div>
 
     <script>
