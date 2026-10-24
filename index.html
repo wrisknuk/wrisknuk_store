@@ -9,15 +9,12 @@
     <link rel="manifest" href="manifest.json">
     
     <style>
-        /* Базовые настройки */
         body { 
-            /* Используем сплошной цвет или очень приглушенную картинку, чтобы текст не терялся */
-            background-color: #0055a4; 
+            background-color: #0055a4;
             background-image: url('wp_bg.jpg'); 
             background-size: cover; 
             background-position: center; 
             background-attachment: fixed;
-            
             color: #ffffff; 
             font-family: 'Segoe WP', 'Segoe UI', 'Segoe UI Symbol', sans-serif; 
             margin: 0;
@@ -26,117 +23,115 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Гарантирует идеальную центровку по вертикали */
+            justify-content: center;
             box-sizing: border-box;
             overflow: hidden;
         }
 
-        /* Контейнер для всего контента */
         .content-wrap {
             width: 100%;
-            max-width: 480px; /* Ширина как у экрана WP (до 5 дюймов) */
+            max-width: 480px;
             text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
             box-sizing: border-box;
         }
         
-        /* Блок для аватарки */
-        .avatar-container {
-            margin-bottom: 30px;
+        .avatar-wrapper {
+            margin-bottom: 25px;
             display: inline-block;
         }
 
-        /* Аватарка: стиль иконки приложения WP */
         .welcome-avatar {
             width: 120px; 
             height: 120px;
-            border-radius: 12px; /* Скругление углов плитки */
+            border-radius: 12px;
             object-fit: cover;
-            border: 4px solid #ffffff; /* Белая рамка для контраста */
+            border: 4px solid #ffffff;
             box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
-        /* Заголовок: крупный, четкий */
+        .header-group {
+            margin-bottom: 30px;
+        }
+
         .welcome-title {
             color: #ffffff; 
             font-size: 28px;
-            font-weight: 300; /* Тонкое начертание Segoe WP */
+            font-weight: 300;
             margin: 0 0 10px 0;
-            letter-spacing: 1.5px; /* Разрядка букв — стиль Metro */
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            
-            /* Подложка под текст, чтобы он читался на любом фоне */
-            background-color: rgba(0, 0, 0, 0.3); 
-            padding: 5px 10px;
+            background-color: rgba(0, 0, 0, 0.4);
+            padding: 8px 16px;
+            border-radius: 4px;
             display: inline-block;
         }
 
-        /* Описание: серый текст, меньше кегль */
         .welcome-text {
             color: #e6e6e6;
             font-size: 14px;
             line-height: 1.4;
             margin: 0;
             max-width: 300px;
-            margin: 0 auto 40px auto; /* Отступ снизу до кнопки */
-            
-            /* Подложка для читаемости */
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 8px 12px;
+            margin: 0 auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 10px 16px;
             border-radius: 4px;
         }
 
-        /* Кнопка-плитка: стиль Windows Phone */
         .enter-btn {
             display: block;
             width: 100%;
-            background-color: #d8107a; /* Фирменный маджента */
+            background-color: #d8107a;
             color: #ffffff;
             border: none;
-            padding: 22px 0; /* Высокая плитка */
+            padding: 22px 0;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            
-            /* Тень в стиле WP: четкая, не размытая */
             box-shadow: 0 4px 6px rgba(0,0,0,0.4); 
             transition: background-color 0.1s ease, transform 0.1s ease;
         }
         
         .enter-btn:active {
             background-color: #a00c5a;
-            transform: scale(0.98); /* Эффект нажатия плитки */
+            transform: scale(0.98);
         }
 
-        /* Футер: мелкий текст */
         .welcome-footer {
             margin-top: 40px;
-            color: #666666; 
+            color: #ffffff; /* Белый цвет вместо серого для лучшей видимости */
             font-size: 11px;
             text-align: center;
             line-height: 1.4;
-            opacity: 0.8;
+            opacity: 0.9;
+            /* Полупрозрачная плашка под футером, чтобы текст читался на любом фоне */
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 8px 16px;
+            border-radius: 4px;
+            display: inline-block;
+            width: 100%;
+            box-sizing: border-box;
         }
     </style>
 </head>
 <body>
 
     <div class="content-wrap">
-        <!-- Верхняя часть: логотип и описание -->
-        <div class="avatar-container">
+        <div class="avatar-wrapper">
             <img src="avatar.png" alt="Logo Large" class="welcome-avatar" onerror="this.style.display='none'">
         </div>
-        
-        <h1 class="welcome-title">WN/OLD STORE</h1>
-        <p class="welcome-text">Добро пожаловать в магазин приложений для WP 8.1 и WM 10</p>
 
-        <!-- Центральная часть: плашка перехода (плитка) -->
+        <div class="header-group">
+            <h1 class="welcome-title">WN/OLD STORE</h1>
+            <p class="welcome-text">Добро пожаловать в магазин приложений для WP 8.1 и WM 10</p>
+        </div>
+
         <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
-        <!-- Нижняя часть: мелкие копирайты -->
         <div class="welcome-footer">
             ©Все права защищены<br>
             WriskNuk Corporation<br>
