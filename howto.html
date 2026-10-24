@@ -26,30 +26,138 @@
             --recommend-border: #28a745;
         }
 
-        body { background-color: var(--bg-color); color: var(--text-color); font-family: 'Segoe UI', sans-serif; margin: 15px; line-height: 1.6; transition: background 0.2s, color 0.2s; }
-        h1 { color: var(--win-purple); font-weight: 300; font-size: 22px; margin-top: 0; }
-        h2 { color: var(--win-purple); font-size: 16px; margin-top: 25px; border-bottom: 1px solid var(--border-color); padding-bottom: 5px; }
-        ol, ul { padding-left: 20px; margin-bottom: 15px; font-size: 14px; }
-        li { margin-bottom: 8px; }
-        p { font-size: 14px; }
-        
-        .back-btn { display: inline-block; background-color: var(--win-purple); color: white; text-decoration: none; padding: 6px 15px; margin-bottom: 20px; font-weight: 600; font-size: 13px; }
-        .back-btn:active { opacity: 0.8; }
-        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', sans-serif;
+            margin: 15px;
+            line-height: 1.6;
+            transition: background 0.2s, color 0.2s;
+        }
+        h1 {
+            color: var(--win-purple);
+            font-weight: 300;
+            font-size: 22px;
+            margin-top: 0;
+        }
+        h2 {
+            color: var(--win-purple);
+            font-size: 16px;
+            margin-top: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+        ol, ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        p {
+            font-size: 14px;
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        [data-theme="light"] code {
+            background: #f0f0f0;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background-color: var(--win-purple);
+            color: white;
+            text-decoration: none;
+            padding: 6px 15px;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: 6px;
+        }
+        .back-btn:active {
+            opacity: 0.8;
+        }
+
+        /* Кнопка переключения темы */
+        .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .theme-toggle-btn:hover {
+            border-color: var(--win-purple);
+            color: var(--win-purple);
+            background: rgba(255,255,255,0.06);
+        }
+        [data-theme="light"] .theme-toggle-btn:hover {
+            background: rgba(0,0,0,0.04);
+        }
+        .icon-box {
+            font-size: 18px;
+            line-height: 0;
+        }
+
         /* Стили для блоков уведомлений */
-        .alert { padding: 12px; margin: 15px 0; font-size: 13px; box-sizing: border-box; }
-        
-        .alert-warning { background-color: var(--alert-bg); border-left: 4px solid var(--alert-border); }
-        .alert-warning-title { font-weight: bold; color: var(--alert-border); margin-bottom: 4px; text-transform: uppercase; }
-        
-        .alert-recommend { background-color: var(--recommend-bg); border-left: 4px solid var(--recommend-border); }
-        .alert-recommend-title { font-weight: bold; color: var(--recommend-border); margin-bottom: 4px; text-transform: uppercase; }
+        .alert {
+            padding: 12px;
+            margin: 15px 0;
+            font-size: 13px;
+            box-sizing: border-box;
+            border-radius: 6px;
+        }
+        .alert-warning {
+            background-color: var(--alert-bg);
+            border-left: 4px solid var(--alert-border);
+        }
+        .alert-warning-title {
+            font-weight: bold;
+            color: var(--alert-border);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .alert-recommend {
+            background-color: var(--recommend-bg);
+            border-left: 4px solid var(--recommend-border);
+        }
+        .alert-recommend-title {
+            font-weight: bold;
+            color: var(--recommend-border);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
-    <a href="menu.html" class="back-btn">⬅ Назад</a>
-    
+    <div class="header-row">
+        <a href="menu.html" class="back-btn">⬅ Назад</a>
+        <button class="theme-toggle-btn" id="themeToggle">
+            <span class="icon-box" id="themeIcon">🌙</span>
+            <span>Тема</span>
+        </button>
+    </div>
+
     <h1>Инструкция по установке приложений</h1>
     <p>Официальный магазин закрыт, поэтому файлы формата <b>.appx</b>, <b>.appxbundle</b> и старые <b>.xap</b> устанавливаются вручную.</p>
 
@@ -62,7 +170,7 @@
     <!-- ЖЕЛТАЯ ПЛАШКА: ПРЕДУПРЕЖДЕНИЕ -->
     <div class="alert alert-warning">
         <div class="alert-warning-title">Внимание! Информация по ошибкам установки</div>
-        Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью. В крайнем случаее писать в наш тг.
+        Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью. В крайнем случае писать в наш тг.
     </div>
 
     <h2>Шаг 1. Включение режима разработчика</h2>
@@ -75,8 +183,8 @@
     <p>Это самый надежный способ, если приложение выдает ошибку при обычной установке со смартфона.</p>
     <ol>
         <li>Там же, в меню <b>Для разработчиков</b> на телефоне, прокрутите вниз и включите тумблер <b>Диспетчер устройств (Device Portal)</b>.</li>
-        <li>Включите пункт <b>Проводное подключение (USB)</b> или Wi-Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>192.168.1.15</code>).</li>
-        <li>Подключите телефон к компьютеру кабелем или убедитесь, что они находятся в одной сети Wi-Fi.</li>
+        <li>Включите пункт <b>Проводное подключение (USB)</b> или Wi‑Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>192.168.1.15</code>).</li>
+        <li>Подключите телефон к компьютеру кабелем или убедитесь, что они находятся в одной сети Wi‑Fi.</li>
         <li>Откройте любой браузер на компьютере и введите адрес, который выдал телефон.</li>
         <li>Если браузер ругается на сертификат безопасности, нажмите <i>«Дополнительно» ➡️ «Перейти на сайт (небезопасно)»</i>.</li>
         <li>В открывшемся меню Device Portal на ПК перейдите во вкладку <b>Apps</b> (Приложения).</li>
@@ -93,10 +201,27 @@
     </ol>
 
     <script>
-        // Скрипт синхронизации темы
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
+
+        const toggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeButton() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+        }
+        updateThemeButton();
+
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                let newTheme = theme === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeButton();
+            });
+        }
     </script>
 </body>
 </html>
-
