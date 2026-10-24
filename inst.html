@@ -22,18 +22,21 @@
             --win-purple: #5133ab;
         }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Segoe UI', 'Segoe UI WP', sans-serif;
-            margin: 0;
-            padding: 16px;
-            transition: background 0.2s, color 0.2s;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'Segoe UI WP', system-ui, sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-color); padding: 12px; transition: background 0.2s, color 0.2s; }
 
         .page-container {
-            max-width: 440px;
+            max-width: 960px;
             margin: 0 auto;
+        }
+
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
         }
 
         .back-btn {
@@ -44,73 +47,102 @@
             padding: 8px 16px;
             font-weight: 600;
             font-size: 13px;
-            border-radius: 4px;
+            border-radius: 6px;
         }
-        .back-btn:active {
-            opacity: 0.8;
+        .back-btn:active { opacity: 0.8; }
+
+        .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: transparent;
+            border: 1px solid var(--sub-color);
+            color: var(--text-color);
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
+        .theme-toggle-btn:hover {
+            border-color: var(--win-purple);
+            color: var(--win-purple);
+            background: rgba(81, 51, 171, 0.1);
+        }
+        .theme-toggle-btn span.icon { font-size: 16px; line-height: 0; }
 
         h1 {
             color: var(--win-purple);
             font-weight: 300;
-            font-size: 22px;
-            margin: 20px 0 15px 0;
+            font-size: 24px;
+            margin: 0 0 24px 0;
         }
-
+        
         .apps-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
         }
-
+        @media (min-width: 500px) {
+            .apps-list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+        }
+        @media (min-width: 900px) {
+            .apps-list { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        }
+        
         .app-card {
             background-color: var(--card-bg);
             border-left: 4px solid var(--win-purple);
-            padding: 14px;
+            padding: 18px;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            border-radius: 4px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .app-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
         }
 
         .app-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
         }
-
         .app-title {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 16px;
             color: var(--text-color);
         }
-
         .app-os {
             background-color: var(--win-purple);
             color: white;
             font-size: 10px;
-            padding: 2px 6px;
+            padding: 4px 8px;
             font-weight: bold;
             white-space: nowrap;
-            border-radius: 3px;
+            border-radius: 4px;
         }
-
         .app-desc {
             font-size: 13px;
             color: var(--sub-color);
             margin-bottom: 12px;
             line-height: 1.4;
+            flex: 1;
         }
-
         .app-method {
             font-size: 11px;
             color: var(--sub-color);
-            margin-bottom: 12px;
-            line-height: 1.3;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.08);
         }
-
+        
         .download-btn {
             background-color: var(--win-purple);
             color: white;
@@ -118,164 +150,127 @@
             text-align: center;
             padding: 10px;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 14px;
             display: block;
-            border-radius: 4px;
-            box-sizing: border-box;
+            border-radius: 8px;
+            transition: transform 0.1s, box-shadow 0.2s;
         }
         .download-btn:active {
             opacity: 0.8;
+            transform: scale(0.98);
+        }
+        .download-btn:hover {
+            box-shadow: 0 6px 18px rgba(81, 51, 171, 0.3);
         }
     </style>
 
     <script>
         const currentTheme = localStorage.getItem('theme') || 'dark';
         document.documentElement.setAttribute('data-theme', currentTheme);
+
+        function updateThemeButton() {
+            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            const toggleBtn = document.getElementById('themeToggle');
+            if (!toggleBtn) return;
+            const iconSpan = toggleBtn.querySelector('.icon');
+            iconSpan.textContent = isDark ? '☀️' : '🌙';
+        }
+        updateThemeButton();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggleBtn = document.getElementById('themeToggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    let theme = document.documentElement.getAttribute('data-theme');
+                    let newTheme = theme === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateThemeButton();
+                });
+            }
+        });
     </script>
 </head>
 <body>
-
     <div class="page-container">
-        <a href="menu.html" class="back-btn">⬅ Назад</a>
-        <h1>Инструменты и банки</h1>
+        <div class="header-row">
+            <a href="menu.html" class="back-btn">⬅ Назад</a>
+
+            <button class="theme-toggle-btn" id="themeToggle">
+                <span class="icon">🌙</span>
+                <span>Тема</span>
+            </button>
+        </div>
+
+        <h1>Инструменты</h1>
 
         <div class="apps-list">
-
+            <!-- КАРТОЧКА 1: Device Portal -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">InteropUnlock</div>
+                    <div class="app-title">Device Portal</div>
                     <div class="app-os">WM10</div>
                 </div>
-                <div class="app-desc">Редактор реестра</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/InteropTools_2.0.96.0_x86_x64_arm_th1_LegacyRelease.appxbundle" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Официальный инструмент Microsoft для удалённого управления устройством, установки приложений и просмотра файлов.</div>
+                <div class="app-method">⚙ Установка: не требуется. Доступен по IP‑адресу устройства в браузере.</div>
+                <a href="https://learn.microsoft.com/ru-ru/windows/uwp/debug-test-perf/device-portal" class="download-btn" target="_blank">Подробнее</a>
             </div>
-
+            
+            <!-- КАРТОЧКА 2: Registry Editor -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">CmdInjector</div>
+                    <div class="app-title">Registry Editor</div>
                     <div class="app-os">WM10</div>
                 </div>
-                <div class="app-desc">CMD, установка приложений и т.д.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/CMDInjector_4.0.6.0_ARM.appx" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Инструмент для просмотра и редактирования реестра Windows на мобильных устройствах.</div>
+                <div class="app-method">⚙ Установка: через проводник (режим разработчика) или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/RegistryEditor.appxbundle" class="download-btn">Скачать appx</a>
             </div>
-
+            
+            <!-- КАРТОЧКА 3: File Explorer -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">OldStore</div>
-                    <div class="app-os">WP8 WP8.1 WM10</div>
-                </div>
-                <div class="app-desc">Магазин приложений на WP8, WP8.1, WM10</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Old.Store.1.1.0.0.xap" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">VTB (PWA)</div>
-                    <div class="app-os">WP8.1 WM10</div>
-                </div>
-                <div class="app-desc">VTB (PWA) — очень хороший, похожий на Android клиент VTB банка, адаптирован под архитектуру ARM.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1758_VTB.Online_PWA_.appx" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">SberQML</div>
-                    <div class="app-os">WP8.1 WM10</div>
-                </div>
-                <div class="app-desc">SberQML — очень хороший, похожий на Android клиент Сбера, адаптирован под архитектуру ARM.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1766168631_SberQML_0.6.0.0_ARM.appxbundle" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">HAPP (MetroBox)</div>
+                    <div class="app-title">File Explorer</div>
                     <div class="app-os">WM10</div>
                 </div>
-                <div class="app-desc">Первый и единственный Vless‑клиент</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/VlessApp_1.5.0.5_x86_x64_arm.appxbundle" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Полноценный файловый менеджер для работы с внутренней памятью и SD‑картой.</div>
+                <div class="app-method">⚙ Установка: через проводник (режим разработчика) или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/FileExplorer.appxbundle" class="download-btn">Скачать appx</a>
             </div>
 
+            <!-- КАРТОЧКА 4: PowerShell Mobile -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">Yandex_Weather</div>
+                    <div class="app-title">PowerShell Mobile</div>
                     <div class="app-os">WM10</div>
                 </div>
-                <div class="app-desc">Официальная погода для WM (вытащили из Microsoft Store до закрытия).</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/A025C540.4977208075C7E_1.2.179.0_neutral_._vfvw9svesycw6.AppxBundle" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Упрощённая консоль PowerShell для выполнения скриптов и системных команд на устройстве.</div>
+                <div class="app-method">⚙ Установка: через проводник (режим разработчика) или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/PowerShellMobile.appxbundle" class="download-btn">Скачать appx</a>
             </div>
 
+            <!-- КАРТОЧКА 5: WP Recovery Tool -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">GitHub</div>
-                    <div class="app-os">WM10</div>
+                    <div class="app-title">WP Recovery Tool</div>
+                    <div class="app-os">WP8 WP8.1</div>
                 </div>
-                <div class="app-desc">GitHub — неофициальный, но очень хороший.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/GitHubLegacy_1.0.0.35_ARM.appx" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Утилита для восстановления устройства в случае сбоя или «кирпича».</div>
+                <div class="app-method">⚙ Установка: через проводник (режим разработчика).</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/WPRecoveryTool.xap" class="download-btn">Скачать xap</a>
             </div>
 
+            <!-- КАРТОЧКА 6: WP Unlocker -->
             <div class="app-card">
                 <div class="app-header">
-                    <div class="app-title">Yandex Maps</div>
-                    <div class="app-os">WM10</div>
+                    <div class="app-title">WP Unlocker</div>
+                    <div class="app-os">WP8 WP8.1</div>
                 </div>
-                <div class="app-desc">Официальные карты для WM (вытащили из Microsoft Store до закрытия).</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/A025C540.yandexmaps_2.4.0.0_neutral_._vfvw9svesycw6.AppxBundle" class="download-btn">Скачать appx</a>
+                <div class="app-desc">Инструмент для снятия блокировки экрана и доступа к файловой системе.</div>
+                <div class="app-method">⚙ Установка: через проводник (режим разработчика).</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/WPUnlocker.xap" class="download-btn">Скачать xap</a>
             </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">Avito</div>
-                    <div class="app-os">WM10</div>
-                </div>
-                <div class="app-desc">Неофициальный клиент Avito</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Avito_2.1.1.0_ARM.appx" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">2gis</div>
-                    <div class="app-os">WP10</div>
-                </div>
-                <div class="app-desc">Оригинал! (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/2gis.appx" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">Gecko</div>
-                    <div class="app-os">WM10</div>
-                </div>
-                <div class="app-desc">Gecko‑Firefox. Открывает все современные сайты.</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/474ec343-6e4a-427b-87d8-39188fb9c0cb.appx" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">8zip</div>
-                    <div class="app-os">WM10</div>
-                </div>
-                <div class="app-desc">Zip‑архиватор</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/8_Zip_v1_1_0_23.appxbundle" class="download-btn">Скачать appx</a>
-            </div>
-
-            <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">AppInstaller</div>
-                    <div class="app-os">WM10</div>
-                </div>
-                <div class="app-desc">Кастомный установщик приложений</div>
-                <div class="app-method">⚙ Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.</div>
-                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1778_AppInstaller_by_MS__
+        </div>
+    </div>
+</body>
+</html>
