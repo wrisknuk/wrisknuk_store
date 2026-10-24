@@ -14,6 +14,7 @@
             --text-color: #ffffff;
             --accent-btn: #d8107a;
             --accent-btn-hover: #a00c5a;
+            --win-purple: #5133ab;
             --panel-bg: rgba(0, 0, 0, 0.5);
             --panel-border: rgba(255, 255, 255, 0.2);
         }
@@ -23,6 +24,7 @@
             --text-color: #1a1a1d;
             --accent-btn: #b00060;
             --accent-btn-hover: #850048;
+            --win-purple: #6b44c7;
             --panel-bg: rgba(255, 255, 255, 0.7);
             --panel-border: rgba(0, 0, 0, 0.15);
         }
@@ -42,7 +44,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Опционально: фон-картинка только если она реально есть */
         .page-bg-image {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -112,6 +113,7 @@
             backdrop-filter: blur(4px);
         }
 
+        /* Большая кнопка «Перейти в меню» */
         .enter-btn {
             display: block;
             width: 100%;
@@ -126,16 +128,16 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
-            transition: background-color 0.1s ease, transform 0.1s ease, box-shadow 0.1s ease;
+            transition: all 0.1s ease;
             border-radius: 6px;
         }
-        
         .enter-btn:active {
             background-color: var(--accent-btn-hover);
             transform: scale(0.98);
             box-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
+        /* Панель управления (тема + фон) */
         .controls-row {
             display: flex;
             justify-content: space-between;
@@ -195,6 +197,46 @@
             background: rgba(0,0,0,0.06);
         }
 
+        /* МАЛЕНЬКАЯ КНОПКА МАГАЗИНА — как ты просил: маленькая, стрелочка, текст столбиком */
+        .mini-shop-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--win-purple);
+            color: white;
+            border: none;
+            padding: 8px 10px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: transform 0.1s ease, background-color 0.2s ease;
+            white-space: nowrap;
+            margin-top: 16px;
+        }
+        .mini-shop-btn:active {
+            transform: scale(0.96);
+        }
+        .mini-shop-btn:hover {
+            background: #6a46d0;
+        }
+        .shop-label {
+            display: block;
+            line-height: 1.1;
+            text-align: left;
+            margin-left: 8px;
+        }
+        .shop-line {
+            display: block;
+            font-size: 11px;
+        }
+        .shop-arrow {
+            font-size: 14px;
+            margin-right: 6px;
+            display: block;
+        }
+
         .welcome-footer {
             margin-top: 36px;
             color: var(--text-color);
@@ -214,7 +256,6 @@
 </head>
 <body>
 
-    <!-- Фон-картинка вынесен в отдельный блок, чтобы его можно было скрыть -->
     <div class="page-bg-image"></div>
 
     <div class="content-wrap">
@@ -239,6 +280,15 @@
                 <span>Фон</span>
             </button>
         </div>
+
+        <!-- Маленькая кнопка магазина: стрелочка + текст столбиком -->
+        <a href="https://wrisknuk.github.io/wrisknuk_store/" class="mini-shop-btn" target="_blank">
+            <span class="shop-arrow">→</span>
+            <span class="shop-label">
+                <span class="shop-line">магазин</span>
+                <span class="shop-line">WP и WM</span>
+            </span>
+        </a>
 
         <div class="welcome-footer">
             ©Все права защищены<br>
