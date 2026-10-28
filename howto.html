@@ -4,22 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Инструкция — wrisknuk_store</title>
+
     <style>
         :root {
-            --bg-color: #000000;
+            /* Чуть мягче, чем #000000 — глазам приятнее */
+            --bg-color: #0f0f11;
             --text-color: #ffffff;
             --win-purple: #5133ab;
-            --border-color: #333333;
+            --border-color: #33333a;
+            
+            /* Цвета для блоков уведомлений */
             --alert-bg: #2b1d00;
             --alert-border: #ffaa00;
             --recommend-bg: #002b0c;
             --recommend-border: #00cc33;
         }
         [data-theme="light"] {
-            --bg-color: #ffffff;
-            --text-color: #000000;
-            --win-purple: #5133ab;
+            --bg-color: #f5f7fa;
+            --text-color: #111114;
+            --win-purple: #42298d;
             --border-color: #e0e0e0;
+            
             --alert-bg: #fff3cd;
             --alert-border: #cc8800;
             --recommend-bg: #d4edda;
@@ -29,69 +34,84 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Segoe UI', sans-serif;
-            margin: 15px;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+            margin: 20px;
             line-height: 1.6;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.3s, color 0.3s;
         }
+
         h1 {
             color: var(--win-purple);
-            font-weight: 300;
-            font-size: 22px;
+            font-weight: 700; /* жирнее, чтобы заголовок сразу цеплял */
+            font-size: 24px;
             margin-top: 0;
+            margin-bottom: 16px;
         }
         h2 {
             color: var(--win-purple);
-            font-size: 16px;
-            margin-top: 25px;
+            font-size: 18px;
+            margin-top: 32px;
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-        }
-        ol, ul {
-            padding-left: 20px;
-            margin-bottom: 15px;
-            font-size: 14px;
-        }
-        li {
-            margin-bottom: 8px;
+            padding-bottom: 8px;
         }
         p {
-            font-size: 14px;
+            font-size: 15px;
+            color: rgba(var(--text-color), 0.92); /* чуть мягче чистый белый */
         }
+        ol, ul {
+            padding-left: 24px;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+
+        /* Блок кода */
         code {
-            background: rgba(0,0,0,0.3);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: monospace;
+            background: rgba(0,0,0,0.4);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95em;
+            color: #ffcc00; /* приятный акцент для команд */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         [data-theme="light"] code {
             background: #f0f0f0;
+            color: #d63384;
         }
 
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 28px;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 12px;
         }
 
         .back-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background-color: var(--win-purple);
             color: white;
             text-decoration: none;
-            padding: 6px 15px;
+            padding: 10px 18px;
             font-weight: 600;
-            font-size: 13px;
-            border-radius: 6px;
+            font-size: 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .back-btn:hover {
+            background-color: rgba(81, 51, 171, 0.9);
+            transform: translateY(-1px);
         }
         .back-btn:active {
-            opacity: 0.8;
+            transform: scale(0.98);
         }
 
-        /* Кнопка переключения темы */
         .theme-toggle-btn {
             display: flex;
             align-items: center;
@@ -99,16 +119,16 @@
             background: transparent;
             border: 1px solid var(--border-color);
             color: var(--text-color);
-            padding: 8px 14px;
+            padding: 10px 16px;
             cursor: pointer;
-            font-size: 13px;
-            border-radius: 6px;
+            font-size: 14px;
+            border-radius: 8px;
             transition: all 0.2s ease;
         }
         .theme-toggle-btn:hover {
             border-color: var(--win-purple);
             color: var(--win-purple);
-            background: rgba(255,255,255,0.06);
+            background: rgba(255,255,255,0.08);
         }
         [data-theme="light"] .theme-toggle-btn:hover {
             background: rgba(0,0,0,0.04);
@@ -120,39 +140,44 @@
 
         /* Стили для блоков уведомлений */
         .alert {
-            padding: 12px;
-            margin: 15px 0;
-            font-size: 13px;
+            padding: 16px;
+            margin: 20px 0;
+            font-size: 14px;
             box-sizing: border-box;
-            border-radius: 6px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
         .alert-warning {
             background-color: var(--alert-bg);
-            border-left: 4px solid var(--alert-border);
+            border-left: 5px solid var(--alert-border);
         }
         .alert-warning-title {
-            font-weight: bold;
+            font-weight: 800;
             color: var(--alert-border);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .alert-recommend {
             background-color: var(--recommend-bg);
-            border-left: 4px solid var(--recommend-border);
+            border-left: 5px solid var(--recommend-border);
         }
         .alert-recommend-title {
-            font-weight: bold;
+            font-weight: 800;
             color: var(--recommend-border);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
     <div class="header-row">
-        <a href="menu.html" class="back-btn">⬅ Назад</a>
-        <button class="theme-toggle-btn" id="themeToggle">
+        <a href="menu.html" class="back-btn">
+            <span>⬅ Назад</span>
+        </a>
+        <button class="theme-toggle-btn" id="themeToggle" aria-label="Переключить тему">
             <span class="icon-box" id="themeIcon">🌙</span>
             <span>Тема</span>
         </button>
@@ -170,7 +195,7 @@
     <!-- ЖЕЛТАЯ ПЛАШКА: ПРЕДУПРЕЖДЕНИЕ -->
     <div class="alert alert-warning">
         <div class="alert-warning-title">Внимание! Информация по ошибкам установки</div>
-        Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью. В крайнем случае писать в наш тг.
+        Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не получается установить (вылезает ошибка или ничего не происходит), обязательно используйте установку через <b>Device Portal</b> с использованием компьютера (инструкция ниже в Шаге 2). Это решает 99% проблем с совместимостью. В крайнем случае пишите в наш Telegram.
     </div>
 
     <h2>Шаг 1. Включение режима разработчика</h2>
@@ -194,6 +219,7 @@
     </ol>
 
     <h2>Шаг 3. Простая установка (Прямо со смартфона)</h2>
+    <p><b>Важно:</b> Этот способ работает не всегда и подходит только для простых приложений.</p>
     <ol>
         <li>Скачайте приложения через браузер на телефоне.</li>
         <li>Откройте встроенное приложение <b>Проводник</b> и найдите скачанный архив в папке «Загрузки».</li>
