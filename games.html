@@ -8,313 +8,219 @@
     
     <style>
         :root {
-            --bg: #0f0f11;
-            --card-bg: #1a1a1d;
-            --accent: #5133ab;          /* Фирменный фиолетовый — глубже и контрастнее */
-            --text: #e0e0e5;
-            --muted: #b0b0b5;
-            --border: rgba(255,255,255,0.1);
-            --btn-bg: var(--accent);
-            --btn-text: #fff;
-            --legacy-bg: rgba(81, 51, 171, 0.12);
-            --legacy-border: #5133ab;
-        }
-        [data-theme="light"] {
-            --bg: #f5f7fa;
+            --bg-color: #f0f2f5;
             --card-bg: #ffffff;
-            --accent: #42298d;
-            --text: #111114;
-            --muted: #66666a;
-            --border: rgba(0,0,0,0.08);
-            --btn-bg: var(--accent);
-            --btn-text: #fff;
-            --legacy-bg: rgba(66, 41, 141, 0.08);
-            --legacy-border: #42298d;
+            --primary: #6750A4; /* Фиолетовый как на макете */
+            --primary-hover: #524086;
+            --text-main: #1C1B1F;
+            --text-secondary: #5E5B64;
+            --border: #E5E4E8;
+            --legacy-bg: #FFF6F2;
+            --legacy-border: #D94520;
+            --legacy-text: #B42B00;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-        body { background: var(--bg); color: var(--text); padding: 16px; transition: background 0.3s, color 0.3s; }
+        body { background: var(--bg-color); color: var(--text-main); padding: 24px; }
 
-        .page-container {
-            max-width: 960px;
-            margin: 0 auto;
-        }
-
-        .header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 28px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        /* Кнопка «Магазин WP и WM» — теперь в одну строку, но с аккуратной стрелочкой */
-        .shop-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 8px 16px;
-            font-size: 13px;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        .shop-btn:hover {
-            background: rgba(255,255,255,0.12);
-            transform: translateY(-1px);
-        }
-        .shop-btn .arrow { font-size: 14px; }
-
-        .back-btn {
-            background: var(--accent);
-            color: var(--btn-text);
-            text-decoration: none;
-            padding: 10px 18px;
-            font-weight: 600;
-            font-size: 14px;
-            border-radius: 8px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: transform 0.1s;
-        }
-        .back-btn:active { transform: scale(0.98); }
-
-        .theme-toggle-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 10px 16px;
-            cursor: pointer;
-            font-size: 14px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-        .theme-toggle-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(81, 51, 171, 0.08);
-        }
-        .theme-toggle-btn span.icon { font-size: 18px; line-height: 0; }
+        .page-container { max-width: 1200px; margin: 0 auto; }
 
         h1 {
-            color: var(--accent);
+            font-size: 32px;
             font-weight: 700;
-            font-size: 28px;
-            margin: 0 0 28px 0;
-            letter-spacing: 0.5px;
+            color: var(--primary);
+            margin-bottom: 32px;
         }
 
+        /* Сетка карточек */
         .apps-list {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media (min-width: 500px) {
-            .apps-list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
-        }
-        @media (min-width: 900px) {
-            .apps-list { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
         }
 
+        /* Карточка */
         .app-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-left: 4px solid var(--accent);
+            border-radius: 16px;
             padding: 20px;
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.15);
-            transition: transform 0.2s, box-shadow 0.2s;
+            gap: 16px;
+            transition: box-shadow 0.2s;
         }
         .app-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
-        }
-        /* Специальный стиль для старых платформ (WP8/WP8.1) */
-        .app-card.legacy {
-            border-left-color: #d8107a; /* Розово‑малиновый акцент для Legacy */
-            background: rgba(216, 16, 122, 0.03);
-        }
-        [data-theme="light"] .app-card.legacy {
-            background: #fff5f6;
-            border-left-color: #d8107a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-        .app-title {
-            font-weight: 700;
-            font-size: 18px;
-            color: var(--text);
-            line-height: 1.2;
-        }
-        .app-os {
-            background: var(--accent);
-            color: #fff;
+        /* Бейдж платформы (в стиле скриншота) */
+        .platform-badge {
+            background: #EBE6FC;
+            color: var(--primary);
             font-size: 11px;
-            padding: 4px 10px;
-            font-weight: 700;
-            white-space: nowrap;
+            font-weight: 600;
+            padding: 4px 8px;
             border-radius: 6px;
+            align-self: flex-start;
             text-transform: uppercase;
         }
-        .app-os.legacy-tag {
-            background: #d8107a;
-            color: #fff;
+        
+        /* Специальный стиль для Legacy (WP8) */
+        .app-card.legacy {
+            background: var(--legacy-bg);
+            border-color: var(--legacy-border);
+        }
+        .app-card.legacy .platform-badge {
+            background: #FFF6F2;
+            color: var(--legacy-text);
+            border: 1px solid var(--legacy-border);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
         }
 
         .app-desc {
             font-size: 14px;
-            color: var(--muted);
+            color: var(--text-secondary);
             line-height: 1.5;
             flex: 1;
         }
-        .app-method {
-            font-size: 12px;
-            color: var(--muted);
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-        }
 
+        .install-info {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .install-info::before { content: "©"; }
+
+        /* Кнопка */
         .download-btn {
             display: block;
             width: 100%;
-            background: var(--btn-bg);
-            color: var(--btn-text);
+            background: var(--primary);
+            color: #ffffff;
             text-align: center;
             padding: 12px;
-            font-weight: 700;
-            font-size: 15px;
-            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 12px;
             text-decoration: none;
-            transition: transform 0.1s, box-shadow 0.2s;
-            position: relative;
-            overflow: hidden;
+            transition: background 0.2s;
         }
-        .download-btn:active { transform: scale(0.98); }
-        .download-btn:hover { box-shadow: 0 8px 20px rgba(81, 51, 171, 0.4); }
+        .download-btn:hover { background: var(--primary-hover); }
+
+        /* Хедер с кнопками навигации */
+        .header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .back-btn, .shop-btn {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .back-btn {
+            background: var(--primary);
+            color: #fff;
+        }
+        .shop-btn {
+            background: #EBE6FC;
+            color: var(--primary);
+        }
     </style>
-
-    <script>
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-
-        function updateThemeButton() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const toggleBtn = document.getElementById('themeToggle');
-            if (!toggleBtn) return;
-            const iconSpan = toggleBtn.querySelector('.icon');
-            iconSpan.textContent = isDark ? '☀️' : '🌙';
-        }
-        updateThemeButton();
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const toggleBtn = document.getElementById('themeToggle');
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    let theme = document.documentElement.getAttribute('data-theme');
-                    let newTheme = theme === 'dark' ? 'light' : 'dark';
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    updateThemeButton();
-                });
-            }
-        });
-    </script>
 </head>
 <body>
     <div class="page-container">
         <div class="header-row">
-            <a href="menu.html" class="back-btn" aria-label="Вернуться в меню">
-                <span>⬅ Назад</span>
-            </a>
-            
-            <!-- Компактная кнопка «Магазин WP и WM» в одну строку -->
-            <a href="https://wrisknuk.github.io/wrisknuk_store/" class="shop-btn" aria-label="Перейти в основной магазин">
-                <span>Магазин WP и WM</span>
-                <span class="arrow">→</span>
-            </a>
-
-            <button class="theme-toggle-btn" id="themeToggle" aria-label="Переключить тему оформления">
-                <span class="icon">🌙</span>
-                <span>Тема</span>
-            </button>
+            <a href="menu.html" class="back-btn" aria-label="Вернуться в меню">⬅ Назад</a>
+            <a href="https://wrisknuk.github.io/wrisknuk_store/" class="shop-btn" aria-label="Перейти в основной магазин">Магазин WP и WM →</a>
         </div>
 
         <h1>Игры</h1>
 
         <div class="apps-list">
-
-            <!-- КАРТОЧКА 1: MINECRAFT -->
+            <!-- Minecraft -->
             <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">Minecraft</div>
-                    <div class="app-os">WM10</div>
-                </div>
+                <span class="platform-badge">WM10</span>
+                <div class="app-title">Minecraft</div>
                 <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Легендарная игра от Mojang.</div>
-                <div class="app-method">Установка: через проводник (режим разработчика) или Device Portal с ПК.</div>
+                <div class="install-info">Установка: через проводник (режим разработчика) или Device Portal с ПК.</div>
                 <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Minecraft.appxbundle" class="download-btn">Скачать appx</a>
             </div>
-            
-            <!-- КАРТОЧКА 2: RIDER 3D -->
+
+            <!-- Rider 3D -->
             <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">Rider 3D</div>
-                    <div class="app-os">WM10</div>
-                </div>
+                <span class="platform-badge">WM10</span>
+                <div class="app-title">Rider 3D</div>
                 <div class="app-desc">Знаменитая игра. Оригинал (вытащен до закрытия проекта Astoria, 2016).</div>
-                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <div class="install-info">Установка: через проводник или Device Portal.</div>
                 <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753666706_Rider3D.appxbundle" class="download-btn">Скачать appx</a>
             </div>
-            
-            <!-- КАРТОЧКА 3: EDGE SURF -->
+
+            <!-- EDGE Surf -->
             <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">EDGE Surf</div>
-                    <div class="app-os">WM10</div>
-                </div>
+                <span class="platform-badge">WM10</span>
+                <div class="app-title">EDGE Surf</div>
                 <div class="app-desc">Порт игры из ПК‑версии браузера EDGE.</div>
-                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <div class="install-info">Установка: через проводник или Device Portal.</div>
                 <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/EdgeSurf2_1.0.11.0_neutral.2.appx" class="download-btn">Скачать appx</a>
             </div>
 
-            <!-- КАРТОЧКА 4: MYMINECRAF LAUNCHER -->
+            <!-- MyMinecraft Launcher -->
             <div class="app-card">
-                <div class="app-header">
-                    <div class="app-title">MyMinecraft Launcher</div>
-                    <div class="app-os">WM10</div>
-                </div>
+                <span class="platform-badge">WM10</span>
+                <div class="app-title">MyMinecraft Launcher</div>
                 <div class="app-desc">Лаунчер с тремя версиями Minecraft. Легендарная игра от Mojang.</div>
-                <div class="app-method">Установка: через проводник или Device Portal.</div>
+                <div class="install-info">Установка: через проводник или Device Portal.</div>
                 <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MyMinecraftLauncher_1.0.2.0_Debug_Test.2FMyMinecraftLauncher_1.0.2.0_arm_Debug.appxbundle" class="download-btn">Скачать appx</a>
             </div>
 
-            <!-- КАРТОЧКА 5: DOODLE JUMP (Legacy) -->
+            <!-- Doodle Jump (Legacy) -->
             <div class="app-card legacy">
-                <div class="app-header">
-                    <div class="app-title">Doodle Jump</div>
-                    <div class="app-os legacy-tag">WP8 / WP8.1</div>
-                </div>
+                <span class="platform-badge">WP8 / WP8.1</span>
+                <div class="app-title">Doodle Jump</div>
                 <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.</div>
-                <div class="app-method">Установка: только через проводник (режим разработчика). Формат .xap.</div>
+                <div class="install-info">Установка: только через проводник (режим разработчика). Формат .xap.</div>
                 <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754602893_Doodle_Jump_1.0.3.0.xap" class="download-btn">Скачать xap</a>
             </div>
 
-            <!-- КАРТОЧКА 6: FLY THE NYAN CAT (Legacy) -->
+            <!-- Fly The Nyan Cat (Legacy) -->
+            <div class="app-card legacy">
+                <span class="platform-badge">WP8 / WP8.1</span>
+                <div class="app-title">Fly The Nyan Cat</div>
+                <div class="app-desc">Оригинал (вытащили до закрытия Microsoft Store). Культовая классика для WP.</div>
+                <div class="install-info">Установка: только через проводник (режим разработчика). Формат .xap.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Fly_The_Nyan_Cat.xap" class="download-btn">Скачать xap</a>
+            </div>
+
+            <!-- Fruit Ninja (Исправленная ссылка) -->
+            <div class="app-card">
+                <span class="platform-badge">WM10</span>
+                <div class="app-title">Fruit Ninja</div>
+                <div class="app-desc">Классический аркадный слэшер. Требуется режим разработчика для установки.</div>
+                <div class="install-info">Установка: через проводник или Device Portal.</div>
+                <a href="https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/FruitNinja.appxbundle" class="download-btn">Скачать appx</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
