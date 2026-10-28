@@ -11,27 +11,25 @@
             --bg-color: #0f0f11;
             --text-color: #ffffff;
             --card-bg: #1a1a1d;
-            --sub-color: #b0b0b5;
-            --win-purple: #5133ab;
-            --hover-purple: #6b4bbf;
+            --sub-color: #a0a0a5;
+            --win-purple: #6741d9;
+            --win-purple-hover: #8b66f0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         [data-theme="light"] {
             --bg-color: #f5f7fa;
             --text-color: #111114;
             --card-bg: #ffffff;
-            --sub-color: #55555a;
-            --win-purple: #42298d;
-            --hover-purple: #583db6;
+            --sub-color: #5a5a60;
+            --win-purple: #5133ab;
+            --win-purple-hover: #42298d;
+            --border-color: rgba(0, 0, 0, 0.08);
+            --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-        
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            padding: 16px; 
-            transition: background 0.3s, color 0.3s; 
-        }
+        body { background-color: var(--bg-color); color: var(--text-color); padding: 16px; transition: background 0.3s, color 0.3s; }
 
         .page-container {
             max-width: 960px;
@@ -44,50 +42,53 @@
             align-items: center;
             flex-wrap: wrap;
             gap: 12px;
-            margin-bottom: 28px;
+            margin-bottom: 32px;
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
             background-color: var(--win-purple);
             color: white;
             text-decoration: none;
             padding: 10px 18px;
             font-weight: 600;
             font-size: 14px;
-            border-radius: 8px;
-            transition: background-color 0.2s, transform 0.1s;
+            border-radius: 10px;
+            transition: transform 0.15s, box-shadow 0.2s;
         }
-        .back-btn:hover { background-color: var(--hover-purple); }
-        .back-btn:active { transform: scale(0.98); }
+        .back-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 14px rgba(103, 65, 217, 0.35);
+        }
+        .back-btn:active { opacity: 0.85; }
 
         .theme-toggle-btn {
             display: flex;
             align-items: center;
             gap: 8px;
             background: transparent;
-            border: 1px solid var(--sub-color);
+            border: 1px solid var(--border-color);
             color: var(--text-color);
             padding: 10px 16px;
             cursor: pointer;
             font-size: 14px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
+            border-radius: 10px;
+            transition: all 0.25s ease;
         }
         .theme-toggle-btn:hover {
             border-color: var(--win-purple);
             color: var(--win-purple);
-            background: rgba(81, 51, 171, 0.08);
+            background: rgba(103, 65, 217, 0.08);
         }
         .theme-toggle-btn span.icon { font-size: 18px; line-height: 0; }
 
         h1 {
             color: var(--win-purple);
             font-weight: 700;
-            font-size: 26px;
-            margin: 0 0 24px 0;
+            font-size: 28px;
+            line-height: 1.2;
+            margin: 0 0 28px 0;
         }
         
         .apps-list {
@@ -99,23 +100,25 @@
             .apps-list { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
         }
         @media (min-width: 800px) {
-            .apps-list { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+            .apps-list { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         }
         
         .app-card {
             background-color: var(--card-bg);
-            border-left: 5px solid var(--win-purple);
+            border: 1px solid var(--border-color);
             padding: 20px;
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            border-radius: 12px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-            transition: transform 0.15s, box-shadow 0.15s;
+            border-radius: 14px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
         }
         .app-card:hover {
             transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+            border-color: var(--win-purple);
+            box-shadow: var(--shadow-sm);
         }
 
         .app-header {
@@ -124,37 +127,39 @@
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 8px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
         .app-title {
             font-weight: 700;
-            font-size: 17px;
+            font-size: 18px;
             color: var(--text-color);
         }
         .app-os {
             background-color: var(--win-purple);
             color: white;
             font-size: 11px;
-            padding: 6px 10px;
+            padding: 4px 8px;
             font-weight: 700;
             white-space: nowrap;
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+        [data-theme="light"] .app-os { background-color: var(--win-purple-hover); }
+
         .app-desc {
-            font-size: 14px;
+            font-size: 15px;
             color: var(--sub-color);
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             line-height: 1.5;
             flex: 1;
         }
         .app-method {
             font-size: 12px;
             color: var(--sub-color);
-            margin-top: auto;
+            margin-top: 16px;
             padding-top: 12px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border-color);
         }
         
         .download-btn {
@@ -167,14 +172,14 @@
             font-size: 15px;
             display: block;
             border-radius: 10px;
-            transition: background-color 0.2s, box-shadow 0.2s;
-            margin-top: 12px;
+            transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
         }
         .download-btn:hover {
-            background-color: var(--hover-purple);
-            box-shadow: 0 6px 20px rgba(81, 51, 171, 0.3);
+            background-color: var(--win-purple-hover);
+            box-shadow: 0 6px 20px rgba(103, 65, 217, 0.3);
         }
         .download-btn:active {
+            opacity: 0.9;
             transform: scale(0.98);
         }
     </style>
@@ -209,11 +214,9 @@
 <body>
     <div class="page-container">
         <div class="header-row">
-            <a href="menu.html" class="back-btn" aria-label="Вернуться назад">
-                <span>⬅ Назад</span>
-            </a>
+            <a href="menu.html" class="back-btn">⬅ Назад</a>
 
-            <button class="theme-toggle-btn" id="themeToggle" aria-label="Переключить тему">
+            <button class="theme-toggle-btn" id="themeToggle">
                 <span class="icon">🌙</span>
                 <span>Тема</span>
             </button>
@@ -222,6 +225,7 @@
         <h1>Магазины</h1>
 
         <div class="apps-list">
+            <!-- КАРТОЧКА 1: MetroStore -->
             <div class="app-card">
                 <div class="app-header">
                     <div class="app-title">MetroStore</div>
@@ -236,6 +240,7 @@
                    aria-label="Скачать MetroStore">Скачать appx</a>
             </div>
             
+            <!-- КАРТОЧКА 2: OldStore -->
             <div class="app-card">
                 <div class="app-header">
                     <div class="app-title">OldStore</div>
