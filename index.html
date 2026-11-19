@@ -5,127 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WN/OLD STORE — Добро пожаловать</title>
     <link rel="icon" type="image/png" href="avatar.png">
-
-    <style>
-        :root {
-            --text: #ffffff;
-            --muted: #c8c8d0;
-            --accent: #5133ab;
-            --accent-hover: #6b4bbf;
-            --tile-bg: rgba(18, 18, 22, 0.84);
-            --border: rgba(255, 255, 255, 0.16);
-            --overlay: rgba(10, 10, 14, 0.72);
-        }
-        [data-theme="light"] {
-            --text: #111114;
-            --muted: #45454d;
-            --accent: #42298d;
-            --accent-hover: #583db6;
-            --tile-bg: rgba(255, 255, 255, 0.88);
-            --border: rgba(0, 0, 0, 0.14);
-            --overlay: rgba(242, 244, 248, 0.78);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            color: var(--text);
-            padding: 20px 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background:
-                linear-gradient(var(--overlay), var(--overlay)),
-                url("wp_bg.jpg") center / cover no-repeat fixed;
-        }
-
-        .page {
-            max-width: 440px;
-            width: 100%;
-            text-align: center;
-            background: var(--tile-bg);
-            border: 1px solid var(--border);
-            padding: 28px 20px;
-        }
-
-        .avatar {
-            width: 110px;
-            height: 110px;
-            object-fit: cover;
-            border: 3px solid var(--accent);
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .title {
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: -0.5px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            color: var(--muted);
-            font-size: 15px;
-            line-height: 1.45;
-            max-width: 320px;
-            margin: 0 auto 26px;
-        }
-
-        .enter-btn {
-            display: block;
-            width: 100%;
-            background: var(--accent);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px 0;
-            font-size: 15px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
-        .enter-btn:hover { background: var(--accent-hover); }
-        .enter-btn:active { transform: scale(0.99); }
-
-        .controls {
-            margin-top: 18px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .theme-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text);
-            padding: 8px 14px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-        .theme-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .footer {
-            margin-top: 22px;
-            padding-top: 14px;
-            border-top: 1px solid var(--border);
-            color: var(--muted);
-            font-size: 12px;
-            line-height: 1.45;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 
     <script>
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -148,12 +28,12 @@
         });
     </script>
 </head>
-<body>
-    <main class="page">
-        <img src="avatar.png" alt="Аватар WN/OLD STORE" class="avatar" onerror="this.style.display='none'">
+<body class="welcome-page">
+    <main class="welcome-card">
+        <img src="avatar.png" alt="Аватар WN/OLD STORE" class="welcome-avatar" onerror="this.style.display='none'">
 
-        <h1 class="title">WN/OLD STORE</h1>
-        <p class="subtitle">Магазин приложений и игр для Windows Phone 8.1 и Windows 10 Mobile</p>
+        <h1 class="welcome-title">WN/OLD STORE</h1>
+        <p class="welcome-subtitle">Магазин приложений и игр для Windows Phone 8.1 и Windows 10 Mobile</p>
 
         <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
@@ -164,7 +44,7 @@
             </button>
         </div>
 
-        <footer class="footer">
+        <footer class="welcome-footer">
             © Все права защищены<br>
             WriskNuk Corporation • 2026
         </footer>
