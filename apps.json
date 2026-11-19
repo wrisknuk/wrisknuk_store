@@ -1,14 +1,272 @@
 {
-  "social": [
-    {"name": "WriskNuk Search Launcher", "url": "https://wrisknuk.github.io/wrisknuk_store/social.html"}
+  "categories": [
+    { "id": "all", "name": "Все" },
+    { "id": "games", "name": "Игры" },
+    { "id": "inst", "name": "Инструменты и банки" },
+    { "id": "magaz", "name": "Магазины" },
+    { "id": "social", "name": "Социальные сети" },
+    { "id": "video", "name": "Видео" }
   ],
-  "video": [
-    {"name": "GTranslator", "url": "https://wrisknuk.github.io/wrisknuk_store/video.html"}
-  ],
-  "tools": [
-    {"name": "Create Mod Schematics Depot", "url": "https://wrisknuk.github.io/wrisknuk_store/inst.html"}
-  ],
-  "games": [
-    {"name": "Subway Surfers Prague", "url": "https://wrisknuk.github.io/wrisknuk_store/games.html"}
+  "apps": [
+    {
+      "id": "minecraft",
+      "name": "Minecraft",
+      "category": "games",
+      "platform": "WM10",
+      "desc": "Оригинал (вытащили до закрытия Microsoft Store). Легендарная игра от Mojang.",
+      "method": "Установка: через проводник (режим разработчика) или Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Minecraft.appxbundle"
+    },
+    {
+      "id": "rider-3d",
+      "name": "Rider 3D",
+      "category": "games",
+      "platform": "WM10",
+      "desc": "Знаменитая игра. Оригинал (вытащен до закрытия проекта Astoria, 2016).",
+      "method": "Установка: через проводник или Device Portal.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1753666706_Rider3D.appxbundle"
+    },
+    {
+      "id": "edge-surf",
+      "name": "EDGE Surf",
+      "category": "games",
+      "platform": "WM10",
+      "desc": "Порт игры из ПК‑версии браузера EDGE.",
+      "method": "Установка: через проводник или Device Portal.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/EdgeSurf2_1.0.11.0_neutral.2.appx"
+    },
+    {
+      "id": "myminecraft-launcher",
+      "name": "MyMinecraft Launcher",
+      "category": "games",
+      "platform": "WM10",
+      "desc": "Лаунчер с тремя версиями Minecraft. Легендарная игра от Mojang.",
+      "method": "Установка: через проводник или Device Portal.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MyMinecraftLauncher_1.0.2.0_Debug_Test.2FMyMinecraftLauncher_1.0.2.0_arm_Debug.appxbundle"
+    },
+    {
+      "id": "doodle-jump",
+      "name": "Doodle Jump",
+      "category": "games",
+      "platform": "WP8 / WP8.1",
+      "desc": "Оригинал (вытащили до закрытия Microsoft Store). Последняя оригинальная версия.",
+      "method": "Установка: только через проводник (режим разработчика). Формат .xap.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1754602893_Doodle_Jump_1.0.3.0.xap"
+    },
+    {
+      "id": "fly-the-nyan-cat",
+      "name": "Fly The Nyan Cat",
+      "category": "games",
+      "platform": "WP8 / WP8.1",
+      "desc": "Оригинал (вытащили до закрытия Microsoft Store). Культовая классика для WP.",
+      "method": "Установка: только через проводник (режим разработчика). Формат .xap.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Fly_The_Nyan_Cat.xap"
+    },
+    {
+      "id": "fruit-ninja",
+      "name": "Fruit Ninja",
+      "category": "games",
+      "platform": "WM10",
+      "desc": "Классический аркадный слэшер. Требуется режим разработчика для установки.",
+      "method": "Установка: через проводник или Device Portal.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/FruitNinja.appxbundle"
+    },
+    {
+      "id": "interop-unlock",
+      "name": "InteropUnlock",
+      "category": "inst",
+      "platform": "WM10",
+      "desc": "Редактор реестра.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/InteropTools_2.0.96.0_x86_x64_arm_th1_LegacyRelease.appxbundle"
+    },
+    {
+      "id": "cmd-injector",
+      "name": "CmdInjector",
+      "category": "inst",
+      "platform": "WM10",
+      "desc": "CMD, установка приложений и т.д.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/CMDInjector_4.0.6.0_ARM.appx"
+    },
+    {
+      "id": "oldstore-inst",
+      "name": "OldStore",
+      "category": "inst",
+      "platform": "WP8 / WP8.1 / WM10",
+      "desc": "Магазин приложений для WP8, WP8.1, WM10.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Old.Store.1.1.0.0.xap"
+    },
+    {
+      "id": "vtb-pwa",
+      "name": "VTB (PWA)",
+      "category": "inst",
+      "platform": "WP8.1 / WM10",
+      "desc": "PWA-клиент ВТБ, адаптированный под архитектуру ARM, визуально приближен к Android-версии.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1758_VTB.Online_PWA_.appx"
+    },
+    {
+      "id": "sber-qml",
+      "name": "SberQML",
+      "category": "inst",
+      "platform": "WP8.1 / WM10",
+      "desc": "Клиент Сбера на QML, адаптированный под архитектуру ARM, визуально приближен к Android-версии.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1766168631_SberQML_0.6.0.0_ARM.appxbundle"
+    },
+    {
+      "id": "happ-metrobox",
+      "name": "HAPP (MetroBox)",
+      "category": "inst",
+      "platform": "WM10",
+      "desc": "Первый и единственный Vless-клиент для платформы.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/VlessApp_1.5.0.5_x86_x64_arm.appxbundle"
+    },
+    {
+      "id": "yandex-weather",
+      "name": "Yandex Weather",
+      "category": "inst",
+      "platform": "WM10",
+      "desc": "Официальный клиент Яндекс.Погоды, извлечённый из Microsoft Store до закрытия платформы.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Yandex.Weather_1.0.0.0_x86_x64_arm.appxbundle"
+    },
+    {
+      "id": "file-explorer",
+      "name": "File Explorer",
+      "category": "inst",
+      "platform": "WM10",
+      "desc": "Полноценный файловый менеджер с поддержкой архивов и сетевых папок.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/FileExplorer_2.1.0.0_ARM.appxbundle"
+    },
+    {
+      "id": "metrostore",
+      "name": "MetroStore",
+      "category": "magaz",
+      "platform": "WM10",
+      "desc": "Популярный магазин приложений на Windows Mobile.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MetroStoreUWP_1.5.0.0_arm.appxbundle"
+    },
+    {
+      "id": "oldstore-magaz",
+      "name": "OldStore",
+      "category": "magaz",
+      "platform": "WP8 / WP8.1 / WM10",
+      "desc": "Магазин приложений для старых версий Windows Phone — WP8, WP8.1 и WM10.",
+      "method": "Установка: через проводник телефона (Режим разработчика) или через Device Portal с ПК.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Old.Store.1.1.0.0.xap"
+    },
+    {
+      "id": "unigram-mobile",
+      "name": "Unigram Mobile (Telegram Client)",
+      "category": "social",
+      "platform": "WP8.1 WM10",
+      "desc": "Неофициальный клиент Telegram для смартфонов на Windows 10 Mobile. Версия с базовыми функциями чатов и каналов, адаптированная под архитектуру ARM.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/UnigramMobile_22.12.6076.0.appxbundle"
+    },
+    {
+      "id": "lovit-max-port",
+      "name": "Ловит (max port)",
+      "category": "social",
+      "platform": "WP8.1 WM10",
+      "desc": "Неофициальный клиент мессенджера Мах для Windows Phone 8.1 / Windows 10 Mobile.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/Lovit_1.1.0.152_ARM.appxbundle"
+    },
+    {
+      "id": "unison",
+      "name": "Unison",
+      "category": "social",
+      "platform": "WP8.1 WM10",
+      "desc": "Неофициальный клиент мессенджера WhatsApp для Windows Phone 8.1 / Windows 10 Mobile.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1746_Unison_v.1.0.0.0.appxbundle"
+    },
+    {
+      "id": "vk",
+      "name": "ВК",
+      "category": "social",
+      "platform": "WP8.0 WP8.1 WM10",
+      "desc": "Официальный клиент соцсети ВКонтакте для Windows Phone 8.1 / Windows 10 Mobile (полностью рабочий, починен с помощью cmp).",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/VKRevived_Release_ARM.xap"
+    },
+    {
+      "id": "4pda",
+      "name": "4pda",
+      "category": "social",
+      "platform": "WP8.1 WM10",
+      "desc": "Неофициальный клиент популярного форума 4pda для Windows Phone 8.1 / Windows 10 Mobile.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/4PDA_1.0.0.0.appx"
+    },
+    {
+      "id": "youtube",
+      "name": "YouTube",
+      "category": "video",
+      "platform": "WM10",
+      "desc": "Неофициальный клиент YouTube. Дизайн и функциональность максимально приближены к оригиналу. Вход в аккаунт Google — через проверку QR‑кода на устройстве с вашим аккаунтом.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/YouTube_3.2.1.0_arm_Debug.appxbundle"
+    },
+    {
+      "id": "rutube",
+      "name": "Rutube",
+      "category": "video",
+      "platform": "WM10",
+      "desc": "Неофициальный клиент RuTube. Дизайн и функциональность максимально приближены к оригиналу.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "appx",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/RuTube.v.1.0.0.0.appxbundle"
+    },
+    {
+      "id": "youtube-patched",
+      "name": "YouTube Patched",
+      "category": "video",
+      "platform": "WP8 WP8.1 WP10",
+      "desc": "Неофициальный клиент YouTube для WP8 и WP8.1.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/1763897155_Youtube_Patched_BETA2.xap"
+    },
+    {
+      "id": "metrotube",
+      "name": "MetroTube",
+      "category": "video",
+      "platform": "WP8 WP8.1 WM10",
+      "desc": "Неофициальный клиент YouTube.",
+      "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
+      "fileType": "xap",
+      "downloadUrl": "https://github.com/wrisknuk/wrisknuk_store/releases/download/UWP_Store/MetroTube.Patched.Pre-Release.1.3.204.0.xap"
+    }
   ]
 }
