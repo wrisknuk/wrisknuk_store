@@ -8,192 +8,166 @@
 
     <style>
         :root {
-            --bg-color: #0f0f11;
-            --text-color: #ffffff;
-            --card-bg: #1a1a1d;
-            --sub-color: #b0b0b5;
-            --win-purple: #5133ab;
-            --hover-purple: #6b4bbf;
+            --text: #ffffff;
+            --muted: #c8c8d0;
+            --accent: #5133ab;
+            --accent-hover: #6b4bbf;
+            --tile-bg: rgba(18, 18, 22, 0.84);
+            --border: rgba(255, 255, 255, 0.16);
+            --overlay: rgba(10, 10, 14, 0.72);
         }
         [data-theme="light"] {
-            --bg-color: #f5f7fa;
-            --text-color: #111114;
-            --card-bg: #ffffff;
-            --sub-color: #55555a;
-            --win-purple: #42298d;
-            --hover-purple: #583db6;
+            --text: #111114;
+            --muted: #45454d;
+            --accent: #42298d;
+            --accent-hover: #583db6;
+            --tile-bg: rgba(255, 255, 255, 0.88);
+            --border: rgba(0, 0, 0, 0.14);
+            --overlay: rgba(242, 244, 248, 0.78);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-        
-        body { 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            padding: 16px; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
             min-height: 100vh;
+            color: var(--text);
+            padding: 20px 16px;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            transition: background 0.3s, color 0.3s; 
+            background:
+                linear-gradient(var(--overlay), var(--overlay)),
+                url("wp_bg.jpg") center / cover no-repeat fixed;
         }
 
-        .page-container {
+        .page {
             max-width: 440px;
             width: 100%;
             text-align: center;
+            background: var(--tile-bg);
+            border: 1px solid var(--border);
+            padding: 28px 20px;
         }
 
-        .avatar-wrapper {
-            margin-bottom: 24px;
-        }
-
-        .welcome-avatar {
-            width: 110px; 
+        .avatar {
+            width: 110px;
             height: 110px;
-            border-radius: 12px;
             object-fit: cover;
-            border: 4px solid var(--win-purple);
-            box-shadow: 0 8px 24px rgba(81, 51, 171, 0.25);
+            border: 3px solid var(--accent);
+            display: inline-block;
+            margin-bottom: 20px;
         }
 
-        .header-group {
-            margin-bottom: 32px;
+        .title {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
         }
 
-        .welcome-title {
-            color: var(--win-purple); 
-            font-size: 28px;
-            font-weight: 700;
-            margin: 0 0 12px 0;
-            line-height: 1.1;
-        }
-
-        .welcome-text {
-            color: var(--sub-color);
+        .subtitle {
+            color: var(--muted);
             font-size: 15px;
-            line-height: 1.5;
-            max-width: 300px;
-            margin: 0 auto;
+            line-height: 1.45;
+            max-width: 320px;
+            margin: 0 auto 26px;
         }
 
         .enter-btn {
             display: block;
             width: 100%;
-            background-color: var(--win-purple);
-            color: white;
+            background: var(--accent);
+            color: #ffffff;
             text-decoration: none;
-            padding: 18px 0;
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
+            padding: 15px 0;
+            font-size: 15px;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            box-shadow: 0 6px 16px rgba(81, 51, 171, 0.2);
-            border-radius: 10px;
-            transition: all 0.2s ease;
+            transition: background 0.15s ease, transform 0.1s ease;
         }
-        .enter-btn:hover {
-            background-color: var(--hover-purple);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(81, 51, 171, 0.3);
-        }
-        .enter-btn:active {
-            transform: scale(0.98);
+        .enter-btn:hover { background: var(--accent-hover); }
+        .enter-btn:active { transform: scale(0.99); }
+
+        .controls {
+            margin-top: 18px;
+            display: flex;
+            justify-content: center;
         }
 
-        .controls-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 10px;
-            margin-top: 28px;
-            flex-wrap: wrap;
-        }
-
-        .theme-toggle-btn {
-            display: flex;
+        .theme-btn {
+            display: inline-flex;
             align-items: center;
             gap: 8px;
             background: transparent;
-            border: 1px solid var(--sub-color);
-            color: var(--text-color);
-            padding: 10px 16px;
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 8px 14px;
+            font-size: 13px;
             cursor: pointer;
-            font-size: 14px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
         }
-        .theme-toggle-btn:hover {
-            border-color: var(--win-purple);
-            color: var(--win-purple);
-            background: rgba(81, 51, 171, 0.08);
+        .theme-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
-        .icon-box { font-size: 18px; line-height: 0; }
 
-        .footer-block {
-            margin-top: 36px;
-            color: var(--sub-color);
+        .footer {
+            margin-top: 22px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
             font-size: 12px;
-            line-height: 1.4;
-            opacity: 0.9;
-            border-top: 1px solid rgba(255,255,255,0.06);
-            padding-top: 16px;
-            text-align: center;
+            line-height: 1.45;
         }
     </style>
 
     <script>
-        const currentTheme = localStorage.getItem('theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
 
-        function updateThemeButton() {
+        function syncThemeBtn() {
             const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const toggleBtn = document.getElementById('themeToggle');
-            if (!toggleBtn) return;
-            const iconSpan = toggleBtn.querySelector('.icon-box');
-            iconSpan.textContent = isDark ? '☀️' : '🌙';
+            const icon = document.querySelector('#themeToggle .icon');
+            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
         }
-        updateThemeButton();
 
         document.addEventListener('DOMContentLoaded', () => {
-            const toggleBtn = document.getElementById('themeToggle');
-            if (toggleBtn) {
-                toggleBtn.addEventListener('click', () => {
-                    let theme = document.documentElement.getAttribute('data-theme');
-                    let newTheme = theme === 'dark' ? 'light' : 'dark';
-                    document.documentElement.setAttribute('data-theme', newTheme);
-                    localStorage.setItem('theme', newTheme);
-                    updateThemeButton();
-                });
-            }
+            syncThemeBtn();
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                syncThemeBtn();
+            });
         });
     </script>
 </head>
 <body>
-    <div class="page-container">
-        <div class="avatar-wrapper">
-            <img src="avatar.png" alt="Логотип магазина" class="welcome-avatar" onerror="this.style.display='none'">
-        </div>
+    <main class="page">
+        <img src="avatar.png" alt="Аватар WN/OLD STORE" class="avatar" onerror="this.style.display='none'">
 
-        <div class="header-group">
-            <h1 class="welcome-title">WN/OLD STORE</h1>
-            <p class="welcome-text">Добро пожаловать в магазин приложений для WP 8.1 и WM 10</p>
-        </div>
+        <h1 class="title">WN/OLD STORE</h1>
+        <p class="subtitle">Магазин приложений и игр для Windows Phone 8.1 и Windows 10 Mobile</p>
 
         <a href="menu.html" class="enter-btn">Перейти в меню</a>
 
-        <div class="controls-row">
-            <button class="theme-toggle-btn" id="themeToggle" aria-label="Переключить тему">
-                <span class="icon-box">🌙</span>
+        <div class="controls">
+            <button class="theme-btn" id="themeToggle" type="button">
+                <span class="icon">🌙</span>
                 <span>Тема</span>
             </button>
         </div>
 
-        <div class="footer-block">
+        <footer class="footer">
             © Все права защищены<br>
-            WriskNuk Corporation<br>
-            2026
-        </div>
-    </div>
+            WriskNuk Corporation • 2026
+        </footer>
+    </main>
 </body>
 </html>
