@@ -1,9 +1,10 @@
 {
   "id": "wrisknuk_store_id",
-  "name": "WriskNuk_Store",
-  "short_name": "WriskNuk_Store",
-  "description": "Магазин приложений для Windows 10 Mobile от WriskNuk Corporation.",
-  "start_url": "index.html",
+  "name": "WN/OLD STORE",
+  "short_name": "WN/OLD STORE",
+  "description": "Каталог приложений, игр и утилит для Windows Phone 8.1 и Windows 10 Mobile от WriskNuk Corporation.",
+  "start_url": "./menu.html",
+  "scope": "./",
   "background_color": "#000000",
   "theme_color": "#5133ab",
   "display": "standalone",
@@ -12,17 +13,21 @@
     {
       "src": "Logo44 (1).png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any"
     },
     {
       "src": "avatar.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any"
     }
   ],
   "uwp_manifest": {
     "publisher": "CN=WriskNuk_Corporation",
     "publisher_display_name": "WriskNuk_Corporation",
-    "package_name": "WriskNuk.Store"
+    "package_name": "WriskNuk.Store",
+    "data_source": "store.json",
+    "overlay_catalog": true
   }
 }
