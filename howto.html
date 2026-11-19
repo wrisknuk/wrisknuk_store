@@ -5,248 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Инструкция — WN/OLD STORE</title>
     <link rel="icon" type="image/png" href="avatar.png">
-
-    <style>
-        :root {
-            --bg-color: #0f0f11;
-            --text-color: #ffffff;
-            --muted-color: #c8c8d0;
-            --win-purple: #5133ab;
-            --win-purple-hover: #6741d9;
-            --tile-bg: rgba(18, 18, 22, 0.86);
-            --border-color: rgba(255, 255, 255, 0.16);
-            --bg-overlay: rgba(10, 10, 14, 0.72);
-
-            --alert-bg: rgba(43, 29, 0, 0.9);
-            --alert-border: #ffaa00;
-            --recommend-bg: rgba(0, 43, 12, 0.9);
-            --recommend-border: #00cc33;
-        }
-        [data-theme="light"] {
-            --bg-color: #f5f7fa;
-            --text-color: #111114;
-            --muted-color: #45454d;
-            --win-purple: #42298d;
-            --win-purple-hover: #5133ab;
-            --tile-bg: rgba(255, 255, 255, 0.9);
-            --border-color: rgba(0, 0, 0, 0.14);
-            --bg-overlay: rgba(242, 244, 248, 0.78);
-
-            --alert-bg: rgba(255, 243, 205, 0.95);
-            --alert-border: #cc8800;
-            --recommend-bg: rgba(212, 237, 218, 0.95);
-            --recommend-border: #28a745;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-        }
-
-        body {
-            min-height: 100vh;
-            background:
-                linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-                url("wp_bg.jpg") center / cover no-repeat fixed;
-            color: var(--text-color);
-            padding: 16px;
-            line-height: 1.6;
-        }
-
-        .page {
-            max-width: 820px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            color: var(--text-color);
-            font-weight: 300;
-            font-size: 30px;
-            text-transform: lowercase;
-            margin-bottom: 14px;
-        }
-        h2 {
-            color: var(--text-color);
-            font-size: 20px;
-            font-weight: 600;
-            margin-top: 28px;
-            margin-bottom: 12px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-        }
-        p {
-            font-size: 15px;
-            color: var(--muted-color);
-            margin-bottom: 12px;
-        }
-        ol, ul {
-            background: var(--tile-bg);
-            border: 1px solid var(--border-color);
-            padding: 16px 16px 16px 36px;
-            margin-bottom: 20px;
-            font-size: 15px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        li:last-child {
-            margin-bottom: 0;
-        }
-
-        code {
-            background: rgba(81, 51, 171, 0.25);
-            border: 1px solid var(--border-color);
-            padding: 2px 6px;
-            font-family: "Consolas", "Monaco", monospace;
-            font-size: 0.92em;
-            color: var(--text-color);
-        }
-
-        .header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--tile-bg);
-            border: 1px solid var(--border-color);
-            padding: 10px 14px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: var(--win-purple);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 9px 16px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: background 0.15s ease, transform 0.1s ease;
-        }
-        .back-btn:hover {
-            background-color: var(--win-purple-hover);
-        }
-        .back-btn:active {
-            transform: scale(0.98);
-        }
-
-        .theme-toggle-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 8px 14px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: border-color 0.15s ease, color 0.15s ease;
-        }
-        .theme-toggle-btn:hover {
-            border-color: var(--win-purple-hover);
-            color: var(--win-purple-hover);
-        }
-        .icon-box {
-            font-size: 16px;
-            line-height: 1;
-        }
-
-        .alert {
-            padding: 16px;
-            margin: 16px 0;
-            font-size: 14px;
-            border: 1px solid var(--border-color);
-        }
-        .alert-warning {
-            background-color: var(--alert-bg);
-            border-left: 4px solid var(--alert-border);
-        }
-        .alert-warning-title {
-            font-weight: 700;
-            color: var(--alert-border);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .alert-recommend {
-            background-color: var(--recommend-bg);
-            border-left: 4px solid var(--recommend-border);
-        }
-        .alert-recommend-title {
-            font-weight: 700;
-            color: var(--recommend-border);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .footer {
-            background: var(--tile-bg);
-            border: 1px solid var(--border-color);
-            padding: 12px 14px;
-            margin-top: 24px;
-            font-size: 12px;
-            color: var(--muted-color);
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="page">
-        <div class="header-row">
-            <a href="menu.html" class="back-btn">
-                <span>Вернуться в меню</span>
-            </a>
-            <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Переключить тему">
-                <span class="icon-box" id="themeIcon">🌙</span>
+        <header class="topbar">
+            <a href="menu.html" class="return-menu-btn">Вернуться в меню</a>
+            <button class="theme-btn" id="themeToggle" type="button" aria-label="Переключить тему">
+                <span class="icon" id="themeIcon">🌙</span>
                 <span>Тема</span>
             </button>
+        </header>
+
+        <h1 class="page-title">инструкция</h1>
+
+        <div class="box">
+            <p>Официальный магазин закрыт, поэтому пакеты <b>.appx</b>, <b>.appxbundle</b> и <b>.xap</b> устанавливаются вручную.</p>
         </div>
 
-        <h1>инструкция по установке</h1>
-        <p>Официальный магазин закрыт, поэтому файлы формата <b>.appx</b>, <b>.appxbundle</b> и <b>.xap</b> устанавливаются вручную.</p>
-
-        <div class="alert alert-recommend">
-            <div class="alert-recommend-title">Рекомендация WN/OLD STORE</div>
-            Для быстрой и стабильной установки приложений мы настоятельно <b>рекомендуем использовать Шаг 2 (Device Portal)</b>. Это самый надёжный метод для Windows 10 Mobile.
+        <div class="box">
+            <p><b>Рекомендация:</b> для стабильной установки используйте Шаг 2 (Device Portal). Если файл не ставится напрямую с телефона, установка через Device Portal решает большинство ошибок.</p>
         </div>
 
-        <div class="alert alert-warning">
-            <div class="alert-warning-title">Внимание! Информация по ошибкам установки</div>
-            Если при установке напрямую через проводник телефона файлы <b>.appx</b> или <b>.appxbundle</b> не устанавливаются (вылетает ошибка или ничего не происходит), используйте установку через <b>Device Portal</b> с ПК (инструкция ниже в Шаге 2). Это решает большинство проблем с совместимостью.
-        </div>
-
-        <h2>Шаг 1. Включение режима разработчика</h2>
-        <ol>
-            <li>На телефоне откройте <b>Параметры</b> ➡️ <b>Обновление и безопасность</b> ➡️ <b>Для разработчиков</b>.</li>
-            <li>Активируйте переключатель <b>Режим разработчика</b> и подтвердите выбор («Да»).</li>
+        <h2 class="section-title">Шаг 1. Режим разработчика</h2>
+        <ol class="guide-list">
+            <li>Откройте на телефоне <b>Параметры</b> ➡️ <b>Обновление и безопасность</b> ➡️ <b>Для разработчиков</b>.</li>
+            <li>Включите <b>Режим разработчика</b> и подтвердите выбор.</li>
         </ol>
 
-        <h2>Шаг 2. Установка через Device Portal (Для ПК)</h2>
-        <p>Самый надёжный способ, если приложение выдаёт ошибку при обычной установке со смартфона.</p>
-        <ol>
-            <li>Там же, в меню <b>Для разработчиков</b> на телефоне, прокрутите вниз и включите тумблер <b>Диспетчер устройств (Device Portal)</b>.</li>
-            <li>Включите <b>Проводное подключение (USB)</b> или Wi‑Fi. На экране появится локальный адрес (например, <code>127.0.0.1:50443</code> или <code>192.168.1.15</code>).</li>
-            <li>Подключите телефон к компьютеру кабелем или убедитесь, что устройства находятся в одной сети Wi‑Fi.</li>
-            <li>Откройте браузер на компьютере и введите адрес, который выдал телефон.</li>
-            <li>Если браузер предупреждает о сертификате безопасности, нажмите <i>«Дополнительно» ➡️ «Перейти на сайт»</i>.</li>
-            <li>В меню Device Portal на ПК перейдите во вкладку <b>Apps</b>.</li>
-            <li>В блоке <b>Deploy apps</b> нажмите <i>Choose File</i> и выберите скачанный <code>.appx</code> / <code>.appxbundle</code> файл.</li>
-            <li>Если приложению нужны зависимости (пакеты из папки Dependencies), добавьте их в поле <i>Dependency</i>.</li>
-            <li>Нажмите <b>Go</b> под файлом и дождитесь статуса <i>Success</i>. Приложение появится в списке на телефоне.</li>
+        <h2 class="section-title">Шаг 2. Установка через Device Portal (ПК)</h2>
+        <ol class="guide-list">
+            <li>В том же разделе включите <b>Диспетчер устройств (Device Portal)</b> и <b>Проводное подключение (USB)</b> или Wi‑Fi.</li>
+            <li>Посмотрите локальный адрес на экране (например, <code>127.0.0.1:50443</code> или <code>192.168.1.15</code>).</li>
+            <li>Подключите телефон к ПК кабелем или зайдите в одну сеть Wi‑Fi и откройте этот адрес в браузере на ПК.</li>
+            <li>При предупреждении о сертификате нажмите <i>«Дополнительно» ➡️ «Перейти на сайт»</i>.</li>
+            <li>Откройте вкладку <b>Apps</b>, в блоке <b>Deploy apps</b> выберите файл <code>.appx</code> / <code>.appxbundle</code> и при необходимости укажите зависимости в <i>Dependency</i>.</li>
+            <li>Нажмите <b>Go</b> и дождитесь статуса <i>Success</i>.</li>
         </ol>
 
-        <h2>Шаг 3. Простая установка (Прямо со смартфона)</h2>
-        <p><b>Важно:</b> Способ работает не всегда и подходит только для части приложений.</p>
-        <ol>
-            <li>Скачайте пакет через браузер на телефоне.</li>
-            <li>Откройте встроенный <b>Проводник</b> и найдите скачанный файл в папке «Загрузки».</li>
-            <li>Нажмите на файл и подтвердите установку. Приложение появится в общем списке меню «Пуск».</li>
+        <h2 class="section-title">Шаг 3. Установка с телефона</h2>
+        <ol class="guide-list">
+            <li>Скачайте файл через браузер смартфона.</li>
+            <li>Откройте <b>Проводник</b> ➡️ <b>Загрузки</b> и нажмите на файл.</li>
+            <li>Подтвердите установку и дождитесь появления приложения в меню «Пуск».</li>
         </ol>
 
         <footer class="footer">
