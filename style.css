@@ -1,168 +1,90 @@
 :root {
-  --accent: #6741d9;
-  --accent-hover: #7c58e6;
+  --accent: rgba(81, 51, 171, 0.78);
+  --accent-hover: rgba(103, 65, 217, 0.88);
+  --badge-bg: #6741d9;
   --text: #ffffff;
-  --muted: #c8c8ce;
-  --tile-bg: rgba(18, 18, 22, 0.82);
-  --tile-border: rgba(255, 255, 255, 0.16);
-  --bg-overlay: rgba(10, 10, 14, 0.72);
+  --muted: rgba(255, 255, 255, 0.82);
+  --tile-border: rgba(255, 255, 255, 0.18);
+  --bg-overlay: rgba(10, 10, 14, 0.55);
 }
 
 [data-theme="light"] {
-  --accent: #5133ab;
-  --accent-hover: #42298d;
-  --text: #111114;
-  --muted: #4a4a52;
-  --tile-bg: rgba(255, 255, 255, 0.86);
-  --tile-border: rgba(0, 0, 0, 0.14);
-  --bg-overlay: rgba(242, 244, 248, 0.78);
+  --accent: rgba(81, 51, 171, 0.72);
+  --accent-hover: rgba(66, 41, 141, 0.85);
+  --badge-bg: #5133ab;
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.86);
+  --tile-border: rgba(255, 255, 255, 0.25);
+  --bg-overlay: rgba(242, 244, 248, 0.45);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-}
-
-body {
-  min-height: 100vh;
-  color: var(--text);
-  background:
-    linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-    url("wp_bg.jpg") center / cover no-repeat fixed;
-  padding: 16px;
-}
-
-.page-container {
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-/* Верхняя панель в стиле WM10 */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 24px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--tile-border);
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.brand-avatar {
-  width: 36px;
-  height: 36px;
-  object-fit: cover;
-  border: 1px solid var(--accent);
-}
-
-/* Плиточные кнопки WM10 */
-.wm-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 9px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  border-radius: 0;
-  transition: background 0.15s, transform 0.1s;
-}
-
-.wm-btn:hover { background: var(--accent-hover); }
-.wm-btn:active { transform: scale(0.98); }
-
-.wm-btn-ghost {
-  background: var(--tile-bg);
-  color: var(--text);
-  border: 1px solid var(--tile-border);
-}
-
-.wm-btn-ghost:hover {
-  border-color: var(--accent);
-  background: var(--tile-bg);
-}
-
-/* Заголовок категории WM10 (крупный лёгкий шрифт) */
-.page-title {
-  font-size: 32px;
-  font-weight: 300;
-  letter-spacing: -0.5px;
-  margin-bottom: 20px;
-  text-transform: lowercase;
-}
-
-/* Сетка карточек / плиток */
-.apps-list {
+.tiles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
 }
 
-.app-card {
-  background: var(--tile-bg);
-  border: 1px solid var(--tile-border);
-  padding: 16px;
+.tile {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  min-height: 112px;
+  padding: 14px;
+  text-align: left;
+  text-decoration: none;
+  background: var(--accent);
+  color: var(--text);
+  border: 1px solid var(--tile-border);
   border-radius: 0;
-  transition: border-color 0.15s;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s;
 }
 
-.app-card:hover {
-  border-color: var(--accent);
+.tile:hover {
+  background: var(--accent-hover);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-.app-header {
+.tile:active {
+  transform: scale(0.98);
+}
+
+.tile.tile-wide {
+  grid-column: span 2;
+  min-height: 92px;
+}
+
+.tile-top {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  margin-bottom: 10px;
+  align-items: center;
+  width: 100%;
 }
 
-.app-title {
-  font-size: 18px;
-  font-weight: 600;
+.tile-icon {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 
-.app-os {
-  background: var(--accent);
-  color: #fff;
+.tile-badge {
+  background: var(--badge-bg);
+  color: #ffffff;
   font-size: 11px;
   font-weight: 700;
-  padding: 3px 7px;
+  padding: 2px 7px;
   letter-spacing: 0.5px;
 }
 
-.app-desc {
-  font-size: 14px;
-  color: var(--muted);
-  line-height: 1.45;
-  flex: 1;
-  margin-bottom: 14px;
+.tile-name {
+  font-size: 17px;
+  font-weight: 600;
+  margin-top: 10px;
 }
 
-.app-method {
+.tile-desc {
   font-size: 12px;
   color: var(--muted);
-  padding-top: 10px;
-  margin-bottom: 12px;
-  border-top: 1px solid var(--tile-border);
-}
-
-.download-btn {
-  width: 100%;
-  justify-content: center;
+  margin-top: 2px;
 }
