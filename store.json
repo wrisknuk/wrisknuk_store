@@ -273,9 +273,9 @@
       "name": "Megler",
       "category": "inst",
       "platform": "WM10",
-      "desc": "приложение, которое позволяет запуск apk приложений на windows 10 mobile",
+      "desc": "Приложение, которое позволяет запускать Android-приложения (APK) только на Windows 10 Mobile.",
       "method": "Установка: через проводник телефона (режим разработчика) или через Device Portal с ПК.",
-      "fileType": "xap",
+      "fileType": "appx",
       "downloadUrl": "https://github.com/Computershik73/megler-w10m/releases/download/v0.1.0.734/Megler_0.1.0.734_ARM.appx"
     }
   ]
