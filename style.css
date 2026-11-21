@@ -24,7 +24,9 @@
     --overlay: rgba(242, 244, 248, 0.65);
 }
 
-* {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -39,6 +41,13 @@ body {
     background:
         linear-gradient(var(--overlay), var(--overlay)),
         url("wp_bg.jpg") center / cover no-repeat fixed;
+    overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+    }
 }
 
 body.modal-open {
@@ -54,8 +63,10 @@ body.welcome-page {
 }
 
 .page {
+    width: 100%;
     max-width: 720px;
     margin: 0 auto;
+    min-width: 0;
 }
 
 .welcome-card {
@@ -140,9 +151,11 @@ body.welcome-page {
 
 .topbar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
+    width: 100%;
     background: var(--panel-bg);
     color: #ffffff;
     border: 1px solid rgba(255, 255, 255, 0.16);
@@ -157,9 +170,11 @@ body.welcome-page {
 
 .topbar-left {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 12px;
+    gap: 10px 12px;
     min-width: 0;
+    flex: 1 1 200px;
 }
 
 .brand {
@@ -168,6 +183,14 @@ body.welcome-page {
     gap: 10px;
     text-decoration: none;
     color: inherit;
+    min-width: 0;
+}
+
+.brand > div:last-child,
+.brand-name,
+.brand-sub {
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .brand-avatar {
@@ -191,6 +214,7 @@ body.welcome-page {
 
 .social-links {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 6px;
 }
@@ -204,6 +228,7 @@ body.welcome-page {
     color: inherit;
     text-decoration: none;
     opacity: 0.85;
+    flex-shrink: 0;
     transition: opacity 0.15s ease, color 0.15s ease, transform 0.1s ease;
 }
 
@@ -240,6 +265,7 @@ body.welcome-page {
     color: inherit;
     padding: 8px 12px;
     flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .theme-btn:hover {
@@ -254,6 +280,7 @@ body.welcome-page {
     padding: 9px 14px;
     font-weight: 600;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .return-menu-btn:hover {
@@ -296,6 +323,8 @@ body.welcome-page {
     padding: 14px 16px;
     margin-bottom: 12px;
     font-size: 14px;
+    width: 100%;
+    min-width: 0;
 }
 
 .box p {
@@ -327,11 +356,14 @@ code {
     font-family: "Consolas", "Monaco", monospace;
     font-size: 0.9em;
     color: #ffffff;
+    overflow-wrap: anywhere;
 }
 
+/* Flex вместо grid — надёжнее в старом Edge и на высоких DPI */
 .tiles-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     gap: 10px;
     margin-bottom: 20px;
 }
@@ -340,6 +372,10 @@ code {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 0 0 calc(50% - 5px);
+    width: calc(50% - 5px);
+    max-width: calc(50% - 5px);
+    min-width: 0;
     min-height: 112px;
     padding: 14px;
     text-align: left;
@@ -360,21 +396,34 @@ code {
 }
 
 .tile.tile-wide {
-    grid-column: span 2;
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
     min-height: 92px;
+}
+
+@media (max-width: 420px) {
+    .tile {
+        flex: 0 0 100%;
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 .tile-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 8px;
     width: 100%;
+    min-width: 0;
 }
 
 .tile-icon {
     width: 28px;
     height: 28px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 .tile-badge {
@@ -384,18 +433,24 @@ code {
     font-weight: 700;
     padding: 2px 7px;
     letter-spacing: 0.5px;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .tile-name {
     font-size: 17px;
     font-weight: 600;
     margin-top: 10px;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .tile-desc {
     font-size: 12px;
     color: var(--muted);
     margin-top: 2px;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .footer {
@@ -406,6 +461,7 @@ code {
     margin-top: 20px;
     font-size: 12px;
     text-align: center;
+    width: 100%;
 }
 
 [data-theme="light"] .footer {
@@ -419,6 +475,7 @@ code {
     background: var(--sheet-bg);
     color: #ffffff;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 16px;
     display: none;
 }
@@ -432,12 +489,15 @@ code {
 }
 
 .overlay-inner {
+    width: 100%;
     max-width: 960px;
     margin: 0 auto;
+    min-width: 0;
 }
 
 .overlay-bar {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 12px;
@@ -454,19 +514,22 @@ code {
     display: flex;
     align-items: center;
     gap: 10px;
+    min-width: 0;
 }
 
 .overlay-title {
     font-size: 28px;
     font-weight: 300;
     text-transform: lowercase;
+    overflow-wrap: break-word;
 }
 
 .apps-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 12px;
     padding-bottom: 24px;
+    width: 100%;
 }
 
 .app-card {
@@ -476,6 +539,8 @@ code {
     padding: 16px;
     display: flex;
     flex-direction: column;
+    flex: 1 1 260px;
+    min-width: 0;
 }
 
 .app-card:hover {
@@ -488,11 +553,14 @@ code {
     align-items: flex-start;
     gap: 8px;
     margin-bottom: 10px;
+    min-width: 0;
 }
 
 .app-title {
     font-size: 18px;
     font-weight: 600;
+    min-width: 0;
+    overflow-wrap: break-word;
 }
 
 .app-os {
@@ -502,6 +570,7 @@ code {
     font-weight: 700;
     padding: 3px 7px;
     white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .app-desc {
@@ -510,6 +579,7 @@ code {
     line-height: 1.45;
     flex: 1;
     margin-bottom: 12px;
+    overflow-wrap: break-word;
 }
 
 .app-method {
@@ -518,6 +588,7 @@ code {
     padding-top: 10px;
     margin-bottom: 12px;
     border-top: 1px solid var(--border);
+    overflow-wrap: break-word;
 }
 
 .download-btn {
@@ -541,4 +612,5 @@ code {
     color: #ffffff;
     border: 1px solid var(--border);
     padding: 16px;
+    width: 100%;
 }
