@@ -8,18 +8,30 @@
     <link rel="stylesheet" href="style.css">
 
     <script>
-        const savedTheme = localStorage.getItem('theme') || 'dark';
+        var savedTheme = 'dark';
+        try {
+            savedTheme = localStorage.getItem('theme') || 'dark';
+        } catch (e) {}
         document.documentElement.setAttribute('data-theme', savedTheme);
 
-        let storeCache = null;
+        var storeCache = null;
 
-        function syncThemeBtn() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-            const icon = document.querySelector('#themeToggle .icon');
-            if (icon) icon.textContent = isDark ? '☀️' : '🌙';
+        function getEl(id) {
+            return document.getElementById(id);
         }
 
-        function esc(s = '') {
+        function syncThemeBtn() {
+            var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+            var btn = getEl('themeToggle');
+            if (!btn) return;
+            var spans = btn.getElementsByTagName('span');
+            if (spans && spans.length > 0) {
+                spans[0].textContent = isDark ? '☀️' : '🌙';
+            }
+        }
+
+        function esc(s) {
+            if (s === undefined || s === null) s = '';
             return String(s)
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
@@ -27,85 +39,156 @@
                 .replace(/"/g, '&quot;');
         }
 
-        async function getStoreData() {
-            if (storeCache) return storeCache;
-            const res = await fetch('store.json', { cache: 'no-store' });
-            storeCache = await res.json();
-            return storeCache;
-        }
-
-        async function openCategory(catId, catName) {
-            const overlay = document.getElementById('catalogOverlay');
-            const title = document.getElementById('overlayTitle');
-            const list = document.getElementById('appsList');
-
-            title.textContent = catName.toLowerCase();
-            list.innerHTML = '<div class="empty-msg">Загрузка...</div>';
-
-            overlay.classList.add('open');
-            overlay.scrollTop = 0;
-            document.body.classList.add('modal-open');
+        function loadStoreJson(callback) {
+            if (storeCache) {
+                callback(null, storeCache);
+                return;
+            }
 
             try {
-                const data = await getStoreData();
-                const items = (data.apps || []).filter(app =>
-                    catId === 'all' || app.category === catId
-                );
-
-                if (!items.length) {
-                    list.innerHTML = '<div class="empty-msg">В этом разделе пока нет файлов.</div>';
-                    return;
-                }
-
-                list.innerHTML = items.map(app => {
-                    const ext = app.fileType || (String(app.downloadUrl).endsWith('.xap') ? 'xap' : 'appx');
-                    return `
-                        <article class="app-card">
-                            <div class="app-header">
-                                <div class="app-title">${esc(app.name)}</div>
-                                <div class="app-os">${esc(app.platform)}</div>
-                            </div>
-                            <div class="app-desc">${esc(app.desc)}</div>
-                            <div class="app-method">⚙ ${esc(app.method)}</div>
-                            <a href="${esc(app.downloadUrl)}" class="download-btn" target="_blank" rel="noopener">
-                                Скачать ${esc(ext)}
-                            </a>
-                        </article>
-                    `;
-                }).join('');
-            } catch (e) {
-                list.innerHTML = '<div class="empty-msg">Ошибка загрузки store.json</div>';
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'store.json?v=' + (new Date().getTime()), true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 0) {
+                            try {
+                                var parsed = JSON.parse(xhr.responseText);
+                                storeCache = parsed;
+                                callback(null, parsed);
+                            } catch (parseErr) {
+                                callback(parseErr, null);
+                            }
+                        } else {
+                            callback(new Error('HTTP ' + xhr.status), null);
+                        }
+                    }
+                };
+                xhr.send(null);
+            } catch (xhrErr) {
+                callback(xhrErr, null);
             }
         }
 
-        function closeCategory() {
-            const overlay = document.getElementById('catalogOverlay');
-            overlay.classList.remove('open');
-            document.body.classList.remove('modal-open');
+        function renderApps(items, listEl) {
+            if (!items || !items.length) {
+                listEl.innerHTML = '<div class="empty-msg">В этом разделе пока нет файлов.</div>';
+                return;
+            }
+
+            var htmlParts = [];
+            for (var i = 0; i < items.length; i++) {
+                var app = items[i] || {};
+                var url = app.downloadUrl ? String(app.downloadUrl) : '#';
+                var ext = app.fileType || (url.toLowerCase().indexOf('.xap', url.length - 4) !== -1 ? 'xap' : 'appx');
+
+                htmlParts.push(
+                    '<article class="app-card">' +
+                        '<div class="app-header">' +
+                            '<div class="app-title">' + esc(app.name) + '</div>' +
+                            '<div class="app-os">' + esc(app.platform) + '</div>' +
+                        '</div>' +
+                        '<div class="app-desc">' + esc(app.desc) + '</div>' +
+                        '<div class="app-method">⚙ ' + esc(app.method) + '</div>' +
+                        '<a href="' + esc(url) + '" class="download-btn" target="_blank" rel="noopener">' +
+                            'Скачать ' + esc(ext) +
+                        '</a>' +
+                    '</article>'
+                );
+            }
+            listEl.innerHTML = htmlParts.join('');
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        function openCategory(catId, catName) {
+            var overlay = getEl('catalogOverlay');
+            var title = getEl('overlayTitle');
+            var list = getEl('appsList');
+            if (!overlay || !title || !list) return;
+
+            title.textContent = String(catName || '').toLowerCase();
+            list.innerHTML = '<div class="empty-msg">Загрузка...</div>';
+
+            if (overlay.className.indexOf('open') === -1) {
+                overlay.className += ' open';
+            }
+            overlay.scrollTop = 0;
+
+            if (document.body.className.indexOf('modal-open') === -1) {
+                document.body.className += (document.body.className ? ' ' : '') + 'modal-open';
+            }
+
+            loadStoreJson(function (err, data) {
+                if (err || !data) {
+                    list.innerHTML = '<div class="empty-msg">Ошибка загрузки store.json</div>';
+                    return;
+                }
+
+                var allApps = data.apps || [];
+                var filtered = [];
+                for (var i = 0; i < allApps.length; i++) {
+                    var item = allApps[i];
+                    if (item && (catId === 'all' || item.category === catId)) {
+                        filtered.push(item);
+                    }
+                }
+
+                renderApps(filtered, list);
+            });
+        }
+
+        function closeCategory() {
+            var overlay = getEl('catalogOverlay');
+            if (overlay) {
+                overlay.className = overlay.className.replace(/\bopen\b/g, '').replace(/\s+/g, ' ').trim();
+            }
+            document.body.className = document.body.className.replace(/\bmodal-open\b/g, '').replace(/\s+/g, ' ').trim();
+        }
+
+        function initPage() {
             syncThemeBtn();
 
-            document.getElementById('themeToggle')?.addEventListener('click', () => {
-                const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('theme', next);
-                syncThemeBtn();
-            });
+            var themeBtn = getEl('themeToggle');
+            if (themeBtn) {
+                themeBtn.onclick = function () {
+                    var current = document.documentElement.getAttribute('data-theme');
+                    var next = current === 'dark' ? 'light' : 'dark';
+                    document.documentElement.setAttribute('data-theme', next);
+                    try {
+                        localStorage.setItem('theme', next);
+                    } catch (e) {}
+                    syncThemeBtn();
+                };
+            }
 
-            document.querySelectorAll('[data-cat]').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    openCategory(btn.dataset.cat, btn.dataset.title);
-                });
-            });
+            var buttons = document.getElementsByTagName('button');
+            for (var i = 0; i < buttons.length; i++) {
+                (function (btn) {
+                    var cat = btn.getAttribute('data-cat');
+                    if (cat !== null) {
+                        btn.onclick = function () {
+                            openCategory(cat, btn.getAttribute('data-title') || '');
+                        };
+                    }
+                })(buttons[i]);
+            }
 
-            document.getElementById('returnMenuBtn')?.addEventListener('click', closeCategory);
+            var returnBtn = getEl('returnMenuBtn');
+            if (returnBtn) {
+                returnBtn.onclick = closeCategory;
+            }
 
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') closeCategory();
-            });
-        });
+            document.onkeydown = function (e) {
+                e = e || window.event;
+                if (e && (e.key === 'Escape' || e.keyCode === 27)) {
+                    closeCategory();
+                }
+            };
+        }
+
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', initPage);
+        } else {
+            window.onload = initPage;
+        }
     </script>
 </head>
 <body>
